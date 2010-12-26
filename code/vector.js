@@ -51,7 +51,7 @@ Vector.prototype.normalize = function() {
 };
 
 Vector.prototype.getUnit = function() {
-  return getQuotient(this.getMagnitude());
+  return this.getQuotient(this.getMagnitude());
 };
 
 Vector.prototype.dot = function(v) {
