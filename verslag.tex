@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage[dutch]{babel}
+
+\title{Een fysisch systeem voor de computer}
+\date{\today}
+\author{Derk Rouwhorst en Harmen Stoppels}
+
+\begin{document}
+	\begin{titlepage}
+	\maketitle
+	\end{titlepage}
+	\section{Botsingen tussen cirkels}
+	Kijken of twee cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen groter of gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels snel bewegen en elkaar tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen cirkels juist tussen twee frames gebeurt.
+	
+	Bij het berekenen van de nieuwe posities van de ballen in het volgende frame, moeten we dus als eerste kijken of ze ondertussen botsen, als tweede berekenen wanneer dat is en als derde uitvinden wat voor gevolg die botsing heeft.
+	
+	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit.
+	
+	De cirkels kunnen elkaar op het tijdsinterval tussen twee frames hoogstens twee keer raken (als je geen rekening houdt met het effect van de botsing), namelijk wanneer ze voor het eerst tegen elkaar aankomen en wanneer ze door elkaar heen zijn gevlogen. De botsing die wij moeten vinden is de eerste, de tweede vindt natuurlijk nooit plaats.
+	
+	Allereerst noemen we de tijd in het eerste frame $t=0$ en in het tweede frame $t=1$. We zoeken een waarde van $t$ waarvoor geldt dat $0 \le t < 1$ en waarbij de afstand tussen de middelpunten gelijk is aan de som van de stralen.
+	
+	De posities van de ballen geven we aan met vectoren. De nieuwe positie bestaat uit de oude positie met daarbij opgeteld de snelheidsvector vermenigvuldigd met de tijd. Wat we krijgen is dus:
+	
+	\begin{equation}
+		\begin{aligned}
+			\mathbf{X} &= \mathbf{X} + \mathbf{v}t \\
+		\end{aligned}
+	\end{equation}
+	Vul je $t=0$ in, dan krijg je de positie in frame 1; vul je $t=1$, dan krijg je de positie in frame 2 (geen rekening gehouden met het effect van een mogelijke botsing).
+	
+	We moeten nu een vergelijking opzetten en oplossen voor $t$, waarin we de relatieve afstand tussen twee ballen gelijkstellen aan de som van de stralen:
+	
+	\begin{equation}
+		\begin{aligned}
+			 \|\mathbf{X_1} + \mathbf{v_1}t  - \mathbf{X_2} -  \mathbf{v_2}t \| &= r_1 + r_2 \\
+			 \|\mathbf{X_{rel}} + \mathbf{v_{rel}}t \| &= r_1 + r_2
+		\end{aligned}
+	\end{equation}
+	Beide kanten kwadrateren geeft:
+	
+	\begin{equation}
+		\label{botsing}
+		\begin{aligned}
+			\mathbf{v_{rel}}^2 t^2 + 2 \mathbf{X_{rel}} \mathbf{v_{rel}} + \mathbf{X_{rel}}^2  &= (r_1 + r_2)^2 \\
+			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} &= (r_1 + r_2)^2 \\
+			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2 &= 0
+		\end{aligned}
+	\end{equation}
+	Deze vergelijking is een simpele ABC-formule, die ook in een iets alternatieve vorm kan worden geschreven om rekentijd te beperken:
+	
+	\begin{equation}
+		\label{a2bc}
+		\begin{aligned}
+			at^2+2bt+c &= 0 \\
+			t^2+\tfrac{2b}{a}t &= -\frac{c}{a} \\
+			\left( t+\tfrac{b}{a} \right)^2 &= \frac{b^2}{a^2} -\frac{c}{a} \\
+			t + \tfrac{b}{a} &= \pm \sqrt{\frac{b^2 - ac}{a^2}} \\
+			t &= \frac{-b \pm \sqrt{b^2 - ac}}{a}
+		\end{aligned}
+	\end{equation}
+	Vergelijking \eqref{a2bc} kunnen we nu toepassen op vergelijking \eqref{botsing}:
+	
+	\begin{equation}
+		\begin{aligned}
+			a &= \mathbf{v_{rel}} \cdot \mathbf{v_{rel}} \\
+			b &= \mathbf{X_{rel}} \cdot \mathbf{v_{rel}} \\
+			c &= \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2
+		\end{aligned}
+	\end{equation}
+\end{document}

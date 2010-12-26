@@ -48,20 +48,20 @@
 			cirk1.massa = 10000;
 			cirk2.massa = 10;
 			
-			document.getElementById('gaDoor').onclick = function(){
-				if(interval){
-					clearInterval(interval);
-					interval = null;
-				} else {
-					var t=0;
-					interval = setInterval(function(){
-						loop(t);
-						t++;
-					}, 1000 / 60);
-				}
-				
-				return false;
-			};
+document.getElementById('gaDoor').onclick = function(){
+	if(interval){
+		clearInterval(interval);
+		interval = null;
+	} else {
+		var t=0;
+		interval = setInterval(function(){
+			loop(t);
+			t++;
+		}, 1000 / 60);
+	}
+	
+	return false;
+};
 		};
 	</script>
 </head>
