@@ -38,8 +38,16 @@ Vector.prototype.krijgProduct = function(n) {
   return new Vector(this.x * n, this.y * n);
 };
 
-Vector.prototype.krijgDeling = function(n) {
+Vector.prototype.krijgQuotient = function(n) {
   return new Vector(this.x / n, this.y / n);
+};
+
+Vector.prototype.inproduct = function(v) {
+  return this.x * v.x + this.y * v.y;
+};
+
+Vector.prototype.uitproduct = function(v) {
+  return this.x * v.y - this.y * v.x;
 };
 
 Vector.prototype.__defineGetter__('norm', function() {
@@ -51,15 +59,7 @@ Vector.prototype.normaliseer = function() {
 };
 
 Vector.prototype.krijgEenheidsvector = function() {
-  return this.krijgDeling(this.norm);
-};
-
-Vector.prototype.inproduct = function(v) {
-  return this.x * v.x + this.y * v.y;
-};
-
-Vector.prototype.uitproduct = function(v) {
-  return this.x * v.y - this.y * v.x;
+  return this.krijgQuotient(this.norm);
 };
 
 Vector.prototype.kloon = function() {
