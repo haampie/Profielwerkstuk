@@ -2,6 +2,7 @@
 
 \usepackage{amsmath}
 \usepackage[dutch]{babel}
+\usepackage{hyperref}
 
 \title{Een fysisch systeem voor de computer}
 \date{\today}
@@ -11,15 +12,21 @@
 	\begin{titlepage}
 	\maketitle
 	\end{titlepage}
+	\subsection*{Beste lezer, dit is nog niet af, wees gewaarschuwd}
+	Dit verslag is nog lang niet af, maar het is al wel een opzetje. Er moeten nog wel honderden plaatjes ter verduidelijking bij!
+	\newpage
+	
+	\tableofcontents
+	\newpage
 	
 	\section{Vectoren}
 	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een x- en een y-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we ook alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
 	
 	\subsection{Notatie}
-	De namen van vectoren schrijven we dikgedrukt en de componenten van vectoren schrijven boven elkaar met ronde haken eromheen. Een voorbeeld hiervan is $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$. Dit stelt een vector voor die $5$ naar rechts is gericht en $3$ naar onder.
+	De namen van vectoren schrijven we dikgedrukt en de componenten boven elkaar met ronde haken eromheen. Een voorbeeld hiervan is $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$. Dit stelt een vector voor die $5$ naar rechts is gericht en $3$ naar onder.
 	
 	\subsection{Norm van een vector}
-	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{{v_1}^2+{v_2}^2}$
+	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{\left({v_1}^2+{v_2}^2\right)}$
 	
 	\subsection{Het inwendig product}
 	Het inwendig product van twee vectoren is de som van alle componenten met elkaar vermenigvuldigd. Een voorbeeld hiervan is:
@@ -31,11 +38,12 @@
 		\end{aligned}
 	\end{equation*}
 	
-	Het resultaat van die vermenigvuldigen en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
+	Het resultaat van die vermenigvuldiging en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
 	
 	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $a=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $b=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en lijn $c$ tussen beide uiteinden van de vectoren, geldt er:
 	
 	\begin{equation}
+		\label{inproduct-cosinus}
 		\begin{aligned}
 			c^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
 			c &= \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2} \\
@@ -56,6 +64,7 @@
 	\subsection{Cirkel tegen cirkel}
 	Kijken of twee cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen groter of gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels snel bewegen en elkaar tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen cirkels juist tussen twee frames gebeurt.
 	
+	\subsubsection{Formule}
 	Bij het berekenen van de nieuwe posities van de ballen in het volgende frame, moeten we dus als eerste kijken of ze ondertussen botsen, als tweede berekenen wanneer dat is en als derde uitvinden wat voor gevolg die botsing heeft.
 	
 	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit.
@@ -113,5 +122,44 @@
 		\end{aligned}
 	\end{equation}
 	
+	\subsubsection{Simulatie}
+	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of formule klopte; zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
+	
+	\subsection{Cirkel tegen lijnstuk}
+	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt. Voor de rest nog even hard nadenken hoe het gaat.
+	
+	\subsubsection{Punt op lijnstuk dichtste bij cirkel}
+	Omdat we met vectoren werken is het heel makkelijk om te bepalen welk punt op een lijnstuk het dichtst bij het middelpunt van een cirkel ligt. Voor het gemak noemen we de uiteinden van het lijntuk $A$ en $B$, het middelpunt van de cirkel $C$, en we defini\"{e}ren $P$ als het punt op het lijnstuk het dichtste bij $C$. $P$ is dus een loodrechte projectie van $C$ op $AB$. Verder stellen we het lijnstuk voor als een vector $\mathbf{v}$ vanuit punt $A$ en tekenen we een vector $\mathbf{w}$ vanuit $A$ naar $C$. Eerder bleek al dat geldt \eqref{inproduct-cosinus}:
+	
+	\begin{equation}
+		\label{inproduct-cosinus-toegepast}
+		\begin{aligned}
+			\mathbf{v} \cdot \mathbf{w} &= \|\mathbf{v}\| \cdot \|\mathbf{w}\| \cdot \cos\gamma \\
+			\cos\gamma &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|}
+		\end{aligned}
+	\end{equation}
+	Verder geldt in driehoek $\triangle ACP$, waarbij $AC = \mathbf{w}$:
+	
+	\begin{equation}
+		\label{cos-gamma}
+		\cos\gamma = \frac{AP}{\|\mathbf{w}\|} = \frac{x}{\|\mathbf{w}\|}
+	\end{equation}
+	We zijn nu op zoek naar de verhouding tussen $x$ en $\mathbf{w}$. Dat geeft een indicatie van hoever punt $P$ op het lijnstuk ligt. Is die verhouding kleiner dan 0, of groter dan 1, dan ligt het punt dat het dichtste bij $C$ ligt, voorbij het lijnstuk. Ligt het ertussen, dan ligt het punt ergens tussen $A$ en $B$.
+	Combineer je \eqref{inproduct-cosinus-toegepast} en \eqref{cos-gamma}, dan krijg je:
+	
+	\begin{equation}
+		\begin{aligned}
+		\frac{x}{\|\mathbf{w}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|} \\
+		                       x &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\|} \\
+		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{v}\|} \\
+		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}
+		\end{aligned}
+	\end{equation}
+	We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen zijn hierbij het de positie van het de begin- en eindpunten van het lijnstuk (dat is meteen al vector $\mathbf{v}$ geworden) en de positie van de cirkel.
+	
 	\section{Gevolgen van botsingen}
+	Hier schrijft Derk een lang verhaal.
+	
+	\section{Programmeren}
+	Hier komt nog een verhaal, maar het resultaat is veel belangrijker.
 \end{document}
