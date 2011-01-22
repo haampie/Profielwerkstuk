@@ -158,8 +158,225 @@
 	We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen zijn hierbij het de positie van het de begin- en eindpunten van het lijnstuk (dat is meteen al vector $\mathbf{v}$ geworden) en de positie van de cirkel.
 	
 	\section{Gevolgen van botsingen}
-	Hier schrijft Derk een lang verhaal.
-	
+	In de natuurkunde is een botsing elke interactie tussen deeltjes of voorwerpen die dicht genoeg bij elkaar komen om energie uit te wisselen.
+
+	\subsection{Theorie van botsingen}
+	Bij een botsing tussen twee lichamen (voorwerpen) zullen er van het moment van eerste aanraking af vormveranderingen optreden, waardoor veerkrachten worden opgewekt. Als deze veerkrachten groot genoeg zijn, zullen de lichamen zich na de botsing weer van elkaar verwijderen. In het algemeen zijn de snelheden van beide lichamen voor en na de botsing verschillend, zodat overdracht van kinetische energie (bewegingsenergie) heeft plaatsgevonden.
+
+	\subsubsection{Elastische botsing}
+	Als twee biljartballen met elkaar botsen, treedt er slechts een tijdelijke vormverandering op; aan het eind van de botsing krijgen de ballen hun oude vorm weer terug. Dit heet dan van een volkomen elastische (veerkrachtige) botsing, waarvoor de wet van behoud van bewegingsenergie geldig is.
+
+	\subsubsection{Onelastische botsing}
+	Wordt er bijvoorbeeld een kogel in een zandzak geschoten en blijft de kogel daarin steken, dan bewegen beide lichamen zich als \'{e}\'{e}n geheel verder. Bij deze volkomen onelastische botsing treedt een blijvende vormverandering op, zodat de wet van behoud van bewegingsenergie niet geldig is, omdat een deel van de bewegingsenergie verbruikt is voor deze vervorming.
+Tussen deze twee voorbeelden in liggen gedeeltelijke veerkrachtige botsingen.
+
+	\subsubsection{De wet van behoud van impuls}
+	Omdat voor elke botsing geldt dat de krachten die de lichamen op elkaar uitoefenen, even groot zijn, tegengesteld gericht zijn en even lang werken, is de stoot van de botsingskrachten nul:
+
+	\begin{equation}
+		  \int_0^t \sum F_1\,dt = 0
+	\end{equation}
+
+De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
+Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
+
+	\subsection{Berekening van de snelheden na de botsing}
+	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. We berekenen het op twee manieren, de eerste manier gebruiken we de wet van behoud van energie en de wet van behoud van impuls, bij de tweede manier gebruiken we alleen de wet van behoud van impuls en de gemeenschappelijke snelheid.
+
+	\subsubsection{Met behulp van de wet van behoud van energie en impuls}
+	Omdat we te maken hebben met elastische botsingen geldt de wet van behoud van energie \eqref{energie} en de wet van behoud van impuls \eqref{impuls}. Met deze twee wetten kunnen we de snelheden van de ballen na de botsing berekenen.
+
+	\begin{equation}
+		\label{energie}
+		\frac{1}{2} m_1 {o_1}^2 + \frac{1}{2} m_2 {o_2}^2 = \frac{1}{2} m_1{v_1}^2 + \frac{1}{2}m_2 {v_2}^2
+	\end{equation}
+	\begin{equation}
+		\label{impuls}
+		m_1 o_1 + m_2 o_2 =  m_1 v_1 + m_2 v_2
+	\end{equation}
+
+	Waarbij:
+	\begin{equation}
+		\begin{aligned}
+			m_1 &= \text{massa van lichaam 1}\\
+			m_2 &= \text{massa van lichaam 2}\\
+			o_1 &= \text{snelheid van lichaam 1 voor de botsing}\\
+			o_2 &= \text{snelheid van lichaam 2 voor de botsing}\\
+			v_1 &= \text{snelheid van lichaam 1 na de botsing}\\
+			v_2 &= \text{snelheid van lichaam 2 na de botsing}
+		\end{aligned}
+	\end{equation}
+
+We hebben nu twee vergelijkingen met twee onbekenden, namelijk $v_1$ en $v_2$. We kunnen $v_2$ uit beide vergelijkingen elimineren, en daarna de vergelijkingen aan elkaar gelijk stellen, zodat we als onbekende alleen $v_1$ over houden.
+
+Als eerste de vergelijking van de wet van behoud van energie:
+	\begin{equation}
+		\label{energie-{v_1}^2}
+		\begin{aligned}
+			\frac{1}{2} m_1 {o_1}^2 + \frac{1}{2} m_2 {o_2}^2 &= \frac{1}{2} m_1{v_1}^2 + \frac{1}{2}m_2 {v_2}^2\\
+			m_1 {o_1}^2 + m_2 {o_2}^2 &= m_1{v_1}^2 + m_2 {v_2}^2\\
+			m_1 {o_1}^2 + m_2 {o_2}^2 - m_2 {v_1}^2 &= m_2{v_2}^2\\
+			\frac{m_1 {o_1}^2 + m_2 {o_2}^2 - m_1 {v_1}^2}{m_2} &= {v_2}^2
+		\end{aligned}
+	\end{equation}
+
+Dan de vergelijking van de wet van behoud van impuls:
+	\begin{equation}
+		\label{impuls-{v_1}^2}
+		\begin{aligned}
+			m_1 o_1 + m_2 o_2 &=  m_1 v_1 + m_2 v_2\\
+			m_1 o_1 + m_2 o_2 - m_1 v_1 &=  m_2 v_2\\
+			\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2} &= v_2\\
+			{\left(\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2}\right)}^2 &= {v_2}^2
+		\end{aligned}
+	\end{equation}
+
+De uitkomsten van \eqref{impuls-{v_1}^2} en \eqref{energie-{v_1}^2} aan elkaar gelijk stellen geeft:
+	\begin{equation}
+		\begin{aligned}
+			&\frac{m_1 {o_1}^2 + m_2 {o_2}^2 - m_1 {v_1}^2}{m_2} = {\left(\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2}\right)}^2\\
+			&= \frac{\left({m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2\right) + \left(2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1\right)}{{m_2}^2}\\
+		\end{aligned}
+	\end{equation}
+
+Deze vergelijking oplossen, zodat je een vierkantsvergelijking krijgt:
+	\begin{equation}
+		\begin{aligned}
+			{m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 &= m_1m_2{o_1}^2 + {m_2}^2{o_2}^2 - m_1m_2{v_1}^2\\
+			{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 &= m_1m_2{o_1}^2 - m_1m_2{v_1}^2\\
+			{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 - m_1m_2{o_1}^2 + m_1m_2{v_1}^2 &= 0\\
+			\left({m_1}^2+m_1m_2\right){v_1}^2+\left(-2{m_1}^2o_1-2m_1m_2o_2\right)v_1+\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right) &= 0\\
+		\end{aligned}
+	\end{equation}
+
+De oplossingen worden gegeven door: $v_1=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, waarbij:
+	\begin{equation}
+		\begin{aligned}
+			a &= {m_1}^2+m_1m_2\\
+			b &= -2{m_1}^2o_1-2m_1m_2o_2\\
+			c &= {m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\\
+		\end{aligned}
+	\end{equation}
+
+We berekenen $-b$, $b^2$, $4ac$ en $b^2-4ac$ apart:
+	\begin{equation}
+		\begin{aligned}
+			-b&=-\left(-2{m_1}^2o_1-2m_1m_2o_2\right)\\
+			&=2{m_1}^2o_1+2m_1m_2o_2\\
+		\end{aligned}
+	\end{equation}
+
+	\begin{equation}
+		\begin{aligned}
+			b^2&=\left(-2{m_1}^2o_1-2m_1m_2o_2\right)^2\\
+			&=4{m_1}^4{o_1}^2+8{m_1}^3m_2o_1o_2+4{m_1}^2{m_2}^2{o_2}^2\\
+		\end{aligned}
+	\end{equation}
+
+	\begin{equation}
+		\begin{aligned}
+			4ac&=4\left({m_1}^2+m_1m_2\right)\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right)\\
+			&=4{m_1}^4{o_1}^2+8{m_1}^3m_2o_1o_2+8{m_1}^2{m_2}^2o_1o_2-4{m_1}^2{m_2}^2{o_1}^2\\
+		\end{aligned}
+	\end{equation}
+
+	\begin{equation}
+		\begin{aligned}
+		b^2-4ac&=4{m_1}^4{o_1}^2+8{m_1}^3m_2o_1o_2+4{m_1}^2{m_2}^2{o_2}^2-4\left({m_1}^2+m_1m_2\right)\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right)\\
+			&={m_1}^2{m_2}^2{\left(2o_2-2o_1\right)}^2\\
+		\end{aligned}
+	\end{equation}
+
+De vierkantsvergelijking kan nu worden ingevuld:
+	\begin{equation}
+		\begin{aligned}
+			v_1&=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\
+			&=\frac{\left(2{m_1}^2o_1+2m_1m_2o_2\right)\pm\sqrt{{m_1}^2{m_2}^2{\left(2o_2-2o_1\right)}^2}}{2\left({m_1}^2+m_1m_2\right)}\\
+			&=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{\left(m_1+m_2\right)}\\
+		\end{aligned}
+	\end{equation}
+
+Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ is:
+	\begin{equation}
+		\begin{aligned}
+		\label{uitwerking-energie-impuls}
+			v_1&=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{\left(m_1+m_2\right)} \wedge v_2&=\frac{\left(m_2o_2+m_1o_1\right)+m_1\left(o_1-o_2\right)}{\left(m_2+m_1\right)}\\
+		\end{aligned}
+	\end{equation}
+
+	\subsubsection{Met behulp van de gemeenschappelijke snelheid}
+	Net zoals bij de vorige manier gebruiken we de wet van behoud van impuls \eqref{impuls-{v_1}^2}, omdat bij botsingen alleen onderlinge krachten werken. We definiëren $v_g$ als de gemeenschappelijke snelheid  aan het eind van de eerste periode van de centrale botsing. Dan geldt er:
+	\begin{equation}
+		\begin{aligned}
+			m_1o_1+m_2o_2&=m_1v_g+m_2v_g\\
+		\end{aligned}
+	\end{equation}
+
+	Waarbij:
+	\begin{equation}
+		\begin{aligned}
+			m_1 &= \text{massa van lichaam 1}\\
+			m_2 &= \text{massa van lichaam 2}\\
+			o_1 &= \text{snelheid van lichaam 1 voor de botsing}\\
+			o_2 &= \text{snelheid van lichaam 2 voor de botsing}\\
+		\end{aligned}
+	\end{equation}
+
+	Daaruit volgt:
+	\begin{equation}
+		\begin{aligned}
+		\label{gemeenschappelijke-snelheid}
+			v_g&=\frac{m_1o_1+m_2o_2}{m_1+m_2}\\
+		\end{aligned}
+	\end{equation}
+
+	Bij een volkomen onelastische botsing is de gemmenschappelijke snelheid $v_g$ van beide voorwerpen gelijk aan \eqref{gemeenschappelijke-snelheid}. Bij een volkomen elastische centrale botsing is de snelheidsverandering van elk voorwerp gedurende de tweede periode van de botsing (op grond van de definitie van een elastische botsing) gelijk aan de snelheidsverandering gedurende de eerste periode van de botsing.
+Is $v$ de snelheid na de botsing, dan geldt dus:
+	\begin{equation}
+		\begin{aligned}
+			v-v_g&=v_g-o\\
+			v&=2v_g-o\\
+		\end{aligned}
+	\end{equation}
+
+	Voor de snelheden $o_1$ en $o_2$ van de twee voorwerpen na de botsing geldt dus:
+	\begin{equation}
+		\begin{aligned}
+		\label{snelheden-met-gemeenschappelijke-snelheid}
+			v_1&=v_g+(v_g-o_1)=2v_g-o_1\\
+			v_2&=v_g+(v_g-o_2)=2v_g-o_2\\
+		\end{aligned}
+	\end{equation}
+
+	Wanneer we \eqref{gemeenschappelijke-snelheid} substitueren in \eqref{snelheden-met-gemeenschappelijke-snelheid} krijgen we de volgende vergelijkingen:
+	\begin{equation}
+		\begin{aligned}
+		\label{uitwerking-gemeenschappelijke-snelheid}
+			v_1=2\left(\frac{m_1o_1+m_2o_2}{m_1+m_2}\right)-o_1 &\wedge v_2=2\left(\frac{m_1o_1+m_2o_2}{m_1+m_2}\right)-o_2\\
+			v_1=\frac{2\left(m_1o_1+m_2o_2\right)}{m_1+m_2}-v_1\cdot\frac{m_1+m_2}{m_1+m_2} &\wedge v_2=\frac{2\left(m_1o_1+m_2o_2\right)}{m_1+m_2}-v_2\cdot\frac{m_1+m_2}{m_1+m_2}\\
+			v_1=\frac{2\left(m_1o_1+m_2o_2\right)-v_1\left(m_1+m_2\right)}{m_1+m_2} &\wedge v_2=\frac{2\left(m_1o_1+m_2o_2\right)-v_2\left(m_1+m_2\right)}{m_1+m_2}\\
+			v_1=\frac{2m_1o_1+2m_2o_2-m_1o_1-m_2o_1}{m_1+m_2} &\wedge v_2=\frac{2m_1o_1+2m_2o_2-m_1o_2-m_2o_2}{m_1+m_2}\\
+			v_1=\frac{m_1o_1+2m_2o_2-o_1m_2}{m_1+m_2} &\wedge v_2=\frac{2m_1o_1+m_2o_2-o_2m_1}{m_1+m_2}\\
+			v_1=\frac{m_1o_1+m_2o_2+m_2o_2-o_1m_2}{m_1+m_2} &\wedge v_2=\frac{m_1o_1+m_2o_2+m_1o_1-o_2m_1}{m_1+m_2}\\
+			v_1=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{m_1+m_2} &\wedge v_2=\frac{\left(m_1o_1+m_2o_2\right)+m_1\left(o_1-o_2\right)}{m_1+m_2}\\
+		\end{aligned}
+	\end{equation}
+
+De uitkomst van \eqref{uitwerking-gemeenschappelijke-snelheid} komt overeen met de uitkomst van \eqref{uitwerking-energie-impuls}.
+
+	\subsection{Experiment van botsende ballen}
+	Wij werken alleen met botsingen in het platte vlak. Omdat we werken harde houten ballen, die vergelijkbaar zijn met biljartballen, hebben we te enkel maken met volkomen elastische botsingen.
+
+	\subsubsection{Botsing tussen twee ballen}
+	Er zijn twee soorten botsingen te onderscheiden: een centrale botsing en een niet-centrale botsing.
+De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
+De verwachting bij een niet-centrale botsing waarvan een bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing. 
+Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
+
+	\subsubsection{Botsing tussen meer dan twee ballen}
+	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaats vindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
+Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+
 	\section{Programmeren}
 	Hier komt nog een verhaal, maar het resultaat is veel belangrijker.
 \end{document}
