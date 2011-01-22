@@ -9,6 +9,7 @@
 		}
 	</style>
 	
+	<script src="vector.js"></script>
 	<script src="javascript.js"></script>
 	<script>
 		var veld, cirk1, cirk2, startY=300;
@@ -16,20 +17,8 @@
 		function loop(t){
 			veld.clearRect(0, 0, 800, 600);
 			
-			var dx = cirk1.x-cirk2.x,
-			    dy = cirk1.y-cirk2.y,
-				rr = dx*dx + dy*dy,
-				r  = Math.sqrt(rr);
-			
-			cirk2.krachten[0].dx = cirk1.massa*cirk2.massa/rr * dx / r;
-			cirk2.krachten[0].dy = cirk1.massa*cirk2.massa/rr * dy / r;
-			
-			cirk1.krachten[0].dx = -cirk2.krachten[0].dx;
-			cirk1.krachten[0].dy = -cirk2.krachten[0].dy;
-			
-			
-			cirk1.beweeg().teken(veld, true);
-			cirk2.beweeg().teken(veld, true);
+			cirk1.stap(1).teken(veld, true);
+			cirk2.stap(1).teken(veld, true);
 			//cirk2.snelheid.teken(veld, cirk2.x, cirk2.y, 'grey');
 		};
 		
@@ -40,8 +29,8 @@
 			cirk1 = new Cirkel(50, 300, 400);
 			cirk2 = new Cirkel(10, 500, 400);
 			
-			cirk1.voegKrachtToe(new Vector(0, 0)).teken(veld, true);
-			cirk2.voegKrachtToe(new Vector(0, 0)).teken(veld, true);
+			cirk1.voegKrachtToe(new Vector(-20, 0)).teken(veld, true);
+			cirk2.voegKrachtToe(new Vector(-1, 1)).teken(veld, true);
 			
 			cirk2.snelheid = new Vector(0, -4);
 			
