@@ -11,4 +11,14 @@
 \contentsline {subsection}{\numberline {2.2}Cirkel tegen lijnstuk}{6}{subsection.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Punt op lijnstuk dichtste bij cirkel}{6}{subsubsection.2.2.1}
 \contentsline {section}{\numberline {3}Gevolgen van botsingen}{7}{section.3}
-\contentsline {section}{\numberline {4}Programmeren}{7}{section.4}
+\contentsline {subsection}{\numberline {3.1}Theorie van botsingen}{7}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Elastische botsing}{8}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Onelastische botsing}{8}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}De wet van behoud van impuls}{8}{subsubsection.3.1.3}
+\contentsline {subsection}{\numberline {3.2}Berekening van de snelheden na de botsing}{8}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Met behulp van de wet van behoud van energie en impuls}{9}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Met behulp van de gemeenschappelijke snelheid}{11}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Experiment van botsende ballen}{12}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Botsing tussen twee ballen}{12}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Botsing tussen meer dan twee ballen}{13}{subsubsection.3.3.2}
+\contentsline {section}{\numberline {4}Programmeren}{13}{section.4}
