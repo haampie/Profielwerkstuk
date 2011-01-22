@@ -34,31 +34,38 @@
 	\begin{equation*}
 		\begin{aligned}
 			\mathbf{v} &= \begin{pmatrix} 5 \\ -3 \end{pmatrix}, \mathbf{u} = \begin{pmatrix} 4 \\ 2 \end{pmatrix} \\
-			\mathbf{v} \cdot \mathbf{u} &= 5 \times 4 -3 \times 2 = -14
+			\mathbf{v} \cdot \mathbf{u} &= 5 \times 4 -3 \times 2 = 14\\
 		\end{aligned}
 	\end{equation*}
 	
 	Het resultaat van die vermenigvuldiging en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
 	
 	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $a=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $b=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en lijn $c$ tussen beide uiteinden van de vectoren, geldt er:
-	
+ 	\begin{equation}
+		\begin{aligned}
+			c=\sqrt{(a_1-b_1)^2+(a_2-b_2)^2} \wedge c^2={\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
+		\end{aligned}
+	\end{equation}
+	\\Hieruit volgt:
 	\begin{equation}
 		\label{inproduct-cosinus}
 		\begin{aligned}
-			c^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
-			c &= \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2} \\
+			\left(\sqrt{(a_1-b_1)^2 + (a_2-b_2)^2}\right)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			(a_1-b_1)^2 + (a_2-b_2)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			{a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2a_1b_2 - 2a_2b_2 &= {a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			-2a_1b_2 - 2a_2b_2 &= - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			-2(\mathbf{a} \cdot \mathbf{b}) &= - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
-			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma
+			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma\\
 		\end{aligned}
 	\end{equation}
+
 	Met het resultaat hiervan kunnen we later geometrische berekeningen doen, zonder de voor de computer ``tijdrovende'' functie cosinus of sinus te gebruiken.
 	
 	\subsection{Eenheidsvector}
-	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij vermenigvuldigd met een getal zijn richting behoudt en de lengte van dat getal aanneemt. Stel je hebt richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
-	
+	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de lengte van dat getal aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
+
+	\newpage	
+
 	\section{Tijdstippen van botsingen}
 	
 	\subsection{Cirkel tegen cirkel}
@@ -74,33 +81,31 @@
 	Allereerst noemen we de tijd in het eerste frame $t=0$ en in het tweede frame $t=1$. We zoeken een waarde van $t$ waarvoor geldt dat $0 \le t < 1$ en waarbij de afstand tussen de middelpunten gelijk is aan de som van de stralen.
 	
 	De posities van de ballen geven we aan met vectoren. De nieuwe positie bestaat uit de oude positie met daarbij opgeteld de snelheidsvector vermenigvuldigd met de tijd. Wat we krijgen is dus:
-	
 	\begin{equation}
 		\begin{aligned}
-			\mathbf{X} &= \mathbf{X} + \mathbf{v}t \\
+			\mathbf{X} &= \mathbf{X} + \mathbf{v}t\\
 		\end{aligned}
 	\end{equation}
-	Vul je $t=0$ in, dan krijg je de positie in frame 1; vul je $t=1$, dan krijg je de positie in frame 2 (geen rekening gehouden met het effect van een mogelijke botsing).
+	\\Vul je $t=0$ in, dan krijg je de positie in frame 1; vul je $t=1$, dan krijg je de positie in frame 2 (geen rekening gehouden met het effect van een mogelijke botsing).
 	
 	We moeten nu een vergelijking opzetten en oplossen voor $t$, waarin we de relatieve afstand tussen twee ballen gelijkstellen aan de som van de stralen:
 	
 	\begin{equation}
 		\begin{aligned}
 			 \|\mathbf{X_1} + \mathbf{v_1}t  - \mathbf{X_2} -  \mathbf{v_2}t \| &= r_1 + r_2 \\
-			 \|\mathbf{X_{rel}} + \mathbf{v_{rel}}t \| &= r_1 + r_2
+			 \|\mathbf{X_{rel}} + \mathbf{v_{rel}}t \| &= r_1 + r_2\\
 		\end{aligned}
 	\end{equation}
-	Beide kanten kwadrateren geeft:
-	
+	\\Beide kanten kwadrateren geeft:
 	\begin{equation}
 		\label{botsing}
 		\begin{aligned}
 			\mathbf{v_{rel}}^2 t^2 + 2 \mathbf{X_{rel}} \mathbf{v_{rel}} + \mathbf{X_{rel}}^2  &= (r_1 + r_2)^2 \\
 			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} &= (r_1 + r_2)^2 \\
-			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2 &= 0
+			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2 &= 0\\
 		\end{aligned}
 	\end{equation}
-	Deze vergelijking is een simpele ABC-formule, die ook in een iets alternatieve vorm kan worden geschreven om rekentijd te beperken:
+	\\Deze vergelijking is een eenvoudige vierkantsvergelijking, die ook in een iets alternatieve vorm kan worden geschreven om rekentijd te beperken:
 	
 	\begin{equation}
 		\label{a2bc}
@@ -109,54 +114,54 @@
 			t^2+\tfrac{2b}{a}t &= -\frac{c}{a} \\
 			\left( t+\tfrac{b}{a} \right)^2 &= \frac{b^2}{a^2} -\frac{c}{a} \\
 			t + \tfrac{b}{a} &= \pm \sqrt{\frac{b^2 - ac}{a^2}} \\
-			t &= \frac{-b \pm \sqrt{b^2 - ac}}{a}
+			t &= \frac{-b \pm \sqrt{b^2 - ac}}{a}\\
 		\end{aligned}
 	\end{equation}
-	Vergelijking \eqref{a2bc} kunnen we nu toepassen op vergelijking \eqref{botsing}:
+	\\Vergelijking \eqref{a2bc} kunnen we nu toepassen op vergelijking \eqref{botsing}:
 	
 	\begin{equation}
 		\begin{aligned}
 			a &= \mathbf{v_{rel}} \cdot \mathbf{v_{rel}} \\
 			b &= \mathbf{X_{rel}} \cdot \mathbf{v_{rel}} \\
-			c &= \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2
+			c &= \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2\\
 		\end{aligned}
 	\end{equation}
 	
 	\subsubsection{Simulatie}
-	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of formule klopte; zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
+	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte; zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
 	
 	\subsection{Cirkel tegen lijnstuk}
 	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt. Voor de rest nog even hard nadenken hoe het gaat.
 	
 	\subsubsection{Punt op lijnstuk dichtste bij cirkel}
 	Omdat we met vectoren werken is het heel makkelijk om te bepalen welk punt op een lijnstuk het dichtst bij het middelpunt van een cirkel ligt. Voor het gemak noemen we de uiteinden van het lijntuk $A$ en $B$, het middelpunt van de cirkel $C$, en we defini\"{e}ren $P$ als het punt op het lijnstuk het dichtste bij $C$. $P$ is dus een loodrechte projectie van $C$ op $AB$. Verder stellen we het lijnstuk voor als een vector $\mathbf{v}$ vanuit punt $A$ en tekenen we een vector $\mathbf{w}$ vanuit $A$ naar $C$. Eerder bleek al dat geldt \eqref{inproduct-cosinus}:
-	
 	\begin{equation}
 		\label{inproduct-cosinus-toegepast}
 		\begin{aligned}
 			\mathbf{v} \cdot \mathbf{w} &= \|\mathbf{v}\| \cdot \|\mathbf{w}\| \cdot \cos\gamma \\
-			\cos\gamma &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|}
+			\cos\gamma &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|}\\
 		\end{aligned}
 	\end{equation}
-	Verder geldt in driehoek $\triangle ACP$, waarbij $AC = \mathbf{w}$:
-	
+	\\Verder geldt in driehoek $\triangle ACP$, waarbij $AC = \mathbf{w}$:
 	\begin{equation}
 		\label{cos-gamma}
 		\cos\gamma = \frac{AP}{\|\mathbf{w}\|} = \frac{x}{\|\mathbf{w}\|}
 	\end{equation}
+
 	We zijn nu op zoek naar de verhouding tussen $x$ en $\mathbf{w}$. Dat geeft een indicatie van hoever punt $P$ op het lijnstuk ligt. Is die verhouding kleiner dan 0, of groter dan 1, dan ligt het punt dat het dichtste bij $C$ ligt, voorbij het lijnstuk. Ligt het ertussen, dan ligt het punt ergens tussen $A$ en $B$.
 	Combineer je \eqref{inproduct-cosinus-toegepast} en \eqref{cos-gamma}, dan krijg je:
-	
 	\begin{equation}
 		\begin{aligned}
 		\frac{x}{\|\mathbf{w}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|} \\
 		                       x &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\|} \\
 		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{v}\|} \\
-		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}
+		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}\\
 		\end{aligned}
 	\end{equation}
-	We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen zijn hierbij het de positie van het de begin- en eindpunten van het lijnstuk (dat is meteen al vector $\mathbf{v}$ geworden) en de positie van de cirkel.
+	\\We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen zijn hierbij het de positie van het de begin- en eindpunten van het lijnstuk (dat is meteen al vector $\mathbf{v}$ geworden) en de positie van de cirkel.
 	
+	\newpage
+
 	\section{Gevolgen van botsingen}
 	In de natuurkunde is een botsing elke interactie tussen deeltjes of voorwerpen die dicht genoeg bij elkaar komen om energie uit te wisselen.
 
@@ -167,35 +172,31 @@
 	Als twee biljartballen met elkaar botsen, treedt er slechts een tijdelijke vormverandering op; aan het eind van de botsing krijgen de ballen hun oude vorm weer terug. Dit heet dan van een volkomen elastische (veerkrachtige) botsing, waarvoor de wet van behoud van bewegingsenergie geldig is.
 
 	\subsubsection{Onelastische botsing}
-	Wordt er bijvoorbeeld een kogel in een zandzak geschoten en blijft de kogel daarin steken, dan bewegen beide lichamen zich als \'{e}\'{e}n geheel verder. Bij deze volkomen onelastische botsing treedt een blijvende vormverandering op, zodat de wet van behoud van bewegingsenergie niet geldig is, omdat een deel van de bewegingsenergie verbruikt is voor deze vervorming.
-Tussen deze twee voorbeelden in liggen gedeeltelijke veerkrachtige botsingen.
+	Wordt er bijvoorbeeld een kogel in een zandzak geschoten en blijft de kogel daarin steken, dan bewegen beide lichamen zich als \'{e}\'{e}n geheel verder. Bij deze volkomen onelastische botsing treedt een blijvende vormverandering op, zodat de wet van behoud van bewegingsenergie niet geldig is, omdat een deel van de bewegingsenergie verbruikt is voor deze vervorming.\\ Tussen deze twee voorbeelden in liggen gedeeltelijke veerkrachtige botsingen.
 
 	\subsubsection{De wet van behoud van impuls}
 	Omdat voor elke botsing geldt dat de krachten die de lichamen op elkaar uitoefenen, even groot zijn, tegengesteld gericht zijn en even lang werken, is de stoot van de botsingskrachten nul:
-
 	\begin{equation}
-		  \int_0^t \sum F_1\,dt = 0
+		  \int_0^t \sum F_1\,dt = 0\\
 	\end{equation}
 
-De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
+	De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
 Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
 
 	\subsection{Berekening van de snelheden na de botsing}
-	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. We berekenen het op twee manieren, de eerste manier gebruiken we de wet van behoud van energie en de wet van behoud van impuls, bij de tweede manier gebruiken we alleen de wet van behoud van impuls en de gemeenschappelijke snelheid.
+	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. We berekenen het op twee manieren,bij  de eerste manier gebruiken we de wet van behoud van energie en de wet van behoud van impuls, bij de tweede manier gebruiken we alleen de wet van behoud van impuls en de gemeenschappelijke snelheid.
 
 	\subsubsection{Met behulp van de wet van behoud van energie en impuls}
 	Omdat we te maken hebben met elastische botsingen geldt de wet van behoud van energie \eqref{energie} en de wet van behoud van impuls \eqref{impuls}. Met deze twee wetten kunnen we de snelheden van de ballen na de botsing berekenen.
-
 	\begin{equation}
 		\label{energie}
-		\frac{1}{2} m_1 {o_1}^2 + \frac{1}{2} m_2 {o_2}^2 = \frac{1}{2} m_1{v_1}^2 + \frac{1}{2}m_2 {v_2}^2
+		\frac{1}{2} m_1 {o_1}^2 + \frac{1}{2} m_2 {o_2}^2 = \frac{1}{2} m_1{v_1}^2 + \frac{1}{2}m_2 {v_2}^2\\
 	\end{equation}
 	\begin{equation}
 		\label{impuls}
-		m_1 o_1 + m_2 o_2 =  m_1 v_1 + m_2 v_2
+		m_1 o_1 + m_2 o_2 =  m_1 v_1 + m_2 v_2\\
 	\end{equation}
-
-	Waarbij:
+	\\Waarbij:
 	\begin{equation}
 		\begin{aligned}
 			m_1 &= \text{massa van lichaam 1}\\
@@ -203,43 +204,39 @@ Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elka
 			o_1 &= \text{snelheid van lichaam 1 voor de botsing}\\
 			o_2 &= \text{snelheid van lichaam 2 voor de botsing}\\
 			v_1 &= \text{snelheid van lichaam 1 na de botsing}\\
-			v_2 &= \text{snelheid van lichaam 2 na de botsing}
+			v_2 &= \text{snelheid van lichaam 2 na de botsing}\\
 		\end{aligned}
 	\end{equation}
 
-We hebben nu twee vergelijkingen met twee onbekenden, namelijk $v_1$ en $v_2$. We kunnen $v_2$ uit beide vergelijkingen elimineren, en daarna de vergelijkingen aan elkaar gelijk stellen, zodat we als onbekende alleen $v_1$ over houden.
-
-Als eerste de vergelijking van de wet van behoud van energie:
+	We hebben nu twee vergelijkingen met twee onbekenden, namelijk $v_1$ en $v_2$. We kunnen $v_2$ uit beide vergelijkingen elimineren, en daarna de vergelijkingen aan elkaar gelijk stellen, zodat we als onbekende alleen $v_1$ over houden.
+	\\Als eerste de vergelijking van de wet van behoud van energie:
 	\begin{equation}
 		\label{energie-{v_1}^2}
 		\begin{aligned}
 			\frac{1}{2} m_1 {o_1}^2 + \frac{1}{2} m_2 {o_2}^2 &= \frac{1}{2} m_1{v_1}^2 + \frac{1}{2}m_2 {v_2}^2\\
 			m_1 {o_1}^2 + m_2 {o_2}^2 &= m_1{v_1}^2 + m_2 {v_2}^2\\
 			m_1 {o_1}^2 + m_2 {o_2}^2 - m_2 {v_1}^2 &= m_2{v_2}^2\\
-			\frac{m_1 {o_1}^2 + m_2 {o_2}^2 - m_1 {v_1}^2}{m_2} &= {v_2}^2
+			\frac{m_1 {o_1}^2 + m_2 {o_2}^2 - m_1 {v_1}^2}{m_2} &= {v_2}^2\\
 		\end{aligned}
 	\end{equation}
-
-Dan de vergelijking van de wet van behoud van impuls:
+	\\Dan de vergelijking van de wet van behoud van impuls:
 	\begin{equation}
 		\label{impuls-{v_1}^2}
 		\begin{aligned}
 			m_1 o_1 + m_2 o_2 &=  m_1 v_1 + m_2 v_2\\
 			m_1 o_1 + m_2 o_2 - m_1 v_1 &=  m_2 v_2\\
 			\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2} &= v_2\\
-			{\left(\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2}\right)}^2 &= {v_2}^2
+			{\left(\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2}\right)}^2 &= {v_2}^2\\
 		\end{aligned}
 	\end{equation}
-
-De uitkomsten van \eqref{impuls-{v_1}^2} en \eqref{energie-{v_1}^2} aan elkaar gelijk stellen geeft:
+	\\De uitkomsten van \eqref{impuls-{v_1}^2} en \eqref{energie-{v_1}^2} aan elkaar gelijk stellen geeft:
 	\begin{equation}
 		\begin{aligned}
 			&\frac{m_1 {o_1}^2 + m_2 {o_2}^2 - m_1 {v_1}^2}{m_2} = {\left(\frac{m_1 o_1 + m_2 o_2 - m_1 v_1}{m_2}\right)}^2\\
 			&= \frac{\left({m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2\right) + \left(2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1\right)}{{m_2}^2}\\
 		\end{aligned}
 	\end{equation}
-
-Deze vergelijking oplossen, zodat je een vierkantsvergelijking krijgt:
+	\\Deze vergelijking oplossen, zodat je een vierkantsvergelijking krijgt:
 	\begin{equation}
 		\begin{aligned}
 			{m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 &= m_1m_2{o_1}^2 + {m_2}^2{o_2}^2 - m_1m_2{v_1}^2\\
@@ -248,8 +245,7 @@ Deze vergelijking oplossen, zodat je een vierkantsvergelijking krijgt:
 			\left({m_1}^2+m_1m_2\right){v_1}^2+\left(-2{m_1}^2o_1-2m_1m_2o_2\right)v_1+\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right) &= 0\\
 		\end{aligned}
 	\end{equation}
-
-De oplossingen worden gegeven door: $v_1=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, waarbij:
+	\\De oplossingen worden gegeven door: $v_1=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, waarbij:
 	\begin{equation}
 		\begin{aligned}
 			a &= {m_1}^2+m_1m_2\\
@@ -257,8 +253,7 @@ De oplossingen worden gegeven door: $v_1=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, waarbi
 			c &= {m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\\
 		\end{aligned}
 	\end{equation}
-
-We berekenen $-b$, $b^2$, $4ac$ en $b^2-4ac$ apart:
+	\\We berekenen $-b$, $b^2$, $4ac$ en $b^2-4ac$ apart:
 	\begin{equation}
 		\begin{aligned}
 			-b&=-\left(-2{m_1}^2o_1-2m_1m_2o_2\right)\\
@@ -286,8 +281,7 @@ We berekenen $-b$, $b^2$, $4ac$ en $b^2-4ac$ apart:
 			&={m_1}^2{m_2}^2{\left(2o_2-2o_1\right)}^2\\
 		\end{aligned}
 	\end{equation}
-
-De vierkantsvergelijking kan nu worden ingevuld:
+	\\De vierkantsvergelijking kan nu worden ingevuld:
 	\begin{equation}
 		\begin{aligned}
 			v_1&=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\
@@ -295,8 +289,7 @@ De vierkantsvergelijking kan nu worden ingevuld:
 			&=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{\left(m_1+m_2\right)}\\
 		\end{aligned}
 	\end{equation}
-
-Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ is:
+	\\Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ zijn:
 	\begin{equation}
 		\begin{aligned}
 		\label{uitwerking-energie-impuls}
@@ -311,8 +304,7 @@ Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ is:
 			m_1o_1+m_2o_2&=m_1v_g+m_2v_g\\
 		\end{aligned}
 	\end{equation}
-
-	Waarbij:
+	\\Waarbij:
 	\begin{equation}
 		\begin{aligned}
 			m_1 &= \text{massa van lichaam 1}\\
@@ -321,16 +313,14 @@ Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ is:
 			o_2 &= \text{snelheid van lichaam 2 voor de botsing}\\
 		\end{aligned}
 	\end{equation}
-
-	Daaruit volgt:
+	\\Daaruit volgt:
 	\begin{equation}
 		\begin{aligned}
 		\label{gemeenschappelijke-snelheid}
 			v_g&=\frac{m_1o_1+m_2o_2}{m_1+m_2}\\
 		\end{aligned}
 	\end{equation}
-
-	Bij een volkomen onelastische botsing is de gemmenschappelijke snelheid $v_g$ van beide voorwerpen gelijk aan \eqref{gemeenschappelijke-snelheid}. Bij een volkomen elastische centrale botsing is de snelheidsverandering van elk voorwerp gedurende de tweede periode van de botsing (op grond van de definitie van een elastische botsing) gelijk aan de snelheidsverandering gedurende de eerste periode van de botsing.
+	\\Bij een volkomen onelastische botsing is de gemeenschappelijke snelheid $v_g$ van beide voorwerpen gelijk aan \eqref{gemeenschappelijke-snelheid}. Bij een volkomen elastische centrale botsing is de snelheidsverandering van elk voorwerp gedurende de tweede periode van de botsing (op grond van de definitie van een elastische botsing) gelijk aan de snelheidsverandering gedurende de eerste periode van de botsing.
 Is $v$ de snelheid na de botsing, dan geldt dus:
 	\begin{equation}
 		\begin{aligned}
@@ -338,8 +328,7 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 			v&=2v_g-o\\
 		\end{aligned}
 	\end{equation}
-
-	Voor de snelheden $o_1$ en $o_2$ van de twee voorwerpen na de botsing geldt dus:
+	\\Voor de snelheden $o_1$ en $o_2$ van de twee voorwerpen na de botsing geldt dus:
 	\begin{equation}
 		\begin{aligned}
 		\label{snelheden-met-gemeenschappelijke-snelheid}
@@ -347,8 +336,7 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 			v_2&=v_g+(v_g-o_2)=2v_g-o_2\\
 		\end{aligned}
 	\end{equation}
-
-	Wanneer we \eqref{gemeenschappelijke-snelheid} substitueren in \eqref{snelheden-met-gemeenschappelijke-snelheid} krijgen we de volgende vergelijkingen:
+	\\Wanneer we \eqref{gemeenschappelijke-snelheid} substitueren in \eqref{snelheden-met-gemeenschappelijke-snelheid} krijgen we de volgende vergelijkingen:
 	\begin{equation}
 		\begin{aligned}
 		\label{uitwerking-gemeenschappelijke-snelheid}
@@ -361,11 +349,10 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 			v_1=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{m_1+m_2} &\wedge v_2=\frac{\left(m_1o_1+m_2o_2\right)+m_1\left(o_1-o_2\right)}{m_1+m_2}\\
 		\end{aligned}
 	\end{equation}
-
-De uitkomst van \eqref{uitwerking-gemeenschappelijke-snelheid} komt overeen met de uitkomst van \eqref{uitwerking-energie-impuls}.
+	\\De uitkomst van \eqref{uitwerking-gemeenschappelijke-snelheid} komt overeen met de uitkomst van \eqref{uitwerking-energie-impuls}.
 
 	\subsection{Experiment van botsende ballen}
-	Wij werken alleen met botsingen in het platte vlak. Omdat we werken harde houten ballen, die vergelijkbaar zijn met biljartballen, hebben we te enkel maken met volkomen elastische botsingen.
+	Wij werken alleen met botsingen in het platte vlak. Omdat we werken met harde houten ballen, die vergelijkbaar zijn met biljartballen, hebben we enkel en alleen te maken met volkomen elastische botsingen.
 
 	\subsubsection{Botsing tussen twee ballen}
 	Er zijn twee soorten botsingen te onderscheiden: een centrale botsing en een niet-centrale botsing.
@@ -376,6 +363,8 @@ Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing 
 	\subsubsection{Botsing tussen meer dan twee ballen}
 	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaats vindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
 Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+
+	\newpage
 
 	\section{Programmeren}
 	Hier komt nog een verhaal, maar het resultaat is veel belangrijker.
