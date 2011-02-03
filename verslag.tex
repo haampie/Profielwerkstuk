@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage[dutch]{babel}
 \usepackage{hyperref}
+\usepackage{enumerate}
 
 \title{Een fysisch systeem voor de computer}
 \date{\today}
@@ -52,8 +53,9 @@
 		\begin{aligned}
 			\left(\sqrt{(a_1-b_1)^2 + (a_2-b_2)^2}\right)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			(a_1-b_1)^2 + (a_2-b_2)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
-			{a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2a_1b_2 - 2a_2b_2 &= {a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
-			-2a_1b_2 - 2a_2b_2 &= - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
+			{a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2a_1b_1 - 2a_2b_2 &= {a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
+			-2a_1b_1 - 2a_2b_2 &= - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
+			-2(a_1b_1 + a_2b_2) &= - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			-2(\mathbf{a} \cdot \mathbf{b}) &= - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
 			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma\\
 		\end{aligned}
@@ -374,5 +376,52 @@ Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken 
 	\newpage
 
 	\section{Programmeren}
-	Hier komt nog een verhaal, maar het resultaat is veel belangrijker.
+	\subsection{Andere eenheden}
+	Een computermodel gebruikt andere eenheden dan in de realiteit worden gebruikt, dus we defini\"{e}ren hier nieuwe eenheden. Als eerste werkt een animatie met een hoeveelheid beeldjes per seconde, of in het Engels: \emph{frames per seconde} (fps). We proberen een snelheid van ongeveer $80$fps te bereiken; hoe hoger het aantal frames per seconde, hoe betrouwbaarder de simulatie. De snelheid van de voorwerpen geven we vervolgens in pixels per frame, of het aantal beeldpuntjes per frame. Dus komen we tot de volgende definities:
+	\\
+	\begin{tabular}{| l l l l |}
+		\hline 
+		\emph{grootheid}       & \emph{symbool} & \emph{eenheid}                    & \emph{symbool} \\
+		Interval tussen frames & $T$            & seconden                          & $s$            \\
+		Frames per seconde     & $f$            & hertz                             & Hz = $s^{-1}$  \\
+		Snelheid               & $v$            & pixels per interval               & px T$^{-1}$    \\
+		Versnelling            & $a$            & pixels per intervalkwadraat       & px T$^{-2}$    \\
+		Kracht                 & $F$            & newton.... .hoehierverder.        & $?$            \\
+		\hline 
+	\end{tabular}
+	
+	\subsection{Hoe de posities berekend worden}
+	In onze simulatie nemen we steeds een stapje $T$ verder in de tijd. Elke keer als we een stapje verder gaan doen we de volgende stappen:
+	\\
+	\begin{enumerate}[1]
+		\item Ga alle voorwerpen bij langs
+		\begin{enumerate}[1]
+			\item Bereken de nieuwe positie: Tel de snelheidsvector bij de huidige positie op
+			\item Bereken welke de richting en grootte van alle krachten op het voorwerp
+			\item Bereken met behulp van de som van alle krachten de nieuwe versnelling
+			\item Tel de versnelling bij de snelheid op
+		\end{enumerate}
+	\end{enumerate}
+	We doen dus alsof elk voorwerp met een constante snelheid in het interval $T$ beweegt. Dit klopt niet met de realiteit, maar als we het tijdsinterval tussen twee frames steeds kleiner maken, benadert het wel de werkelijkheid. Stel dat $T$ naar 0 nadert, dus $T = \Delta t$, dan geldt allereerst voor de positie van een voowerp:
+	\\	
+	\begin{equation}
+		\label{verplaatsing}
+		\begin{aligned}
+			\mathbf{x} =: \mathbf{x} + \mathbf{v} \cdot \Delta t
+		\end{aligned}	
+	\end{equation}
+	En voor de snelheid geldt dan:
+	\\	
+	\begin{equation}
+		\label{snelheidsdefinitie}
+		\begin{aligned}
+			\mathbf{v} &= \lim_{\Delta t\to0} \frac{\Delta \mathbf{x}}{\Delta t} \\
+			\mathbf{v} \cdot \Delta t &= \Delta \mathbf{x}
+		\end{aligned}
+	\end{equation}
+	Invullen van \eqref{snelheidsdefinitie} in \eqref{verplaatsing} geeft dan:
+	\begin{equation}
+		\mathbf{x} =: \mathbf{x} +  \Delta \mathbf{x}
+	\end{equation}
+	Waarmee bewezen is dat je de snelheid van een voorwerp als constant mag zien in een minuscuul tijdsinterval.
 \end{document}
