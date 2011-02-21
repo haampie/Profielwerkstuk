@@ -1,3 +1,6 @@
+var OMEGA = 0.001;
+
+
 /**
  * De Wereld houdt alles bij elkaar
  */
@@ -9,14 +12,66 @@ function Wereld(breedte, hoogte, ctx){
 }
 
 /**
+ * Kijk of er een botsing gebeurt tussen twee voorwerpen
+ */
+Wereld.botst = function(een, twee){
+  var vrel = een.snelheid.krijgVerschil(twee.snelheid);
+  var Xrel = een.positie.krijgVerschil(twee.positie);
+  var a = vrel.inproduct(vrel);
+  var b = Xrel.inproduct(vrel);
+  var c = Xrel.inproduct(Xrel) - (een.straal + twee.straal)*(een.straal + twee.straal);
+  var d = b*b - a*c;
+  
+  if(d < 0) return false;
+  
+  var t2 = (-b - Math.sqrt(d))/a;
+  var t1 = (-b + Math.sqrt(d))/a;
+  
+  if(t2 <= 0 || t2 > 1){
+    if(t1 <= 0 || t1 > 1){
+      return false;
+    } else {
+      return t1;
+    }
+  } else {
+    return t2;
+  }
+};
+
+/**
  * Doe een stap in de tijd voor elk voorwerp
  */
-Wereld.prototype.stap = function(t){
+Wereld.prototype.stap = function(voorwaartsch){
   
-  // Verplaats elk voorwerp
+  // Reken de nieuwe snelheid uit
   this.voorwerpen.forEach(function(vw, i){
-    vw.stap(t);
-  });
+    vw.move = 1;
+    vw.stap(voorwaartsch);
+  }, this);
+  
+  var botsingGebeurt = false;
+  
+  // Zoek per voorwerp naar botsingen met elk volgend voorwerp
+  this.voorwerpen.forEach(function(vw, i){
+    // Zoek naar botsingen!
+    for(var j=i+1; j<this.voorwerpen.length; j++){
+    
+      // Beweeg het voorwerp naar zijn nieuwe positie
+      var botsing = Wereld.botst(vw, this.voorwerpen[j]);
+      
+      if(typeof botsing == 'number'){
+        botsingGebeurt = true;
+        vw.move = this.voorwerpen[j].move = botsing;
+      }
+    }
+  }, this);
+  
+  // Beweeg elk voorwerp
+  this.voorwerpen.forEach(function(vw, i){
+    vw.beweeg(vw.move);
+  }, true);
+  
+  return botsingGebeurt;
 };
 
 Wereld.prototype.nieuwVoorwerp = function(vw){
@@ -109,11 +164,11 @@ Cirkel.prototype.teken = function(ctx, krachten){
 /**
  * Bij de beweging wordt de nieuwe snelheid berekend
  * gebruikmakend van de krachten van het moment
+ * Het voorwerp wordt niet bewogen.
  * F = m*a -> a = F/m. 
- * v += a. 
- * p = v*t
+ * v += a.
  */
-Cirkel.prototype.stap = function(t){
+Cirkel.prototype.stap = function(voorwaartsch){
 
 	// Maak een nulvector
 	var som = new Vector();
@@ -127,11 +182,17 @@ Cirkel.prototype.stap = function(t){
 	som.deel(this.massa);
 	
 	// Versnelling optellen bij de snelheid
-	this.snelheid.plus(som);
-	
-	// Tel de snelheid op bij de positie.
-	this.positie.plus(this.snelheid.krijgProduct(t));
+  if(voorwaartsch){
+    this.snelheid.plus(som);
+  } else {
+    this.snelheid.min(som);
+  }
 	
 	// Voor chaining
 	return this;
+};
+
+Cirkel.prototype.beweeg = function(a){
+	// Tel de snelheid op bij de positie.
+	this.positie.plus(this.snelheid.krijgProduct(a));
 };

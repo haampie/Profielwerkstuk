@@ -12,10 +12,16 @@
   <script src="vector.js"></script>
   <script src="javascript.js"></script>
   <script>
-    var wereld, interval;
+    var wereld, interval = null;
     
-    function loop(){
-      wereld.stap(1);
+    function loop(voorwaartsch){
+      console.log(wereld.voorwerpen[0].snelheid.y);
+      
+      if(wereld.stap(voorwaartsch)){
+          clearInterval(interval);
+          interval = null;
+      }
+      
       wereld.teken();
     }
     
@@ -25,19 +31,26 @@
       wereld = new Wereld(800, 600, ctx);
       
       // Grote cirkel
-      cirk1 = new Cirkel(50, 300, 400);
-      cirk1.nieuweKracht(new Vector(-2, 0));
+      cirk1 = new Cirkel(50, 300, 300);
+      cirk1.nieuweKracht(new Vector(1, 0));
+      cirk1.snelheid = new Vector(0, 2);
       cirk1.massa = 50;
       
       // Kleine cirkel
-      cirk2 = new Cirkel(10, 500, 400);
-      cirk2.nieuweKracht(new Vector(-1, 1));
-      cirk2.snelheid = new Vector(0, -4);
+      cirk2 = new Cirkel(10, 800, 370);
+      cirk2.nieuweKracht(new Vector(-1, 0));
       cirk2.massa = 10;
+      
+      // Middelmatige cirkel
+      cirk3 = new Cirkel(25, 200, 440);
+      cirk3.nieuweKracht(new Vector(1, 0));
+      cirk3.snelheid = new Vector(0, -4);
+      cirk3.massa = 300;
       
       // Voeg cirkels toe
       wereld.nieuwVoorwerp(cirk1);
       wereld.nieuwVoorwerp(cirk2);
+      wereld.nieuwVoorwerp(cirk3);
       
       wereld.teken();
       
@@ -45,29 +58,32 @@
         GUI
       */
       
+      // Automatisch afspelen
       document.getElementById('loop').onclick = function(){
         if(interval){
           clearInterval(interval);
           interval = null;
         } else {
           interval = setInterval(function(){
-            loop(1);
+            loop(true);
           }, 1000 / 60);
         }
         
         return false;
       };
       
+      // Ga heen, en lope voorwaartsch
       document.getElementById('next').onclick = function(){
         if(!interval){
-          loop(1);
+          loop(true);
         }
         return false;
       };
       
+      // Terug in de tijd gaan!
       document.getElementById('prev').onclick = function(){
         if(!interval){
-          loop(-1);
+          loop(false);
         }
         
         return false;
