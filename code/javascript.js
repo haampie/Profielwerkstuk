@@ -15,8 +15,12 @@ Wereld.prototype.stap = function(t){
   
   // Verplaats elk voorwerp
   this.voorwerpen.forEach(function(vw, i){
-    
+    vw.stap(t);
   });
+};
+
+Wereld.prototype.nieuwVoorwerp = function(vw){
+  this.voorwerpen.push(vw);
 };
 
 /**
@@ -24,6 +28,13 @@ Wereld.prototype.stap = function(t){
  */
 Wereld.prototype.teken = function(){
   
+  // Maak het scherm leeg
+  this.ctx.clearRect(0, 0, this.breedte, this.hoogte);
+  
+  // Teken elk voorwerp
+  this.voorwerpen.forEach(function(vw, i){
+    vw.teken(this.ctx, true);
+  }, this);
 };
 
 Vector.prototype.teken = function(ctx, x, y, kleur){
@@ -49,18 +60,21 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 	ctx.restore();
 };
 
+/**
+ *
+ */
 function Cirkel(r, px, py){
-  this.straal = r;
-  this.positie = new Vector(px, py);
+	this.straal = r;
+	this.positie = new Vector(px, py);
 	this.massa = 1000;
 	
 	this.snelheid = new Vector();
 	this.krachten = [];
-  this.resulterend = new Vector();
+	this.resulterend = new Vector();
 }
 
-Cirkel.prototype.voegKrachtToe = function(){
-  var args = Array.prototype.slice.call(arguments);
+Cirkel.prototype.nieuweKracht = function(){
+	var args = Array.prototype.slice.call(arguments);
   
 	for(var i=0; i<args.length; i++){
 		this.krachten.push(args[i]);
@@ -101,23 +115,23 @@ Cirkel.prototype.teken = function(ctx, krachten){
  */
 Cirkel.prototype.stap = function(t){
 
-  // Maak een nulvector
+	// Maak een nulvector
 	var som = new Vector();
 	
-  // Tel alle krachten bij elkaar op
-  this.krachten.forEach(function(el){
-    som.plus(el);
-  });
-  
-  // Deel door de massa
-  som.deel(this.massa);
+	// Tel alle krachten bij elkaar op
+	this.krachten.forEach(function(el){
+		som.plus(el);
+	});
 	
-  // Versnelling optellen bij de snelheid
+	// Deel door de massa
+	som.deel(this.massa);
+	
+	// Versnelling optellen bij de snelheid
 	this.snelheid.plus(som);
-  
-  // Tel de snelheid op bij de positie.
-  this.positie.plus(this.snelheid.krijgProduct(t));
 	
-  // Voor chaining
+	// Tel de snelheid op bij de positie.
+	this.positie.plus(this.snelheid.krijgProduct(t));
+	
+	// Voor chaining
 	return this;
 };
