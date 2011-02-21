@@ -1,63 +1,101 @@
 <!DOCTYPE HTML>
 <html lang="nl">
 <head>
-	<meta charset="UTF-8">
-	<title>Vectors en cirkels</title>
-	<style>
-		canvas {
-			border: 1px dotted #CCC;
-		}
-	</style>
-	
-	<script src="vector.js"></script>
-	<script src="javascript.js"></script>
-	<script>
-		var veld, cirk1, cirk2, startY=300;
-		
-		function loop(t){
-			veld.clearRect(0, 0, 800, 600);
-			
-			cirk1.stap(1).teken(veld, true);
-			cirk2.stap(1).teken(veld, true);
-			//cirk2.snelheid.teken(veld, cirk2.x, cirk2.y, 'grey');
-		};
-		
-		window.onload = function(){
-			var interval = null;
-			
-			veld = document.getElementById('c').getContext('2d');
-			cirk1 = new Cirkel(50, 300, 400);
-			cirk2 = new Cirkel(10, 500, 400);
-			
-			cirk1.voegKrachtToe(new Vector(-20, 0)).teken(veld, true);
-			cirk2.voegKrachtToe(new Vector(-1, 1)).teken(veld, true);
-			
-			cirk2.snelheid = new Vector(0, -4);
-			
-			cirk1.massa = 4;
-			cirk2.massa = -1;
-			
-document.getElementById('gaDoor').onclick = function(){
-	if(interval){
-		clearInterval(interval);
-		interval = null;
-	} else {
-		var t=0;
-		interval = setInterval(function(){
-			loop(t);
-			t++;
-		}, 1000 / 60);
-	}
-	
-	return false;
-};
-		};
-	</script>
+  <meta charset="UTF-8">
+  <title>Vectors en cirkels</title>
+  <style>
+    canvas {
+      border: 1px dotted #CCC;
+    }
+  </style>
+  
+  <script src="vector.js"></script>
+  <script src="javascript.js"></script>
+  <script>
+    var wereld, interval = null;
+    
+    function loop(voorwaartsch){
+      console.log(wereld.voorwerpen[0].snelheid.y);
+      
+      if(wereld.stap(voorwaartsch)){
+          clearInterval(interval);
+          interval = null;
+      }
+      
+      wereld.teken();
+    }
+    
+    window.onload = function(){
+      var ctx = document.getElementById('c').getContext('2d');
+
+      wereld = new Wereld(800, 600, ctx);
+      
+      // Grote cirkel
+      cirk1 = new Cirkel(50, 300, 300);
+      cirk1.nieuweKracht(new Vector(1, 0));
+      cirk1.snelheid = new Vector(0, 2);
+      cirk1.massa = 50;
+      
+      // Kleine cirkel
+      cirk2 = new Cirkel(10, 800, 370);
+      cirk2.nieuweKracht(new Vector(-1, 0));
+      cirk2.massa = 10;
+      
+      // Middelmatige cirkel
+      cirk3 = new Cirkel(25, 200, 440);
+      cirk3.nieuweKracht(new Vector(1, 0));
+      cirk3.snelheid = new Vector(0, -4);
+      cirk3.massa = 300;
+      
+      // Voeg cirkels toe
+      wereld.nieuwVoorwerp(cirk1);
+      wereld.nieuwVoorwerp(cirk2);
+      wereld.nieuwVoorwerp(cirk3);
+      
+      wereld.teken();
+      
+      /*
+        GUI
+      */
+      
+      // Automatisch afspelen
+      document.getElementById('loop').onclick = function(){
+        if(interval){
+          clearInterval(interval);
+          interval = null;
+        } else {
+          interval = setInterval(function(){
+            loop(true);
+          }, 1000 / 60);
+        }
+        
+        return false;
+      };
+      
+      // Ga heen, en lope voorwaartsch
+      document.getElementById('next').onclick = function(){
+        if(!interval){
+          loop(true);
+        }
+        return false;
+      };
+      
+      // Terug in de tijd gaan!
+      document.getElementById('prev').onclick = function(){
+        if(!interval){
+          loop(false);
+        }
+        
+        return false;
+      };
+    };
+  </script>
 </head>
 <body>
-	<h1>Voorbeeld</h1>
-	<canvas id="c" width="800" height="600"></canvas>
-	
-	<p><a href="#" id="gaDoor">Start/Stop animatie</a></p>
+  <h1>Voorbeeld</h1>
+  <canvas id="c" width="800" height="600"></canvas>
+  <form action="#" method="get">
+    <p><button id="prev">&lt;</button> <button id="loop">start</button> <button id="next">&gt;</button></p>
+  </form>
 </body>
 </html>
