@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 \select@language {dutch}
 \contentsline {section}{\numberline {1}Vectoren}{3}{section.1}
 \contentsline {subsection}{\numberline {1.1}Notatie}{3}{subsection.1.1}
@@ -26,4 +24,3 @@
 \contentsline {section}{\numberline {4}Programmeren}{15}{section.4}
 \contentsline {subsection}{\numberline {4.1}Andere eenheden}{15}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Hoe de posities berekend worden}{15}{subsection.4.2}
->>>>>>> 8fa97118dc4fd9b40ea9477f35b64eebb07150c0
