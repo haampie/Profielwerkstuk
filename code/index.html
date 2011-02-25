@@ -32,20 +32,17 @@
       
       // Grote cirkel
       cirk1 = new Cirkel(50, 300, 300);
-      cirk1.nieuweKracht(new Vector(1, 0));
-      cirk1.snelheid = new Vector(0, 2);
       cirk1.massa = 50;
       
       // Kleine cirkel
-      cirk2 = new Cirkel(10, 800, 370);
+      cirk2 = new Cirkel(10, 600, 390);
       cirk2.nieuweKracht(new Vector(-1, 0));
       cirk2.massa = 10;
       
       // Middelmatige cirkel
-      cirk3 = new Cirkel(25, 200, 440);
-      cirk3.nieuweKracht(new Vector(1, 0));
-      cirk3.snelheid = new Vector(0, -4);
-      cirk3.massa = 300;
+      cirk3 = new Cirkel(25, 200, 480);
+      cirk3.snelheid = new Vector(4, -4);
+      cirk3.massa = 30;
       
       // Voeg cirkels toe
       wereld.nieuwVoorwerp(cirk1);
@@ -95,7 +92,7 @@
   <h1>Voorbeeld</h1>
   <canvas id="c" width="800" height="600"></canvas>
   <form action="#" method="get">
-    <p><button id="prev">&lt;</button> <button id="loop">start</button> <button id="next">&gt;</button></p>
+    <p><button id="prev" disabled="disabled">&lt;</button> <button id="loop">start</button> <button id="next">&gt;</button></p>
   </form>
 </body>
 </html>

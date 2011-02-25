@@ -38,6 +38,24 @@ Wereld.botst = function(een, twee){
   }
 };
 
+Wereld.berekenGevolg = function(een, twee){
+  var p1 = een.positie.krijgSom(een.snelheid.krijgProduct(een.move));
+  var p2 = twee.positie.krijgSom(twee.snelheid.krijgProduct(twee.move));
+  var diff = p2.krijgVerschil(p1);
+  var eenheidsnormaal = diff.krijgEenheidsvector();
+  
+  var relatieveSnelheid = een.snelheid.krijgVerschil(twee.snelheid);
+  
+  var impuls = eenheidsnormaal.inproduct( relatieveSnelheid.krijgProduct( -2 ) );
+      impuls /= eenheidsnormaal.inproduct( eenheidsnormaal.krijgProduct( 1 / een.massa + 1 / twee.massa ) );
+     
+  var reactieEen = eenheidsnormaal.krijgProduct( impuls / een.massa );
+	var reactieTwee = eenheidsnormaal.krijgProduct( -impuls / twee.massa );
+  
+  een.snelheid = een.snelheid.krijgSom( reactieEen ).krijgProduct( 1 - een.move );
+	twee.snelheid = twee.snelheid.krijgSom( reactieTwee ).krijgProduct( 1 - een.move );
+};
+
 /**
  * Doe een stap in de tijd voor elk voorwerp
  */
@@ -60,8 +78,13 @@ Wereld.prototype.stap = function(voorwaartsch){
       var botsing = Wereld.botst(vw, this.voorwerpen[j]);
       
       if(typeof botsing == 'number'){
+        
+        // Er gebeurt een botsing
         botsingGebeurt = true;
         vw.move = this.voorwerpen[j].move = botsing;
+        
+        // Verplaats de voorwerpen en bereken de snelheden na de botsing
+        Wereld.berekenGevolg(vw, this.voorwerpen[j]);
       }
     }
   }, this);
@@ -71,7 +94,7 @@ Wereld.prototype.stap = function(voorwaartsch){
     vw.beweeg(vw.move);
   }, true);
   
-  return botsingGebeurt;
+  return false;
 };
 
 Wereld.prototype.nieuwVoorwerp = function(vw){
