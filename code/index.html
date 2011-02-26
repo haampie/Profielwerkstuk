@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Vectors en cirkels</title>
-  <style>
-    canvas {
-      border: 1px dotted #CCC;
-    }
-  </style>
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
   
+  <script src="jquery.js"></script>
   <script src="vector.js"></script>
   <script src="javascript.js"></script>
   <script>
     var wereld, interval = null;
     
     function loop(voorwaartsch){
-      console.log(wereld.voorwerpen[0].snelheid.y);
       
       if(wereld.stap(voorwaartsch)){
           clearInterval(interval);
@@ -25,8 +22,11 @@
       wereld.teken();
     }
     
-    window.onload = function(){
-      var ctx = document.getElementById('c').getContext('2d');
+    $(document).ready(function(){
+      var ctx = $('#c')[0].getContext('2d'),
+          $loopBtn = $('#loop'),
+          $stapBtn = $('#stap'),
+          $nieuwBtn = $('#add');
 
       wereld = new Wereld(800, 600, ctx);
       
@@ -56,43 +56,98 @@
       */
       
       // Automatisch afspelen
-      document.getElementById('loop').onclick = function(){
+      $loopBtn.click(function(){
+        // Als er al een interval bestaat moet je pauzeren
         if(interval){
+          // Maak de volgendeknop weer klikbaar
+          $stapBtn.removeAttr("disabled");
+          
+          // Maak de pauzeknop een startknop
+          $loopBtn.text('Start');
+          
+          // Haal het interval weg
           clearInterval(interval);
           interval = null;
-        } else {
+        }
+        
+        // Anders moet je er een maken
+        else {
+          // Volgendeknop even disabelen
+          $stapBtn.attr("disabled", "disabled");
+          
+          // Maak de startknop een pauzeknop
+          $loopBtn.text('Stop');
+          
+          // Nieuw interval met ongeveer 60fps
           interval = setInterval(function(){
             loop(true);
           }, 1000 / 60);
         }
         
         return false;
-      };
+      });
       
       // Ga heen, en lope voorwaartsch
-      document.getElementById('next').onclick = function(){
+      $stapBtn.click(function(){
         if(!interval){
           loop(true);
         }
         return false;
-      };
+      });
       
-      // Terug in de tijd gaan!
-      document.getElementById('prev').onclick = function(){
-        if(!interval){
-          loop(false);
-        }
+      $nieuwBtn.click(function(){
+        // Random cirkel
+        var cirkel = new Cirkel(Math.randInt(5, 30), Math.randInt(50, 750), Math.randInt(50, 550));
+        
+        var hoek = Math.random()*2*Math.PI;
+        var vdx = Math.cos(hoek);
+        var vdy = Math.sin(hoek);
+        
+        cirkel.snelheid = new Vector(vdx, vdy);
+        cirkel.massa = 10;
+        wereld.nieuwVoorwerp(cirkel);
+        
+        wereld.teken();
         
         return false;
-      };
-    };
+      });
+      
+      $('#menubar1, #menubar2').submit(function(){ return false; });
+      
+      $('#showOptions').toggle(function(){
+        $(this).addClass('uitgeklapt');
+        $("#opties").show();
+      }, function(){
+        $(this).removeClass('uitgeklapt');
+        $("#opties").hide();
+      });
+    });
   </script>
 </head>
 <body>
-  <h1>Voorbeeld</h1>
-  <canvas id="c" width="800" height="600"></canvas>
-  <form action="#" method="get">
-    <p><button id="prev" disabled="disabled">&lt;</button> <button id="loop">start</button> <button id="next">&gt;</button></p>
-  </form>
+  <div id="wrap">
+    <form action="#" method="get" id="menubar1" class="options top clearfix">
+      <h1 class="left">Voorbeeld 1</h1>
+      <p class="right">
+        <button id="showOptions" class="buttonLarge button-gray">Opties</button>
+      </p>
+      <div id="opties">
+        <p><label><input type="checkbox" name="krachten" id="krachten" checked="checked" />Krachtsvector laten zien</label></p>
+        <p><label><input type="checkbox" name="snelheid" id="snelheid" checked="checked" />Snelheidsvector laten zien</label></p>
+      </div>
+    </form>
+    
+    <canvas id="c" width="798" height="600"></canvas>
+    
+    <form action="#" method="get" id="menubar2" class="options bottom clearfix">
+      <p class="left">
+        <button id="loop" class="buttonLarge button-gray">Start</button> 
+        <button id="stap" class="buttonLarge button-gray">&gt;</button>
+      </p>
+      <p class="right">
+        <button id="add" class="buttonLarge button-gray">Nieuw voorwerp</button>
+      </p>
+    </form>
+  </div>
 </body>
 </html>

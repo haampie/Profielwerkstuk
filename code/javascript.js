@@ -1,4 +1,9 @@
 var OMEGA = 0.001;
+var TEKENSNELHEID = true
+
+Math.randInt = function(a, b){
+  return Math.random()*(b-a)+a;
+};
 
 
 /**
@@ -116,6 +121,10 @@ Wereld.prototype.teken = function(){
 };
 
 Vector.prototype.teken = function(ctx, x, y, kleur){
+  
+  // alleen tekenen als er een lengte is
+  if(this.x == 0 && this.y ==0) return;
+  
 	ctx.save();
 	
 	ctx.strokeStyle = ctx.fillStyle = (kleur ? kleur : 'red');
@@ -123,10 +132,10 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 	ctx.translate(x, y);
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
-	ctx.lineTo(this.x, this.y);
+	ctx.lineTo(this.x*20, this.y*20);
 	ctx.stroke();
 	
-	ctx.translate(this.x, this.y);
+	ctx.translate(this.x*20, this.y*20);
 	ctx.rotate(Math.atan2(this.y, this.x)-1.25*Math.PI);
 	
 	ctx.beginPath();
@@ -180,6 +189,10 @@ Cirkel.prototype.teken = function(ctx, krachten){
 			(new Vector()).plus(this.krachten).teken(ctx, this.positie.x, this.positie.y, 'green');
 		}
 	}
+  
+  if(TEKENSNELHEID){
+    this.snelheid.teken(ctx, this.positie.x, this.positie.y, 'blue');
+  }
 	
 	return this;
 };
