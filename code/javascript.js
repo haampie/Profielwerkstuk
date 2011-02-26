@@ -106,6 +106,10 @@ Wereld.prototype.nieuwVoorwerp = function(vw){
   this.voorwerpen.push(vw);
 };
 
+Wereld.prototype.apocalyps = function(){
+  this.voorwerpen = [];
+};
+
 /**
  * Teken elk voorwerp op het huidige tijdstip
  */
@@ -145,6 +149,8 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 	ctx.fill();
 	
 	ctx.restore();
+  
+  return this;
 };
 
 /**
@@ -180,13 +186,16 @@ Cirkel.prototype.teken = function(ctx){
 	
 	if(Wereld.TEKENKRACHTEN){
 		// Teken alle krachten
+    var resulterende = new Vector();
+    
 		for(var i=0; i<this.krachten.length; i++){
 			this.krachten[i].teken(ctx, this.positie.x, this.positie.y);
+      resulterende.plus(this.krachten[i]);
 		}
 		
 		// Teken de resulterende kracht als er meer dan 1 kracht op de cirkel werkt
 		if(this.krachten.length > 1){
-			(new Vector()).plus(this.krachten).teken(ctx, this.positie.x, this.positie.y, 'green');
+      resulterende.teken(ctx, this.positie.x, this.positie.y, 'green');
 		}
 	}
   

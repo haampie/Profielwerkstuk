@@ -47,11 +47,21 @@
     });
   </script>
 </head>
-<body>
+<body>  
   <div id="wrap">
+    
+    <div id="presets">
+      <h1>Fysisch systeem v1.0 <span class="door">door Derk Rouwhorst en Harmen Stoppels</span></h1>
+    </div>
+    
     <form action="#" method="get" id="menubar1" class="options top clearfix">
-      <h1 class="left">Voorbeeld 1</h1>
+      <p class="left">
+        <span class="big">Simulatie</span> 
+        <span class="erbij">&middot; voorbeelden: 
+        <a href="#vb1" title="Voorbeeld 1" id="vb1" class="round">1</a></span>
+      </p>
       <p class="right">
+        <button class="buttonLarge button-gray reset">Reset</button>
         <button id="showOptions" class="buttonLarge button-gray">Opties</button>
       </p>
       <div id="opties">
@@ -80,7 +90,7 @@
         <ul id="voorwerpLijst">
           
         </ul>
-        <button id="reset" class="buttonLarge button-gray">Deze data instellen</button>
+        <button class="buttonLarge button-gray reset">Deze data instellen</button>
         <button id="add" class="buttonLarge button-gray">Nieuw voorwerp</button>
       </div>
     </form>

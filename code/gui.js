@@ -105,7 +105,7 @@ $(document).ready(function(){
     return false;
   });
   
-  $('#reset').click(function(){
+  $('.reset').click(function(){
     $voorwerpLst.children().each(function(i){
       var j = i+1;
       
@@ -126,4 +126,26 @@ $(document).ready(function(){
     $voorwerpLst.append($(nieuwItem(new Cirkel(), $voorwerpLst.children().length + 1)));
   });
   
+  $('#vb1').click(function(){
+    wereld.apocalyps();
+    
+    var cirkel = new Cirkel(20, 240, 500);
+    cirkel.snelheid = new Vector(0, -4);
+    cirkel.massa = 50;
+    cirkel.nieuweKracht( new Vector(0, cirkel.massa/50) );
+    cirkel.nieuweKracht( new Vector(1, 0) );
+    
+    var cirkel2 = new Cirkel(30, 640, 500);
+    cirkel2.snelheid = new Vector(-2, -4);
+    cirkel2.massa = 112.5;
+    cirkel2.nieuweKracht( new Vector(0, cirkel2.massa/50) );
+    
+    wereld.nieuwVoorwerp(cirkel);
+    wereld.nieuwVoorwerp(cirkel2);
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
 });
