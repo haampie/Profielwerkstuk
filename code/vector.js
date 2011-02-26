@@ -1,5 +1,8 @@
 function Vector(x, y) {
-  if(!(this instanceof Vector)) return new Vector(x, y);
+  if(!(this instanceof Vector)){
+    return new Vector(x, y);
+  }
+  
   this.x = x || 0;
   this.y = y || 0;
 }

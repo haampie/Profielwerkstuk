@@ -2,13 +2,14 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Vectors en cirkels</title>
+  <title>Vectoren en cirkels</title>
   <link rel="stylesheet" href="reset.css" />
   <link rel="stylesheet" href="style.css" />
   
   <script src="jquery.js"></script>
   <script src="vector.js"></script>
   <script src="javascript.js"></script>
+  <script src="gui.js"></script>
   <script>
     var wereld, interval = null;
     
@@ -23,10 +24,7 @@
     }
     
     $(document).ready(function(){
-      var ctx = $('#c')[0].getContext('2d'),
-          $loopBtn = $('#loop'),
-          $stapBtn = $('#stap'),
-          $nieuwBtn = $('#add');
+      var ctx = $('#c')[0].getContext('2d');
 
       wereld = new Wereld(800, 600, ctx);
       
@@ -45,86 +43,7 @@
       
       wereld.teken();
       
-      /*
-        GUI
-      */
-      
-      // Automatisch afspelen
-      $loopBtn.click(function(){
-        // Als er al een interval bestaat moet je pauzeren
-        if(interval){
-          // Maak de volgendeknop weer klikbaar
-          $stapBtn.removeAttr("disabled");
-          
-          // Maak de pauzeknop een startknop
-          $loopBtn.text('Start');
-          
-          // Haal het interval weg
-          clearInterval(interval);
-          interval = null;
-        }
-        
-        // Anders moet je er een maken
-        else {
-          // Volgendeknop even disabelen
-          $stapBtn.attr("disabled", "disabled");
-          
-          // Maak de startknop een pauzeknop
-          $loopBtn.text('Stop');
-          
-          // Nieuw interval met ongeveer 60fps
-          interval = setInterval(function(){
-            loop(true);
-          }, 1000 / 60);
-        }
-        
-        return false;
-      });
-      
-      // Ga heen, en lope voorwaartsch
-      $stapBtn.click(function(){
-        if(!interval){
-          loop(true);
-        }
-        return false;
-      });
-      
-      $nieuwBtn.click(function(){
-        // Random cirkel
-        var cirkel = new Cirkel(Math.randInt(5, 30), Math.randInt(50, 750), Math.randInt(50, 550));
-        
-        var hoek = Math.random()*2*Math.PI;
-        var vdx = Math.cos(hoek);
-        var vdy = Math.sin(hoek);
-        
-        cirkel.snelheid = new Vector(vdx, vdy);
-        cirkel.massa = 10;
-        wereld.nieuwVoorwerp(cirkel);
-        
-        wereld.teken();
-        
-        return false;
-      });
-      
-      $('#menubar1, #menubar2').submit(function(){ return false; });
-      
-      $('#showOptions').toggle(function(){
-        $(this).addClass('uitgeklapt');
-        $("#opties").show();
-      }, function(){
-        $(this).removeClass('uitgeklapt');
-        $("#opties").hide();
-      });
-      
-      $('#krachten').change(function(){
-        Wereld.TEKENKRACHTEN = !Wereld.TEKENKRACHTEN;
-        if(!interval) wereld.teken();
-      });
-      
-      $('#snelheid').change(function(){
-        Wereld.TEKENSNELHEID = !Wereld.TEKENSNELHEID;
-        if(!interval) wereld.teken();
-      });
+      $('#vernieuwData').click();
     });
   </script>
 </head>
@@ -149,8 +68,21 @@
         <button id="stap" class="buttonLarge button-gray">&gt;</button>
       </p>
       <p class="right">
-        <button id="add" class="buttonLarge button-gray">Nieuw voorwerp</button>
+        
       </p>
+    </form>
+    
+    <form action="#" method="get" id="voorwerpen" class="options clearfix">
+      <p class="right"> 
+        <button id="vernieuwData" class="buttonLarge button-gray">Krijg huidige data</button>
+      </p>
+      <div id="voorwerpLijstWrapper" class="left">
+        <ul id="voorwerpLijst">
+          
+        </ul>
+        <button id="reset" class="buttonLarge button-gray">Deze data instellen</button>
+        <button id="add" class="buttonLarge button-gray">Nieuw voorwerp</button>
+      </div>
     </form>
   </div>
 </body>

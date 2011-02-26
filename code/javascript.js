@@ -1,7 +1,3 @@
-var OMEGA = 0.001;
-Wereld.TEKENSNELHEID = true;
-Wereld.TEKENKRACHTEN = true;
-
 Math.randInt = function(a, b){
   return Math.random()*(b-a)+a;
 };
@@ -16,6 +12,9 @@ function Wereld(breedte, hoogte, ctx){
   this.ctx = ctx;
   this.voorwerpen = [];
 }
+
+Wereld.TEKENSNELHEID = true;
+Wereld.TEKENKRACHTEN = true;
 
 /**
  * Kijk of er een botsing gebeurt tussen twee voorwerpen
@@ -152,9 +151,9 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
  *
  */
 function Cirkel(r, px, py){
-	this.straal = r;
-	this.positie = new Vector(px, py);
-	this.massa = 1000;
+	this.straal = r || 0;
+	this.positie = new Vector(px || 0, py || 0);
+	this.massa = 10;
 	
 	this.snelheid = new Vector();
 	this.krachten = [];

@@ -146,3 +146,27 @@ input[type=checkbox] {
   background: -webkit-gradient(linear,left top,left bottom,from(#D1D1D1),to(#E9E9E9));
   background: -moz-linear-gradient(top,#D1D1D1,#E9E9E9);
 }
+
+#voorwerpen {
+  margin-top: 1em;
+  border-radius: 5px;
+}
+
+#voorwerpen ul {
+  margin: 0;
+  list-style: none;
+}
+
+#voorwerpen li {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+#voorwerpen h2 {
+  padding-bottom: 5px;
+}
+
+#voorwerpen label {
+  min-width: 100px;
+  float: left;
+}
