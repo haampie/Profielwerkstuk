@@ -31,23 +31,17 @@
       wereld = new Wereld(800, 600, ctx);
       
       // Grote cirkel
-      cirk1 = new Cirkel(50, 300, 300);
+      cirk1 = new Cirkel(50, 500, 300);
       cirk1.massa = 50;
       
       // Kleine cirkel
-      cirk2 = new Cirkel(10, 600, 390);
-      cirk2.nieuweKracht(new Vector(-1, 0));
-      cirk2.massa = 10;
-      
-      // Middelmatige cirkel
-      cirk3 = new Cirkel(25, 200, 480);
-      cirk3.snelheid = new Vector(4, -4);
-      cirk3.massa = 30;
+      cirk2 = new Cirkel(50, 200, 367.5);
+      cirk2.snelheid = new Vector(5, 0);
+      cirk2.massa = 50;
       
       // Voeg cirkels toe
       wereld.nieuwVoorwerp(cirk1);
       wereld.nieuwVoorwerp(cirk2);
-      wereld.nieuwVoorwerp(cirk3);
       
       wereld.teken();
       
@@ -121,6 +115,16 @@
         $(this).removeClass('uitgeklapt');
         $("#opties").hide();
       });
+      
+      $('#krachten').change(function(){
+        Wereld.TEKENKRACHTEN = !Wereld.TEKENKRACHTEN;
+        if(!interval) wereld.teken();
+      });
+      
+      $('#snelheid').change(function(){
+        Wereld.TEKENSNELHEID = !Wereld.TEKENSNELHEID;
+        if(!interval) wereld.teken();
+      });
     });
   </script>
 </head>
@@ -132,8 +136,8 @@
         <button id="showOptions" class="buttonLarge button-gray">Opties</button>
       </p>
       <div id="opties">
-        <p><label><input type="checkbox" name="krachten" id="krachten" checked="checked" />Krachtsvector laten zien</label></p>
-        <p><label><input type="checkbox" name="snelheid" id="snelheid" checked="checked" />Snelheidsvector laten zien</label></p>
+        <p><label><input type="checkbox" name="krachten" id="krachten" checked="checked" />Krachtsvectoren laten zien</label></p>
+        <p><label><input type="checkbox" name="snelheid" id="snelheid" checked="checked" />Snelheidsvectoren laten zien</label></p>
       </div>
     </form>
     

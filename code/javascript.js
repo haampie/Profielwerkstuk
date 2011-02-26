@@ -1,5 +1,6 @@
 var OMEGA = 0.001;
-var TEKENSNELHEID = true
+Wereld.TEKENSNELHEID = true;
+Wereld.TEKENKRACHTEN = true;
 
 Math.randInt = function(a, b){
   return Math.random()*(b-a)+a;
@@ -57,8 +58,8 @@ Wereld.berekenGevolg = function(een, twee){
   var reactieEen = eenheidsnormaal.krijgProduct( impuls / een.massa );
 	var reactieTwee = eenheidsnormaal.krijgProduct( -impuls / twee.massa );
   
-  een.snelheid = een.snelheid.krijgSom( reactieEen ).krijgProduct( 1 - een.move );
-	twee.snelheid = twee.snelheid.krijgSom( reactieTwee ).krijgProduct( 1 - een.move );
+  een.snelheid = een.snelheid.krijgSom( reactieEen );
+	twee.snelheid = twee.snelheid.krijgSom( reactieTwee );
 };
 
 /**
@@ -170,7 +171,7 @@ Cirkel.prototype.nieuweKracht = function(){
 	return this;
 };
 
-Cirkel.prototype.teken = function(ctx, krachten){
+Cirkel.prototype.teken = function(ctx){
 	ctx.fillStyle = '#333';
 	
 	// Teken de cirkel
@@ -178,7 +179,7 @@ Cirkel.prototype.teken = function(ctx, krachten){
 	ctx.arc(this.positie.x, this.positie.y, this.straal, 0, 2*Math.PI, true);
 	ctx.fill();
 	
-	if(krachten && krachten===true){
+	if(Wereld.TEKENKRACHTEN){
 		// Teken alle krachten
 		for(var i=0; i<this.krachten.length; i++){
 			this.krachten[i].teken(ctx, this.positie.x, this.positie.y);
@@ -190,7 +191,7 @@ Cirkel.prototype.teken = function(ctx, krachten){
 		}
 	}
   
-  if(TEKENSNELHEID){
+  if(Wereld.TEKENSNELHEID){
     this.snelheid.teken(ctx, this.positie.x, this.positie.y, 'blue');
   }
 	
