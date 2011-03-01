@@ -29,6 +29,8 @@ Wereld.botst = function(een, twee){
   
   if(d < 0) return false;
   
+  if(a == 0) return false;
+  
   var t2 = (-b - Math.sqrt(d))/a;
   var t1 = (-b + Math.sqrt(d))/a;
   
@@ -59,6 +61,12 @@ Wereld.berekenGevolg = function(een, twee){
   
   een.snelheid = een.snelheid.krijgSom( reactieEen );
 	twee.snelheid = twee.snelheid.krijgSom( reactieTwee );
+};
+
+Wereld.prototype.drawCallback = function(){};
+
+Wereld.prototype.nieuweTekenVoorafganger = function(a){
+  this.drawCallback = a;
 };
 
 /**
@@ -108,6 +116,7 @@ Wereld.prototype.nieuwVoorwerp = function(vw){
 
 Wereld.prototype.apocalyps = function(){
   this.voorwerpen = [];
+  this.drawCallback = function(){};
 };
 
 /**
@@ -117,6 +126,8 @@ Wereld.prototype.teken = function(){
   
   // Maak het scherm leeg
   this.ctx.clearRect(0, 0, this.breedte, this.hoogte);
+  
+  this.drawCallback.call(this);
   
   // Teken elk voorwerp
   this.voorwerpen.forEach(function(vw, i){
@@ -189,8 +200,10 @@ Cirkel.prototype.teken = function(ctx){
     var resulterende = new Vector();
     
 		for(var i=0; i<this.krachten.length; i++){
-			this.krachten[i].teken(ctx, this.positie.x, this.positie.y);
-      resulterende.plus(this.krachten[i]);
+      var k = this.krachten[i];
+      var kracht = typeof k == 'function' ? k.call(this) : k;
+			kracht.teken(ctx, this.positie.x, this.positie.y);
+      resulterende.plus(kracht);
 		}
 		
 		// Teken de resulterende kracht als er meer dan 1 kracht op de cirkel werkt
@@ -220,8 +233,8 @@ Cirkel.prototype.stap = function(voorwaartsch){
 	
 	// Tel alle krachten bij elkaar op
 	this.krachten.forEach(function(el){
-		som.plus(el);
-	});
+		som.plus( typeof el == 'function' ? el.call(this) : el );
+	}, this);
 	
 	// Deel door de massa
 	som.deel(this.massa);

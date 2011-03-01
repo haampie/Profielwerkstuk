@@ -148,4 +148,73 @@ $(document).ready(function(){
     
     return false;
   });
+  
+  $('#vb2').click(function(){
+    wereld.apocalyps();
+    
+    wereld.nieuweTekenVoorafganger(function(){
+      this.ctx.save();
+      this.ctx.beginPath();
+      this.ctx.fillStyle = '#111';
+      this.ctx.arc(400, 300, 2, 0, 2*Math.PI, true);
+      this.ctx.arc(200, 300, 2, 0, 2*Math.PI, true);
+      this.ctx.fill();
+      this.ctx.restore();
+    });
+    
+    var cirkel = new Cirkel(20, 350, 290);
+    cirkel.snelheid = new Vector(0, -4);
+    cirkel.massa = 50;
+    cirkel.nieuweKracht( function(){
+      return new Vector((400-this.positie.x)/50, (300-this.positie.y)/50);
+    } );
+    
+    var cirkel2 = new Cirkel(20, 200, 300);
+    cirkel2.snelheid = new Vector(0, 4);
+    cirkel2.massa = 50;
+    cirkel2.nieuweKracht( function(){
+      return new Vector((200-this.positie.x)/50, (300-this.positie.y)/50);
+    } );
+    
+    var cirkel3 = new Cirkel(40, 1300, 450);
+    cirkel3.nieuweKracht( new Vector(-2, 0) );
+    cirkel3.massa = 150;
+    
+    wereld.nieuwVoorwerp(cirkel);
+    wereld.nieuwVoorwerp(cirkel2);
+    wereld.nieuwVoorwerp(cirkel3);
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
+  
+  $('#vb3').click(function(){
+    wereld.apocalyps();
+    
+    var cirkel = new Cirkel(20, 20, 300);
+    cirkel.snelheid = new Vector(3, 0);
+    cirkel.massa = 50;
+    cirkel.nieuweKracht( new Vector(2, 0) );
+    
+    var cirkel2 = new Cirkel(20, 100, 300);
+    cirkel2.massa = 50;
+    
+    var cirkel3 = new Cirkel(20, 150, 300);
+    cirkel3.massa = 50;
+    
+    var cirkel4 = new Cirkel(20, 200, 300);
+    cirkel4.massa = 50;
+    
+    wereld.nieuwVoorwerp(cirkel);
+    wereld.nieuwVoorwerp(cirkel2);
+    wereld.nieuwVoorwerp(cirkel3);
+    wereld.nieuwVoorwerp(cirkel4);
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
 });

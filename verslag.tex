@@ -134,9 +134,62 @@
 	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte; zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
 	
 	\subsection{Cirkel tegen lijnstuk}
-	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt. Voor de rest nog even hard nadenken hoe het gaat.
+	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt.
+	
+	\subsubsection{Tijdstippen van botsingen}
+		Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken dus naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
+	
+	Om dit probleem op te lossen gebruiken een vergelijking voor de afstand van een punt tot een lijn, en die afstand moet gelijk zijn aan de straal van de cirkel. Als $AB$ en $CD$ niet parallel lopen, krijgen we twee oplossingen voor onze vergelijking. De eerste is de botsing, de tweede oplossing geeft het tijdstip aan waarop de cirkel door $AB$ is gevlogen en het lijnstuk dan raakt.
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Bal-Lijn.png}}
+		\caption{Botsing tussen een bal en een lijnstuk}
+		\label{bal-lijn}
+	\end{figure}
+	
+	Eerst defini\"{e}ren we $\mathbf{n}$ als de normaalvector van $AB$. Daarna vinden we de afstand van een punt tot een lijnstuk door middel van de eigenschappen van het inproduct van twee vectoren:
+	\begin{equation}
+		\label{eigenschappeninproduct}
+		cos \gamma = \frac{|\mathbf{w} \cdot \mathbf{n}|}{\| \mathbf{w} \| \| \mathbf{n} \|}
+	\end{equation}
+	Verder geldt in het driehoekje met zijden $\mathbf{w}$ en $r$:
+	\begin{equation}
+		\label{driehoekmetzijdew}
+		cos \gamma = \frac{r}{\| \mathbf{w}\| }
+	\end{equation}
+	Samenvoeging van \eqref{eigenschappeninproduct} en \eqref{driehoekmetzijdew} geeft:
+	\begin{equation}
+		\label{definitiestraal}
+		\begin{aligned}
+			\frac{r}{\| \mathbf{w}\| } &= \frac{|\mathbf{w} \cdot \mathbf{n}|}{\| \mathbf{w} \| \| \mathbf{n} \|} \\
+			r &= \frac{|\mathbf{w} \cdot \mathbf{n}|}{\| \mathbf{n} \|} \\
+			r \, \| \mathbf{n} \| &= |\mathbf{w} \cdot \mathbf{n}| \\
+			\pm \, r \, \| \mathbf{n} \| &= \mathbf{w} \cdot \mathbf{n}
+		\end{aligned}
+	\end{equation}
+	Vector $\mathbf{w}$ begint in het middelpunt van de cirkel op $CD$ en gaat naar punt $A$, en is dus als volgt de defini\"{e}ren:
+	\begin{equation}
+		\label{definitiew}
+		\begin{aligned}
+			\mathbf{w} &= \mathbf{a} - (\mathbf{c} + t \left(\mathbf{d} - \mathbf{c} \right)) \qquad 0 \leq t \leq 1 \\
+			&= \mathbf{a} - \mathbf{c} - t \left(\mathbf{d} - \mathbf{c} \right)
+		\end{aligned}
+	\end{equation}
+	Als je $t=0$ invult krijg je $\mathbf{w} = \mathbf{a} - \mathbf{c}$ en als je $t=1$ invult krijg je $\mathbf{w} = \mathbf{a} - \mathbf{d}$.
+	
+	Nu kun je \eqref{definitiew} invullen in \eqref{definitiestraal} en kun je $t$ uitdrukken in andere variabelen:
+	\begin{equation}
+		\begin{aligned}
+			\pm \, r \, \| \mathbf{n} \| &= (\mathbf{a} - \mathbf{c} - t \left(\mathbf{d} - \mathbf{c} \right)) \cdot \mathbf{n} \\
+			\pm \, r \, \| \mathbf{n} \| &= (\mathbf{a} - \mathbf{c}) \cdot \mathbf{n} - t \left(\mathbf{d} - \mathbf{c} \right) \cdot \mathbf{n} \\
+			t \left(\mathbf{d} - \mathbf{c} \right) \cdot \mathbf{n} &= \pm \, r \, \| \mathbf{n} \| + (\mathbf{a} - \mathbf{c}) \cdot \mathbf{n} \\
+			t &= \frac{\pm \, r \, \| \mathbf{n} \| + (\mathbf{a} - \mathbf{c}) \cdot \mathbf{n}}{\left(\mathbf{d} - \mathbf{c} \right) \cdot \mathbf{n}}
+		\end{aligned}
+	\end{equation}
 	
 	\subsubsection{Punt op lijnstuk dichtste bij cirkel}
+	DIT STUKJE IS NU VERGELIJKBAAR MET HET VORIGE. HET MOET OPNIEUW GESCHREVEN WORDEN.
+	
 	Omdat we met vectoren werken is het heel makkelijk om te bepalen welk punt op een lijnstuk het dichtst bij het middelpunt van een cirkel ligt. Voor het gemak noemen we de uiteinden van het lijntuk $A$ en $B$, het middelpunt van de cirkel $C$, en we defini\"{e}ren $P$ als het punt op het lijnstuk het dichtste bij $C$. $P$ is dus een loodrechte projectie van $C$ op $AB$. Verder stellen we het lijnstuk voor als een vector $\mathbf{v}$ vanuit punt $A$ en tekenen we een vector $\mathbf{w}$ vanuit $A$ naar $C$. Eerder bleek al dat geldt \eqref{inproduct-cosinus}:
 	\begin{equation}
 		\label{inproduct-cosinus-toegepast}
