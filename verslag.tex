@@ -14,10 +14,7 @@
 	\begin{titlepage}
 	\maketitle
 	\end{titlepage}
-	\subsection*{Beste lezer, dit is nog niet af, wees gewaarschuwd}
-	Dit verslag is nog lang niet af, maar het is al wel een opzetje. Er moeten nog wel honderden plaatjes ter verduidelijking bij!
-	\newpage
-	
+
 	\tableofcontents
 	\newpage
 	
@@ -243,10 +240,12 @@ Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elka
 	\\Deze vergelijking oplossen, zodat je een vierkantsvergelijking krijgt:
 	\begin{equation}
 		\begin{aligned}
-			{m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 &= m_1m_2{o_1}^2 + {m_2}^2{o_2}^2 - m_1m_2{v_1}^2\\
-			{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 &= m_1m_2{o_1}^2 - m_1m_2{v_1}^2\\
-			{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 - m_1m_2{o_1}^2 + m_1m_2{v_1}^2 &= 0\\
-			\left({m_1}^2+m_1m_2\right){v_1}^2+\left(-2{m_1}^2o_1-2m_1m_2o_2\right)v_1+\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right) &= 0\\
+			&{m_1}^2{o_1}^2 + {m_2}^2{o_2}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 =\\
+			&m_1m_2{o_1}^2 + {m_2}^2{o_2}^2 - m_1m_2{v_1}^2\\
+			&{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 =\\
+			&m_1m_2{o_1}^2 - m_1m_2{v_1}^2\\
+			&{m_1}^2{o_1}^2 + {m_1}^2{v_1}^2 + 2m_1m_2o_1o_2 - 2{m_1}^2o_1v_1 - 2m_1m_2o_2v_1 - m_1m_2{o_1}^2 + m_1m_2{v_1}^2 = 0\\
+			&\left({m_1}^2+m_1m_2\right){v_1}^2+\left(-2{m_1}^2o_1-2m_1m_2o_2\right)v_1+\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right) = 0\\
 		\end{aligned}
 	\end{equation}
 	\\De oplossingen worden gegeven door: $v_1=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, waarbij:
@@ -281,7 +280,8 @@ Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elka
 
 	\begin{equation}
 		\begin{aligned}
-		b^2-4ac&=4{m_1}^4{o_1}^2+8{m_1}^3m_2o_1o_2+4{m_1}^2{m_2}^2{o_2}^2-4\left({m_1}^2+m_1m_2\right)\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right)\\
+				b^2-4ac&=4{m_1}^4{o_1}^2+8{m_1}^3m_2o_1o_2+4{m_1}^2{m_2}^2{o_2}^2-4\left({m_1}^2+m_1m_2\right)*\\
+			&\left({m_1}^2{o_1}^2+2m_1m_2o_1o_2-m_1m_2{o_1}^2\right)\\
 			&={m_1}^2{m_2}^2{\left(2o_2-2o_1\right)}^2\\
 		\end{aligned}
 	\end{equation}
@@ -355,7 +355,11 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 	\end{equation}
 	\\De uitkomst van \eqref{uitwerking-gemeenschappelijke-snelheid} komt overeen met de uitkomst van \eqref{uitwerking-energie-impuls}.
 
-	\subsection{Experiment van botsende ballen}
+	\newpage
+
+	\section{Experiment van botsende ballen}
+
+	\subsection{Verwachtingen bij het experiment van botsende ballen}
 	Wij werken alleen met botsingen in het platte vlak. Omdat we werken met harde houten ballen, die vergelijkbaar zijn met biljartballen, hebben we enkel en alleen te maken met volkomen elastische botsingen.
 
 	\subsubsection{Botsing tussen twee ballen}
@@ -363,20 +367,158 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
 De verwachting bij een niet-centrale botsing waarvan een bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing. 
 
-<<<<<<< HEAD
-=======
 \begin{figure}[h]
- \centerline{\includegraphics{BotsingSchuin.png}}
- \caption{Een niet-centrale botsing}
- \label{botsingschuin}
+	\centerline{\includegraphics{BotsingSchuin.png}}
+	\caption{Een niet-centrale botsing}
+	\label{botsingschuin}
 \end{figure}
 
->>>>>>> 58946ee72cd481a57bd6586eeb99d33e969e6b9b
 Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
 
 	\subsubsection{Botsing tussen meer dan twee ballen}
 	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaats vindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
 Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+
+	\subsection{Resultaten van het experiment met botsende ballen}
+	Om te controleren of de formules - die afgeleidt zijn van de wet van behoud van impuls - ook in overeenstemming zijn met de werkelijkheid, hebben wij een aantal proeven uitgevoerd. We hebben de proeven uitgevoerd op 15 december 2010 in het practicumlokaal, meer een camera van school. Deze proeven hebben we uitgevoerd met verschillende ballen, omdat we van tevoren niet wisten bij welke ballen de meeste kinetische energie werd overgedragen. We hebben een golfbal, knikkers en jeu de boules ballen gebruikt. Eerst wilden we een aantal gegevens noteren van de ballen die wij gebruikten, zoals de diameter of omtrek en de massa. Maar we omdat alleen de massa's en de snelheden van de ballen in de formules \eqref{energie} en \eqref{impuls} hebben zitten, hebben we alleen de massa's van de ballen genoteerd:
+
+	\begin{tabular}{|  l l |}
+		\hline 
+			\emph{lichaam} &\emph{massa}\\
+			Golfbal: &045,98 gram\\
+			Gele knikker: &104,42 gram\\
+			Witte knikker: &089,75 gram\\
+			Zwart-witte knikker: &091,27 gram\\
+			Groene jeu de boules bal: &228,04 gram\\
+			Blauwe jeu de boules bal: &223,06 gram\\
+			Rode jeu de boules bal: &223,30 gram\\
+		\hline 
+	\end{tabular}
+	\\
+	\\We hebben een aantal verschillende combinaties van ballen met elkaar laten botsen. Eerst een blauwe jeu de boules bal met een rode jeu de boules bal.
+
+In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat de botsing duidelijk te zien is.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{botsing3.jpg}}
+	\caption{Alle beeldjes samengevoegd}
+	\label{botsing3}
+\end{figure}
+
+	Als we de resultaten met Coach uitlezen en in tabellen zetten, kunnen we er met Exel hieraan rekenen. Als we de positie uitzetten tegen de tijd krijgen we figuur \eqref{00771} en \eqref{00772}.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00771.png}}
+	\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal}
+	\label{00771}
+\end{figure}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00772.png}}
+	\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal}
+	\label{00772}
+\end{figure}
+
+	De blauwe bal licht in eerste instantie stil. Pas vanaf $t=2,94s$ begint de blauwe bal te rollen, nadat de rode bal er tegen aan is gebotst. Op ongeveer $t=4,30s$ tot $t=4,54s$ rolt de blauwe bal onder de paal door, hierdoor is het automatisch traceren op dit interval niet goed gelukt. Na $t=5,71s$ verdwijnt de bal uit het beeld, en is dus ook niet goed getraceerd. Als we dus alleen de goede meetresultaten mee rekenen krijgen we reeks \eqref{00773} en \eqref{00774}.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00773.png}}
+	\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
+	\label{00773}
+\end{figure}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00774.png}}
+	\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
+	\label{00774}
+\end{figure}
+
+	Nu hebben we de plaats in de $x-richting$ en in de $y-richting$ uitgezet tegen de tijd. Hieruit kunnen we de snelheid van de bal herleiden. Na $1,00s$ is de bal $0,1883m$ verplaats in de $x-richting$ en $0,1786m$ in de $y-richting$. De snelheid van de bal kun je dus berekenen met de $Stelling$ $van$ $Pythagoras$:
+
+	\begin{equation}
+		\label{snelheid}
+		\begin{aligned}
+			v&=\sqrt{{|rc_x|}^2+{|rc_y|}^2}\\
+			v&=\sqrt{{rc_x}^2+{rc_y}^2}\\
+		\end{aligned}
+	\end{equation}
+
+	De snelheid van de blauwe jeu de boules bal na de botsing is dus: $v=\sqrt{{0,1883}^2+{0,1786}^2}=0,2595m/s$
+
+	Nu hebben we de blauwe bal gehad, nu de rode bal. De rode bal heeft, in tegenstelling tot de blauwe, wel een begin snelheid. Omdat de rode bal heel weinig wordt afgebogen is het niet heel duidelijk te zien op werk tijdstip dit gebeurd. De bal wordt het meeste afgebogen in de $x-richting$, en als we in figuur \eqref{00775} kijken kunnen we op $t=2,97s$ een verandering in de baan ontdekken.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00775.png}}
+	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal}
+	\label{00775}
+\end{figure}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00776.png}}
+	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal}
+	\label{00776}
+\end{figure}
+
+De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x-richting$ verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00777.png}}
+	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
+	\label{00777}
+\end{figure}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00778.png}}
+	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
+	\label{00778}
+\end{figure}
+
+Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid berekenen we dus met formule \eqref{snelheid}: $v=0,6649m/s$
+
+We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79s$ tot $t=3,67s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{00779.png}}
+	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
+	\label{00779}
+\end{figure}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{007710.png}}
+	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
+	\label{007710}
+\end{figure}
+
+	De snelheid hieruit berekenen geeft: $v=0,4664m/s$
+
+	We stellen dat de blauwe bal, bal 1 is, en de rode bal, bal 2.
+	Dan hadden we de volgende gegevens:
+
+	\begin{tabular}{  l l }
+		$m_1$= &0,22306 kg\\
+		$m_2$= &0,22330 kg\\
+		$o_1$= &0,0000 m/s\\
+		$o_2$= &0,6649 m/s\\
+	\end{tabular}
+
+	De snelheden na de botsing kunnen we berekenen met de formules van \eqref{uitwerking-energie-impuls}.
+	$v_1$ zou dus moeten zijn:
+
+	\begin{equation}
+		\begin{aligned}
+			v_1&=\frac{\left(0,22306 \cdot 0,0000+0,22330 \cdot 0,6649\right)+0,22330 \cdot \left(0,6649-0,0000\right)}{\left(0,22306+0,22330\right)}=0,6653m/s\\
+		\end{aligned}
+	\end{equation}
+
+	En $v_2$ zou moeten zijn:
+
+	\begin{equation}
+		\begin{aligned}
+			v_2&=\frac{\left(0,22330 \cdot 0,6649+0,22306 \cdot 0,0000\right)+0,22306 \cdot \left(0,0000-0,6649\right)}{\left(0,22330+0,22306\right)}=0m/s
+		\end{aligned}
+	\end{equation}
+
+Natuurlijk bij een centrale botsing wel.
 
 	\newpage
 
