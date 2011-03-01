@@ -1,4 +1,6 @@
-var OMEGA = 0.001;
+Math.randInt = function(a, b){
+  return Math.random()*(b-a)+a;
+};
 
 
 /**
@@ -10,6 +12,9 @@ function Wereld(breedte, hoogte, ctx){
   this.ctx = ctx;
   this.voorwerpen = [];
 }
+
+Wereld.TEKENSNELHEID = true;
+Wereld.TEKENKRACHTEN = true;
 
 /**
  * Kijk of er een botsing gebeurt tussen twee voorwerpen
@@ -38,6 +43,24 @@ Wereld.botst = function(een, twee){
   }
 };
 
+Wereld.berekenGevolg = function(een, twee){
+  var p1 = een.positie.krijgSom(een.snelheid.krijgProduct(een.move));
+  var p2 = twee.positie.krijgSom(twee.snelheid.krijgProduct(twee.move));
+  var diff = p2.krijgVerschil(p1);
+  var eenheidsnormaal = diff.krijgEenheidsvector();
+  
+  var relatieveSnelheid = een.snelheid.krijgVerschil(twee.snelheid);
+  
+  var impuls = eenheidsnormaal.inproduct( relatieveSnelheid.krijgProduct( -2 ) );
+      impuls /= eenheidsnormaal.inproduct( eenheidsnormaal.krijgProduct( 1 / een.massa + 1 / twee.massa ) );
+     
+  var reactieEen = eenheidsnormaal.krijgProduct( impuls / een.massa );
+	var reactieTwee = eenheidsnormaal.krijgProduct( -impuls / twee.massa );
+  
+  een.snelheid = een.snelheid.krijgSom( reactieEen );
+	twee.snelheid = twee.snelheid.krijgSom( reactieTwee );
+};
+
 /**
  * Doe een stap in de tijd voor elk voorwerp
  */
@@ -60,8 +83,13 @@ Wereld.prototype.stap = function(voorwaartsch){
       var botsing = Wereld.botst(vw, this.voorwerpen[j]);
       
       if(typeof botsing == 'number'){
+        
+        // Er gebeurt een botsing
         botsingGebeurt = true;
         vw.move = this.voorwerpen[j].move = botsing;
+        
+        // Verplaats de voorwerpen en bereken de snelheden na de botsing
+        Wereld.berekenGevolg(vw, this.voorwerpen[j]);
       }
     }
   }, this);
@@ -71,11 +99,15 @@ Wereld.prototype.stap = function(voorwaartsch){
     vw.beweeg(vw.move);
   }, true);
   
-  return botsingGebeurt;
+  return false;
 };
 
 Wereld.prototype.nieuwVoorwerp = function(vw){
   this.voorwerpen.push(vw);
+};
+
+Wereld.prototype.apocalyps = function(){
+  this.voorwerpen = [];
 };
 
 /**
@@ -93,6 +125,10 @@ Wereld.prototype.teken = function(){
 };
 
 Vector.prototype.teken = function(ctx, x, y, kleur){
+  
+  // alleen tekenen als er een lengte is
+  if(this.x == 0 && this.y ==0) return;
+  
 	ctx.save();
 	
 	ctx.strokeStyle = ctx.fillStyle = (kleur ? kleur : 'red');
@@ -100,10 +136,10 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 	ctx.translate(x, y);
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
-	ctx.lineTo(this.x, this.y);
+	ctx.lineTo(this.x*20, this.y*20);
 	ctx.stroke();
 	
-	ctx.translate(this.x, this.y);
+	ctx.translate(this.x*20, this.y*20);
 	ctx.rotate(Math.atan2(this.y, this.x)-1.25*Math.PI);
 	
 	ctx.beginPath();
@@ -113,15 +149,17 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 	ctx.fill();
 	
 	ctx.restore();
+  
+  return this;
 };
 
 /**
  *
  */
 function Cirkel(r, px, py){
-	this.straal = r;
-	this.positie = new Vector(px, py);
-	this.massa = 1000;
+	this.straal = r || 0;
+	this.positie = new Vector(px || 0, py || 0);
+	this.massa = 10;
 	
 	this.snelheid = new Vector();
 	this.krachten = [];
@@ -138,7 +176,7 @@ Cirkel.prototype.nieuweKracht = function(){
 	return this;
 };
 
-Cirkel.prototype.teken = function(ctx, krachten){
+Cirkel.prototype.teken = function(ctx){
 	ctx.fillStyle = '#333';
 	
 	// Teken de cirkel
@@ -146,17 +184,24 @@ Cirkel.prototype.teken = function(ctx, krachten){
 	ctx.arc(this.positie.x, this.positie.y, this.straal, 0, 2*Math.PI, true);
 	ctx.fill();
 	
-	if(krachten && krachten===true){
+	if(Wereld.TEKENKRACHTEN){
 		// Teken alle krachten
+    var resulterende = new Vector();
+    
 		for(var i=0; i<this.krachten.length; i++){
 			this.krachten[i].teken(ctx, this.positie.x, this.positie.y);
+      resulterende.plus(this.krachten[i]);
 		}
 		
 		// Teken de resulterende kracht als er meer dan 1 kracht op de cirkel werkt
 		if(this.krachten.length > 1){
-			(new Vector()).plus(this.krachten).teken(ctx, this.positie.x, this.positie.y, 'green');
+      resulterende.teken(ctx, this.positie.x, this.positie.y, 'green');
 		}
 	}
+  
+  if(Wereld.TEKENSNELHEID){
+    this.snelheid.teken(ctx, this.positie.x, this.positie.y, 'blue');
+  }
 	
 	return this;
 };

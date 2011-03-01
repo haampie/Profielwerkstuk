@@ -2,20 +2,18 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Vectors en cirkels</title>
-  <style>
-    canvas {
-      border: 1px dotted #CCC;
-    }
-  </style>
+  <title>Vectoren en cirkels</title>
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
   
+  <script src="jquery.js"></script>
   <script src="vector.js"></script>
   <script src="javascript.js"></script>
+  <script src="gui.js"></script>
   <script>
     var wereld, interval = null;
     
     function loop(voorwaartsch){
-      console.log(wereld.voorwerpen[0].snelheid.y);
       
       if(wereld.stap(voorwaartsch)){
           clearInterval(interval);
@@ -25,77 +23,83 @@
       wereld.teken();
     }
     
-    window.onload = function(){
-      var ctx = document.getElementById('c').getContext('2d');
+    $(document).ready(function(){
+      var ctx = $('#c')[0].getContext('2d');
 
       wereld = new Wereld(800, 600, ctx);
       
       // Grote cirkel
+<<<<<<< HEAD
       cirk1 = new Cirkel(50, 200, 300);
       cirk1.nieuweKracht(new Vector(1, 0));
       cirk1.snelheid = new Vector(0, 2);
+=======
+      cirk1 = new Cirkel(50, 500, 300);
+>>>>>>> cc339f85062ea85e127b8ec1f341b3478e475979
       cirk1.massa = 50;
       
       // Kleine cirkel
-      cirk2 = new Cirkel(10, 800, 370);
-      cirk2.nieuweKracht(new Vector(-1, 0));
-      cirk2.massa = 10;
-      
-      // Middelmatige cirkel
-      cirk3 = new Cirkel(25, 200, 440);
-      cirk3.nieuweKracht(new Vector(1, 0));
-      cirk3.snelheid = new Vector(0, -4);
-      cirk3.massa = 300;
+      cirk2 = new Cirkel(50, 200, 367.5);
+      cirk2.snelheid = new Vector(5, 0);
+      cirk2.massa = 50;
       
       // Voeg cirkels toe
       wereld.nieuwVoorwerp(cirk1);
       wereld.nieuwVoorwerp(cirk2);
-      wereld.nieuwVoorwerp(cirk3);
       
       wereld.teken();
       
-      /*
-        GUI
-      */
-      
-      // Automatisch afspelen
-      document.getElementById('loop').onclick = function(){
-        if(interval){
-          clearInterval(interval);
-          interval = null;
-        } else {
-          interval = setInterval(function(){
-            loop(true);
-          }, 1000 / 60);
-        }
-        
-        return false;
-      };
-      
-      // Ga heen, en lope voorwaartsch
-      document.getElementById('next').onclick = function(){
-        if(!interval){
-          loop(true);
-        }
-        return false;
-      };
-      
-      // Terug in de tijd gaan!
-      document.getElementById('prev').onclick = function(){
-        if(!interval){
-          loop(false);
-        }
-        
-        return false;
-      };
-    };
+      $('#vernieuwData').click();
+    });
   </script>
 </head>
-<body>
-  <h1>Voorbeeld</h1>
-  <canvas id="c" width="800" height="600"></canvas>
-  <form action="#" method="get">
-    <p><button id="prev">&lt;</button> <button id="loop">start</button> <button id="next">&gt;</button></p>
-  </form>
+<body>  
+  <div id="wrap">
+    
+    <div id="presets">
+      <h1>Fysisch systeem v1.0 <span class="door">door Derk Rouwhorst en Harmen Stoppels</span></h1>
+    </div>
+    
+    <form action="#" method="get" id="menubar1" class="options top clearfix">
+      <p class="left">
+        <span class="big">Simulatie</span> 
+        <span class="erbij">&middot; voorbeelden: 
+        <a href="#vb1" title="Voorbeeld 1" id="vb1" class="round">1</a></span>
+      </p>
+      <p class="right">
+        <button class="buttonLarge button-gray reset">Reset</button>
+        <button id="showOptions" class="buttonLarge button-gray">Opties</button>
+      </p>
+      <div id="opties">
+        <p><label><input type="checkbox" name="krachten" id="krachten" checked="checked" />Krachtsvectoren laten zien</label></p>
+        <p><label><input type="checkbox" name="snelheid" id="snelheid" checked="checked" />Snelheidsvectoren laten zien</label></p>
+      </div>
+    </form>
+    
+    <canvas id="c" width="798" height="600"></canvas>
+    
+    <form action="#" method="get" id="menubar2" class="options bottom clearfix">
+      <p class="left">
+        <button id="loop" class="buttonLarge button-gray">Start</button> 
+        <button id="stap" class="buttonLarge button-gray">&gt;</button>
+      </p>
+      <p class="right">
+        
+      </p>
+    </form>
+    
+    <form action="#" method="get" id="voorwerpen" class="options clearfix">
+      <p class="right"> 
+        <button id="vernieuwData" class="buttonLarge button-gray">Krijg huidige data</button>
+      </p>
+      <div id="voorwerpLijstWrapper" class="left">
+        <ul id="voorwerpLijst">
+          
+        </ul>
+        <button class="buttonLarge button-gray reset">Deze data instellen</button>
+        <button id="add" class="buttonLarge button-gray">Nieuw voorwerp</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
