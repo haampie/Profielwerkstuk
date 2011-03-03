@@ -11,6 +11,7 @@ function Wereld(breedte, hoogte, ctx){
   this.hoogte = hoogte;
   this.ctx = ctx;
   this.voorwerpen = [];
+  this.statischeVoorwerpen = [];
 }
 
 Wereld.TEKENSNELHEID = true;
@@ -20,47 +21,83 @@ Wereld.TEKENKRACHTEN = true;
  * Kijk of er een botsing gebeurt tussen twee voorwerpen
  */
 Wereld.botst = function(een, twee){
-  var vrel = een.snelheid.krijgVerschil(twee.snelheid);
-  var Xrel = een.positie.krijgVerschil(twee.positie);
-  var a = vrel.inproduct(vrel);
-  var b = Xrel.inproduct(vrel);
-  var c = Xrel.inproduct(Xrel) - (een.straal + twee.straal)*(een.straal + twee.straal);
-  var d = b*b - a*c;
-  
-  if(d < 0) return false;
-  
-  if(a == 0) return false;
-  
-  var t2 = (-b - Math.sqrt(d))/a;
-  var t1 = (-b + Math.sqrt(d))/a;
-  
-  if(t2 <= 0 || t2 > 1){
-    if(t1 <= 0 || t1 > 1){
-      return false;
+  if(een instanceof Cirkel && twee instanceof Cirkel){
+    var vrel = een.snelheid.krijgVerschil(twee.snelheid);
+    var Xrel = een.positie.krijgVerschil(twee.positie);
+    var a = vrel.inproduct(vrel);
+    var b = Xrel.inproduct(vrel);
+    var c = Xrel.inproduct(Xrel) - (een.straal + twee.straal)*(een.straal + twee.straal);
+    var d = b*b - a*c;
+    
+    if(d < 0) return false;
+    
+    if(a == 0) return false;
+    
+    var t2 = (-b - Math.sqrt(d))/a;
+    var t1 = (-b + Math.sqrt(d))/a;
+    
+    if(t2 < 0 || t2 >= 1){
+      if(t1 < 0 || t1 >= 1){
+        return false;
+      } else {
+        return t1;
+      }
     } else {
+      return t2;
+    }
+  }
+  
+  else if(een instanceof Cirkel && twee instanceof Lijnstuk){
+    var normaal = twee.vector.krijgNormaal();
+    
+    // f = (d-c).n;
+    var f = een.positie.krijgSom(een.snelheid).min(een.positie).inproduct(normaal);
+    
+    if(f == 0){
+      return false;
+    }
+    
+    // e = (a-c).n;
+    var e = twee.startpunt.krijgVerschil(een.positie).inproduct(normaal);
+    
+    // g = r*||n||
+    var g = een.straal * normaal.norm;
+    
+    var t1 = (-g + e)/f;
+    var t2 = (g + e)/f;
+    
+    if(t1 >= 0 && t1 < 1 && t1 <= t2){
       return t1;
     }
-  } else {
-    return t2;
+    
+    if(t2 >= 0 && t2 < 1 && t2 <= t1){
+      return t2;
+    }
+    
+    return false;
   }
 };
 
 Wereld.berekenGevolg = function(een, twee){
-  var p1 = een.positie.krijgSom(een.snelheid.krijgProduct(een.move));
-  var p2 = twee.positie.krijgSom(twee.snelheid.krijgProduct(twee.move));
-  var diff = p2.krijgVerschil(p1);
-  var eenheidsnormaal = diff.krijgEenheidsvector();
+  if(een instanceof Cirkel && twee instanceof Cirkel){
+    var diff = twee.positie.krijgVerschil(een.positie);
+    var eenheidsnormaal = diff.krijgEenheidsvector();
+    
+    var relatieveSnelheid = een.snelheid.krijgVerschil(twee.snelheid);
+    
+    var impuls = eenheidsnormaal.inproduct( relatieveSnelheid.krijgProduct( -2 ) );
+        impuls /= eenheidsnormaal.inproduct( eenheidsnormaal.krijgProduct( 1 / een.massa + 1 / twee.massa ) );
+       
+    var reactieEen = eenheidsnormaal.krijgProduct( impuls / een.massa );
+    var reactieTwee = eenheidsnormaal.krijgProduct( -impuls / twee.massa );
+    
+    een.snelheid.plus( reactieEen );
+    twee.snelheid.plus( reactieTwee );
+  }
   
-  var relatieveSnelheid = een.snelheid.krijgVerschil(twee.snelheid);
-  
-  var impuls = eenheidsnormaal.inproduct( relatieveSnelheid.krijgProduct( -2 ) );
-      impuls /= eenheidsnormaal.inproduct( eenheidsnormaal.krijgProduct( 1 / een.massa + 1 / twee.massa ) );
-     
-  var reactieEen = eenheidsnormaal.krijgProduct( impuls / een.massa );
-	var reactieTwee = eenheidsnormaal.krijgProduct( -impuls / twee.massa );
-  
-  een.snelheid = een.snelheid.krijgSom( reactieEen );
-	twee.snelheid = twee.snelheid.krijgSom( reactieTwee );
+  else if(een instanceof Cirkel && twee instanceof Lijnstuk){
+    var eenheidsnormaal = twee.vector.krijgEenheidsvector();
+  }
 };
 
 Wereld.prototype.drawCallback = function(){};
@@ -76,13 +113,13 @@ Wereld.prototype.stap = function(voorwaartsch){
   
   // Reken de nieuwe snelheid uit
   this.voorwerpen.forEach(function(vw, i){
-    vw.move = 1;
+    vw.move = 0;
     vw.stap(voorwaartsch);
   }, this);
   
   var botsingGebeurt = false;
   
-  // Zoek per voorwerp naar botsingen met elk volgend voorwerp
+  // Zoek per dynamisch voorwerp naar botsingen met elk ander dynamisch voorwerp
   this.voorwerpen.forEach(function(vw, i){
     // Zoek naar botsingen!
     for(var j=i+1; j<this.voorwerpen.length; j++){
@@ -93,29 +130,62 @@ Wereld.prototype.stap = function(voorwaartsch){
       if(typeof botsing == 'number'){
         
         // Er gebeurt een botsing
-        botsingGebeurt = true;
+        // botsingGebeurt = true;
         vw.move = this.voorwerpen[j].move = botsing;
         
-        // Verplaats de voorwerpen en bereken de snelheden na de botsing
+        // Verplaats de voorwerpen naar botsingsstand
+        vw.beweeg(botsing);
+        this.voorwerpen[j].beweeg(botsing);
+        
+        // Bereken de snelheden na de botsing
         Wereld.berekenGevolg(vw, this.voorwerpen[j]);
+        
+        break;
+      }
+    }
+    
+    // Botsingen met statische voorwerpen
+    for(var j = 0; j < this.statischeVoorwerpen.length; j++){
+      
+      var botsing = Wereld.botst(vw, this.statischeVoorwerpen[j]);
+      
+      if(typeof botsing == 'number'){
+        botsingGebeurt = true;
+        vw.move = botsing;
+        
+        vw.beweeg(botsing);
+        
+        Wereld.berekenGevolg(vw, this.statischeVoorwerpen[j]);
+        
+        break;
       }
     }
   }, this);
   
   // Beweeg elk voorwerp
   this.voorwerpen.forEach(function(vw, i){
-    vw.beweeg(vw.move);
+    vw.beweeg(1 - vw.move);
   }, true);
   
-  return false;
+  return botsingGebeurt;
 };
 
-Wereld.prototype.nieuwVoorwerp = function(vw){
-  this.voorwerpen.push(vw);
+Wereld.prototype.nieuwVoorwerp = function(vw, statisch){
+  // Boolean afdwingen
+  statisch = !!statisch;
+  
+  if(statisch){
+    // Voeg statisch voorwerp toe
+    this.statischeVoorwerpen.push(vw);
+  } else {
+    // Voeg dynamisch voorwerp toe
+    this.voorwerpen.push(vw);
+  }
 };
 
 Wereld.prototype.apocalyps = function(){
   this.voorwerpen = [];
+  this.statischeVoorwerpen = [];
   this.drawCallback = function(){};
 };
 
@@ -131,6 +201,10 @@ Wereld.prototype.teken = function(){
   
   // Teken elk voorwerp
   this.voorwerpen.forEach(function(vw, i){
+    vw.teken(this.ctx, true);
+  }, this);
+  
+  this.statischeVoorwerpen.forEach(function(vw, i){
     vw.teken(this.ctx, true);
   }, this);
 };
@@ -165,7 +239,7 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 };
 
 /**
- *
+ * Maakt een cirkel
  */
 function Cirkel(r, px, py){
 	this.straal = r || 0;
@@ -253,4 +327,32 @@ Cirkel.prototype.stap = function(voorwaartsch){
 Cirkel.prototype.beweeg = function(a){
 	// Tel de snelheid op bij de positie.
 	this.positie.plus(this.snelheid.krijgProduct(a));
+};
+
+/**
+ * Lijnstuk is een statisch voorwerp
+ */
+function Lijnstuk(px, py, dx, dy){
+
+	this.startpunt = new Vector(px || 0, py || 0);
+  this.vector = new Vector(dx || 0, dy || 0);
+  
+}
+
+Lijnstuk.prototype.teken = function(ctx){
+  ctx.save();
+  
+  ctx.translate(this.startpunt.x, this.startpunt.y);
+  
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 1;
+  
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(this.vector.x, this.vector.y);
+  ctx.stroke();
+  
+  ctx.restore();
+  
+  return this;
 };

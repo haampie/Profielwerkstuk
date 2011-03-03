@@ -16,8 +16,8 @@
     function loop(voorwaartsch){
       
       if(wereld.stap(voorwaartsch)){
-          clearInterval(interval);
-          interval = null;
+        clearInterval(interval);
+        interval = null;
       }
       
       wereld.teken();
@@ -29,13 +29,7 @@
       wereld = new Wereld(800, 600, ctx);
       
       // Grote cirkel
-<<<<<<< HEAD
-      cirk1 = new Cirkel(50, 200, 300);
-      cirk1.nieuweKracht(new Vector(1, 0));
-      cirk1.snelheid = new Vector(0, 2);
-=======
       cirk1 = new Cirkel(50, 500, 300);
->>>>>>> cc339f85062ea85e127b8ec1f341b3478e475979
       cirk1.massa = 50;
       
       // Kleine cirkel
@@ -67,6 +61,7 @@
         <a href="#vb1" title="Voorbeeld 1" id="vb1" class="round">1</a></span>
         <a href="#vb2" title="Voorbeeld 2" id="vb2" class="round">2</a></span>
         <a href="#vb3" title="Voorbeeld 3" id="vb3" class="round">3</a></span>
+        <a href="#vb4" title="Voorbeeld 4" id="vb4" class="round">4</a></span>
       </p>
       <p class="right">
         <button class="buttonLarge button-gray reset">Reset</button>
@@ -86,7 +81,7 @@
         <button id="stap" class="buttonLarge button-gray">&gt;</button>
       </p>
       <p class="right">
-        
+        <button id="tekenlijn" class="buttonLarge button-gray">Plaats een lijn</button>
       </p>
     </form>
     

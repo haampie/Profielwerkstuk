@@ -201,10 +201,10 @@ $(document).ready(function(){
     var cirkel2 = new Cirkel(20, 100, 300);
     cirkel2.massa = 50;
     
-    var cirkel3 = new Cirkel(20, 150, 300);
+    var cirkel3 = new Cirkel(20, 200, 300);
     cirkel3.massa = 50;
     
-    var cirkel4 = new Cirkel(20, 200, 300);
+    var cirkel4 = new Cirkel(20, 300, 300);
     cirkel4.massa = 50;
     
     wereld.nieuwVoorwerp(cirkel);
@@ -213,6 +213,36 @@ $(document).ready(function(){
     wereld.nieuwVoorwerp(cirkel4);
     
     $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
+  
+  $('#vb4').click(function(){
+    wereld.apocalyps();
+    
+    var cirkel = new Cirkel(20, 300, 300);
+    cirkel.snelheid = new Vector(3, 0);
+    cirkel.massa = 50;
+    
+    var lijn = new Lijnstuk(500, 200, 10, 200);
+    
+    wereld.nieuwVoorwerp(cirkel);
+    wereld.nieuwVoorwerp(lijn, true);
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
+
+  
+  $('#tekenlijn').click(function(){
+    var lijnstuk = new Lijnstuk(50, 100, 200, 100);
+    
+    // statisch voorwerp
+    wereld.nieuwVoorwerp(lijnstuk, true);
+    
     wereld.teken();
     
     return false;
