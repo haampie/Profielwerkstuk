@@ -63,15 +63,26 @@ Wereld.botst = function(een, twee){
     // g = r*||n||
     var g = een.straal * normaal.norm;
     
-    var t1 = (-g + e)/f;
+    var t = (-g + e)/f;
     var t2 = (g + e)/f;
     
-    if(t1 >= 0 && t1 < 1 && t1 <= t2){
-      return t1;
+    // kijk of t2 eerder plaatsvond
+    if(t2 >= 0 && t2 < t){
+      t = t2;
     }
     
-    if(t2 >= 0 && t2 < 1 && t2 <= t1){
-      return t2;
+    // Kijk of er een geldig tijdstip is
+    if(t >= 0 && t < 1){
+      var w = een.positie.krijgSom(een.snelheid.krijgProduct(t)).min(twee.startpunt);
+      var hoever = twee.vector.inproduct(w) / twee.vector.inproduct(twee.vector);
+      
+      console.log(t, hoever);
+      
+      if( hoever < 0 || hoever > 1 ){
+        return false;
+      }
+      
+      return t;
     }
     
     return false;

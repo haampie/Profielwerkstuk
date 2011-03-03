@@ -225,7 +225,7 @@ $(document).ready(function(){
     cirkel.snelheid = new Vector(3, 0);
     cirkel.massa = 50;
     
-    var lijn = new Lijnstuk(500, 200, 10, 200);
+    var lijn = new Lijnstuk(500, 200, 200, 200);
     
     wereld.nieuwVoorwerp(cirkel);
     wereld.nieuwVoorwerp(lijn, true);
@@ -235,14 +235,50 @@ $(document).ready(function(){
     
     return false;
   });
-
   
-  $('#tekenlijn').click(function(){
-    var lijnstuk = new Lijnstuk(50, 100, 200, 100);
+  $('#vb5').click(function(){
+    wereld.apocalyps();
     
-    // statisch voorwerp
-    wereld.nieuwVoorwerp(lijnstuk, true);
+    var punt = new Vector(400, 200);
     
+    var cirkel2 = new Cirkel(20, 400, 200);
+    cirkel2.massa = 50;
+    cirkel2.nieuweKracht( function(){
+      return punt.krijgVerschil(this.positie).deel(50);
+    } );
+    cirkel2.nieuweKracht( function(){
+      return this.snelheid.krijgProduct(-1/10);
+    } );
+    cirkel2.nieuweKracht( new Vector(0, 3) );
+    
+    var cirkel3 = new Cirkel(40, 1300, 500);
+    cirkel3.snelheid = new Vector(-5, 0);
+    cirkel3.massa = 150;
+    
+    wereld.nieuweTekenVoorafganger(function(){
+      var diff = cirkel2.positie.krijgVerschil(punt);
+      this.ctx.save();
+      
+      this.ctx.translate(punt.x, punt.y);
+      
+      this.ctx.fillStyle = '#111';
+      this.ctx.strokeStyle = '#AAA';
+      
+      this.ctx.beginPath();
+      this.ctx.arc(0, 0, 2, 0, 2*Math.PI, true);
+      this.ctx.fill();
+      
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, 0);
+      this.ctx.lineTo(diff.x, diff.y);
+      this.ctx.stroke();
+      this.ctx.restore();
+    });
+    
+    wereld.nieuwVoorwerp(cirkel2);
+    wereld.nieuwVoorwerp(cirkel3);
+    
+    $('#vernieuwData').click();
     wereld.teken();
     
     return false;
