@@ -283,4 +283,50 @@ $(document).ready(function(){
     
     return false;
   });
+  
+  $('#vb6').click(function(){
+    wereld.apocalyps();
+    
+    var zon = new Cirkel(100, 400, 300);
+    var aarde = new Cirkel(3.66, 105, 300);
+    var maan = new Cirkel(1, 95, 300);
+    
+    zon.massa = 27000;
+    aarde.massa = 81.3;
+    maan.massa = 1;
+    
+    function aantrekkingskracht(a, b){
+      
+      var vec = b.positie.krijgVerschil(a.positie);
+      var richting = vec.krijgEenheidsvector();
+      var norm = a.massa*b.massa/vec.inproduct(vec)/10;
+      
+      return richting.keer(norm);
+    }
+    
+    aarde.snelheid = new Vector(0, -3);
+    maan.snelheid = new Vector(0, -2);
+    
+    wereld.nieuwVoorwerp(zon);
+    wereld.nieuwVoorwerp(aarde);
+    wereld.nieuwVoorwerp(maan);
+    
+    for(var i=0; i<wereld.voorwerpen.length; i++){
+      for(var j=0; j<wereld.voorwerpen.length; j++){
+        if(i==j) continue;
+        
+        wereld.voorwerpen[i].nieuweKracht((function(i, j){
+          return function(){
+            console.log(i, j);
+            return aantrekkingskracht(wereld.voorwerpen[i], wereld.voorwerpen[j]);
+          };
+        })(i, j));
+      }
+    }
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
 });

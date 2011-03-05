@@ -120,12 +120,12 @@ Wereld.prototype.nieuweTekenVoorafganger = function(a){
 /**
  * Doe een stap in de tijd voor elk voorwerp
  */
-Wereld.prototype.stap = function(voorwaartsch){
+Wereld.prototype.stap = function(){
   
   // Reken de nieuwe snelheid uit
   this.voorwerpen.forEach(function(vw, i){
     vw.move = 0;
-    vw.stap(voorwaartsch);
+    vw.stap(this, i);
   }, this);
   
   var botsingGebeurt = false;
@@ -212,11 +212,11 @@ Wereld.prototype.teken = function(){
   
   // Teken elk voorwerp
   this.voorwerpen.forEach(function(vw, i){
-    vw.teken(this.ctx, true);
+    vw.teken(this.ctx, this, i);
   }, this);
   
   this.statischeVoorwerpen.forEach(function(vw, i){
-    vw.teken(this.ctx, true);
+    vw.teken(this.ctx, this, i);
   }, this);
 };
 
@@ -255,7 +255,9 @@ Vector.prototype.teken = function(ctx, x, y, kleur){
 function Cirkel(r, px, py){
 	this.straal = r || 0;
 	this.positie = new Vector(px || 0, py || 0);
-	this.massa = 10;
+  
+  // standaard een gewicht van pi*r*r/10
+	this.massa = this.straal*this.straal*Math.PI/10;
 	
 	this.snelheid = new Vector();
 	this.krachten = [];
@@ -272,7 +274,7 @@ Cirkel.prototype.nieuweKracht = function(){
 	return this;
 };
 
-Cirkel.prototype.teken = function(ctx){
+Cirkel.prototype.teken = function(ctx, wereld, num){
 	ctx.fillStyle = '#333';
 	
 	// Teken de cirkel
@@ -286,7 +288,7 @@ Cirkel.prototype.teken = function(ctx){
     
 		for(var i=0; i<this.krachten.length; i++){
       var k = this.krachten[i];
-      var kracht = typeof k == 'function' ? k.call(this) : k;
+      var kracht = typeof k == 'function' ? k.call(this, wereld, num) : k;
 			kracht.teken(ctx, this.positie.x, this.positie.y);
       resulterende.plus(kracht);
 		}
@@ -311,25 +313,21 @@ Cirkel.prototype.teken = function(ctx){
  * F = m*a -> a = F/m. 
  * v += a.
  */
-Cirkel.prototype.stap = function(voorwaartsch){
+Cirkel.prototype.stap = function(wereld, i){
 
 	// Maak een nulvector
 	var som = new Vector();
 	
 	// Tel alle krachten bij elkaar op
 	this.krachten.forEach(function(el){
-		som.plus( typeof el == 'function' ? el.call(this) : el );
+		som.plus( typeof el == 'function' ? el.call(this, wereld, i) : el );
 	}, this);
 	
 	// Deel door de massa
 	som.deel(this.massa);
 	
 	// Versnelling optellen bij de snelheid
-  if(voorwaartsch){
-    this.snelheid.plus(som);
-  } else {
-    this.snelheid.min(som);
-  }
+  this.snelheid.plus(som);
 	
 	// Voor chaining
 	return this;
