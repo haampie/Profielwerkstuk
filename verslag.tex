@@ -27,6 +27,9 @@
 	\subsection{Norm van een vector}
 	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{\left({v_1}^2+{v_2}^2\right)}$
 	
+	\subsection{Eenheidsvector}
+	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de lengte van dat getal aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
+	
 	\subsection{Het inwendig product}
 	Het inwendig product van twee vectoren is de som van alle componenten met elkaar vermenigvuldigd. Een voorbeeld hiervan is:
 	
@@ -37,14 +40,24 @@
 		\end{aligned}
 	\end{equation*}
 	
-	Het resultaat van die vermenigvuldiging en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
+	Deze rekenkundige bewerking blijkt heel goed toepasbaar te zijn in geometrische berekeningen. We gebruiken het inproduct onder andere om een vector op een andere te projecteren, en ook om te kijken of een voorwerp een lijnstuk of juist de lijn in het verlengde van het lijnstuk raakt.
+
+	Werken met het inproduct zorgt niet alleen voor een kortere notatie, maar blijkt ook in sommige gevallen de voor de computer ``tijdrovende'' functie cosinus te vervangen.
 	
-	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $\mathbf{u}=\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}$ en $\mathbf{v}=\begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van de vectoren, geldt er:
+	Het bewijs voor de laatstgenoemde eigenschap maakt gebruik van de cosinusregel. Gegeven zijn de vectoren $\mathbf{a}=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $\mathbf{b}=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van $\mathbf{a}$ en $\mathbf{b}$. Zie figuur \ref{cosinusregel-inproduct}
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{cosinusregel-inproduct.png}}
+		\caption{Een driehoek met vectoren}
+		\label{cosinusregel-inproduct}
+	\end{figure}
+	
+	Voor de lengte van vector $\mathbf{c}$ geldt dan:
  	\begin{equation}
 		\begin{aligned}
 			\|\mathbf{c}\|^2 = \left\{ 
 				\begin{array}{l l}
- 	 				\sqrt{(a_1-b_1)^2+(a_2-b_2)^2} \\
+ 	 				(a_1-b_1)^2+(a_2-b_2)^2 \\
   					{\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma 
  	 			\end{array} 
  	 		\right.
@@ -62,11 +75,6 @@
 			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma\\
 		\end{aligned}
 	\end{equation}
-
-	Met het resultaat hiervan kunnen we later geometrische berekeningen doen, zonder de voor de computer ``tijdrovende'' functie cosinus of sinus te gebruiken.
-	
-	\subsection{Eenheidsvector}
-	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de lengte van dat getal aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
 
 	\newpage	
 
