@@ -108,6 +108,10 @@ Wereld.berekenGevolg = function(een, twee){
   
   else if(een instanceof Cirkel && twee instanceof Lijnstuk){
     var eenheidsnormaal = twee.vector.krijgEenheidsvector();
+    var vlangszij = eenheidsnormaal.krijgProduct(een.snelheid.inproduct(eenheidsnormaal));
+    var vrechtop = een.snelheid.krijgVerschil(vlangszij);
+    
+    een.snelheid = vlangszij.plus(vrechtop.keer(-1));
   }
 };
 
@@ -178,7 +182,7 @@ Wereld.prototype.stap = function(){
     vw.beweeg(1 - vw.move);
   }, true);
   
-  return botsingGebeurt;
+  return false;
 };
 
 Wereld.prototype.nieuwVoorwerp = function(vw, statisch){

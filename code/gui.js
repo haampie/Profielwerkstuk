@@ -221,14 +221,25 @@ $(document).ready(function(){
   $('#vb4').click(function(){
     wereld.apocalyps();
     
-    var cirkel = new Cirkel(20, 300, 300);
-    cirkel.snelheid = new Vector(3, 0);
-    cirkel.massa = 50;
+    var cirkel1 = new Cirkel(20, 300, 260);
+    cirkel1.snelheid = new Vector(2, 1);
+    cirkel1.massa = 50;
     
-    var lijn = new Lijnstuk(500, 200, 200, 200);
+    var cirkel2 = new Cirkel(20, 200, 350);
+    cirkel2.snelheid = new Vector(-1, -1);
+    cirkel2.massa = 50;
     
-    wereld.nieuwVoorwerp(cirkel);
-    wereld.nieuwVoorwerp(lijn, true);
+    var lijn1 = new Lijnstuk(100, 200, 0, 200);
+    var lijn2 = new Lijnstuk(500, 200, 0, 200);
+    var lijn3 = new Lijnstuk(100, 200, 400, 0);
+    var lijn4 = new Lijnstuk(100, 400, 400, 0);
+    
+    wereld.nieuwVoorwerp(cirkel1);
+    wereld.nieuwVoorwerp(cirkel2);
+    wereld.nieuwVoorwerp(lijn1, true);
+    wereld.nieuwVoorwerp(lijn2, true);
+    wereld.nieuwVoorwerp(lijn3, true);
+    wereld.nieuwVoorwerp(lijn4, true);
     
     $('#vernieuwData').click();
     wereld.teken();

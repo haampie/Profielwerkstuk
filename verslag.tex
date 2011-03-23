@@ -39,17 +39,21 @@
 	
 	Het resultaat van die vermenigvuldiging en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
 	
-	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $a=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $b=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en lijn $c$ tussen beide uiteinden van de vectoren, geldt er:
+	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $\mathbf{u}=\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}$ en $\mathbf{v}=\begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van de vectoren, geldt er:
  	\begin{equation}
 		\begin{aligned}
-			c=\sqrt{(a_1-b_1)^2+(a_2-b_2)^2} \wedge c^2={\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma \\
+			\|\mathbf{c}\|^2 = \left\{ 
+				\begin{array}{l l}
+ 	 				\sqrt{(a_1-b_1)^2+(a_2-b_2)^2} \\
+  					{\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma 
+ 	 			\end{array} 
+ 	 		\right.
 		\end{aligned}
 	\end{equation}
 	\\Hieruit volgt:
 	\begin{equation}
 		\label{inproduct-cosinus}
 		\begin{aligned}
-			\left(\sqrt{(a_1-b_1)^2 + (a_2-b_2)^2}\right)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			(a_1-b_1)^2 + (a_2-b_2)^2 &= {\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			{a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2a_1b_1 - 2a_2b_2 &= {a_1}^2 + {a_2}^2+ {b_1}^2 + {b_2}^2 - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
 			-2a_1b_1 - 2a_2b_2 &= - 2 \cdot {\|\mathbf{a}\|} \cdot {\|\mathbf{b}\|} \cdot \cos\gamma \\
