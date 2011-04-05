@@ -76,8 +76,6 @@ Wereld.botst = function(een, twee){
       var w = een.positie.krijgSom(een.snelheid.krijgProduct(t)).min(twee.startpunt);
       var hoever = twee.vector.inproduct(w) / twee.vector.inproduct(twee.vector);
       
-      console.log(t, hoever);
-      
       if( hoever < 0 || hoever > 1 ){
         return false;
       }
@@ -86,6 +84,31 @@ Wereld.botst = function(een, twee){
     }
     
     return false;
+  }
+  
+  else if(een instanceof Cirkel && twee instanceof Punt){
+    var Xrel = een.positie.krijgVerschil(twee.p);
+    var a = een.snelheid.inproduct(een.snelheid);
+    var b = Xrel.inproduct(een.snelheid);
+    var c = Xrel.inproduct(Xrel) - een.straal*een.straal;
+    var d = b*b - a*c;
+    
+    if(d < 0) return false;
+    
+    if(a == 0) return false;
+    
+    var t2 = (-b - Math.sqrt(d))/a;
+    var t1 = (-b + Math.sqrt(d))/a;
+    
+    if(t2 < 0 || t2 >= 1){
+      if(t1 < 0 || t1 >= 1){
+        return false;
+      } else {
+        return t1;
+      }
+    } else {
+      return t2;
+    }
   }
 };
 
@@ -112,6 +135,13 @@ Wereld.berekenGevolg = function(een, twee){
     var vrechtop = een.snelheid.krijgVerschil(vlangszij);
     
     een.snelheid = vlangszij.plus(vrechtop.keer(-1));
+  }
+  
+  else if(een instanceof Cirkel && twee instanceof Punt){
+    var eenheidsnormaal = twee.p.krijgVerschil(een.positie).krijgEenheidsvector();
+    var vrechtop = eenheidsnormaal.krijgProduct(een.snelheid.inproduct(eenheidsnormaal));
+    
+    een.snelheid.plus(vrechtop.keer(-2));
   }
 };
 
@@ -191,7 +221,14 @@ Wereld.prototype.nieuwVoorwerp = function(vw, statisch){
   
   if(statisch){
     // Voeg statisch voorwerp toe
+    
     this.statischeVoorwerpen.push(vw);
+    
+    if(vw instanceof Lijnstuk){
+      // als er een lijnstuk wordt toegevoegd, moet je ook het begin- en eindpunt los toevoegen
+      this.statischeVoorwerpen.push(new Punt(vw.startpunt.kloon()));
+      this.statischeVoorwerpen.push(new Punt(vw.startpunt.krijgSom(vw.vector)));
+    }
   } else {
     // Voeg dynamisch voorwerp toe
     this.voorwerpen.push(vw);
@@ -347,8 +384,8 @@ Cirkel.prototype.beweeg = function(a){
  */
 function Lijnstuk(px, py, dx, dy){
 
-	this.startpunt = new Vector(px || 0, py || 0);
-  this.vector = new Vector(dx || 0, dy || 0);
+	this.startpunt = new Vector(px, py);
+  this.vector = new Vector(dx, dy);
   
 }
 
@@ -369,3 +406,12 @@ Lijnstuk.prototype.teken = function(ctx){
   
   return this;
 };
+
+
+
+function Punt(v){
+  this.p = v;
+  
+}
+
+Punt.prototype.teken = function(){};

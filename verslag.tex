@@ -6,6 +6,7 @@
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{listings}
 
 \title{Een fysisch systeem voor de computer}
 \date{\today}
@@ -20,16 +21,16 @@
 	\newpage
 	
 	\section{Vectoren}
-	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we ook alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
+	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
 	
 	\subsection{Notatie}
 	De namen van vectoren schrijven we dikgedrukt en de componenten boven elkaar met ronde haken eromheen. Een voorbeeld hiervan is $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$. Dit stelt een vector voor die $5$ naar rechts is gericht en $3$ naar onder.
 	
 	\subsection{Norm van een vector}
-	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{\left({v_1}^2+{v_2}^2\right)}$
+	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{{v_1}^2+{v_2}^2}$.
 	
 	\subsection{Eenheidsvector}
-	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de lengte van dat getal aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
+	Een eenheidsvector is een vector waarvan de norm 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de norm van het getal waarmee vermenigvuldigd is aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van de eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
 	
 	\subsection{Het inwendig product}
 	Het inwendig product van twee vectoren is de som van alle componenten met elkaar vermenigvuldigd. Een voorbeeld hiervan is:
@@ -43,13 +44,13 @@
 	
 	Deze rekenkundige bewerking blijkt heel goed toepasbaar te zijn in geometrische berekeningen. We gebruiken het inproduct onder andere om een vector op een andere te projecteren, en ook om te kijken of een voorwerp een lijnstuk of juist de lijn in het verlengde van het lijnstuk raakt.
 
-	Werken met het inproduct zorgt niet alleen voor een kortere notatie, maar blijkt ook in sommige gevallen de voor de computer ``tijdrovende'' functie cosinus te vervangen.
+	Werken met het inproduct zorgt niet alleen voor een kortere notatie, maar blijkt ook in sommige gevallen de voor de computer tijdrovende functie cosinus te vervangen.
 	
 	Het bewijs voor de laatstgenoemde eigenschap maakt gebruik van de cosinusregel. Gegeven zijn de vectoren $\mathbf{a}=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $\mathbf{b}=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van $\mathbf{a}$ en $\mathbf{b}$. Zie figuur \ref{cosinusregel-inproduct}
 	
 	\begin{figure}[h]
 		\centerline{\includegraphics[width=\textwidth]{Plaatjes/cosinusregel-inproduct.png}}
-		\caption{Een driehoek met vectoren}
+		\caption{Een driehoek met vectoren als zijden}
 		\label{cosinusregel-inproduct}
 	\end{figure}
 	
@@ -76,13 +77,28 @@
 			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma\\
 		\end{aligned}
 	\end{equation}
+	
+	\subsection{Normaalvector}
+	De normaalvector van een vector is de vector die loodrecht op de andere vector staat. Een normaalvector is makkelijk af te leiden, algemeen geldt: als vector $\mathbf{v}=\begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ is gegeven, dan is de normaalvector $\mathbf{n}=\begin{pmatrix} -v_2 \\ v_1 \end{pmatrix}$.
+	
+	Het inproduct van een vector met zijn normaalvector is altijd 0, bijvoorbeeld:
+	
+	\begin{equation}
+		\begin{aligned}
+			\mathbf{v} &= \begin{pmatrix} 4 \\ 2 \end{pmatrix}\\
+			\mathbf{n} &= \begin{pmatrix} -2 \\ 4 \end{pmatrix} \\
+			\mathbf{v} \cdot \mathbf{n} &= 4 \cdot -2 - 2 \cdot 4 = 0
+		\end{aligned}
+	\end{equation}
+	
+	Dit volgt ook uit de eigenschap van het inproduct \eqref{inproduct-cosinus}, de cosinus van 90 graden is namelijk 0.
 
-	\newpage	
+	\newpage
 
 	\section{Tijdstippen van botsingen}
 	
 	\subsection{Cirkel tegen cirkel}
-	Kijken of twee cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen groter of gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels snel bewegen en elkaar tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen cirkels juist tussen twee frames gebeurt.
+	Kijken of twee stilstaande cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels bewegen en elkaar in een simulatie tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen bewegende cirkels juist tussen twee frames gebeurt.
 	
 	\subsubsection{Formule}
 	\begin{figure}[h]
@@ -93,9 +109,9 @@
 	
 	Bij het berekenen van de nieuwe posities van de ballen in het volgende frame, moeten we dus als eerste kijken of ze ondertussen botsen, als tweede berekenen wanneer dat is en als derde uitvinden wat voor gevolg die botsing heeft.
 	
-	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit.
+	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit. Zie ook paragraaf \ref{werking-van-het-programma}.
 	
-	De cirkels kunnen elkaar op het tijdsinterval tussen twee frames hoogstens twee keer raken (als je geen rekening houdt met het effect van de botsing), namelijk wanneer ze voor het eerst tegen elkaar aankomen en wanneer ze door elkaar heen zijn gevlogen. De botsing die wij moeten vinden is de eerste, de tweede vindt natuurlijk nooit plaats.
+	De cirkels kunnen elkaar op het tijdsinterval tussen twee frames hoogstens twee keer raken (geen rekening gehouden met het effect van de botsing), namelijk wanneer ze voor het eerst tegen elkaar aankomen en wanneer ze door elkaar heen zijn gevlogen. De botsing die wij moeten vinden is de eerste, de tweede vindt natuurlijk nooit plaats.
 	
 	Allereerst noemen we de tijd in het eerste frame $t=0$ en in het tweede frame $t=1$. We zoeken een waarde van $t$ waarvoor geldt dat $0 \le t < 1$ en waarbij de afstand tussen de middelpunten gelijk is aan de som van de stralen.
 	
@@ -150,12 +166,12 @@
 	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte. Zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
 	
 	\subsection{Cirkel tegen lijnstuk}
-	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt.
+	De vergelijking die we moeten opstellen om te kijken of een cirkel binnen een tijdsinterval een een frame botst met een lijnstuk is lastiger dan dat van twee cirkels. Het is namelijk een stuk lastiger om de kortste afstand tussen een cirkel en een lijnstuk te vinden, maar het we hebben wel een elegante oplossing gevonden.
 	
 	\subsubsection{Tijdstippen van botsingen}
-	Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken dus naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
+	Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
 	
-	Om dit probleem op te lossen gebruiken een vergelijking voor de afstand van een punt tot een lijn, en die afstand moet gelijk zijn aan de straal van de cirkel. Als $AB$ en $CD$ niet parallel lopen, krijgen we twee oplossingen voor onze vergelijking. De eerste is de botsing, de tweede oplossing geeft het tijdstip aan waarop de cirkel door $AB$ is gevlogen en het lijnstuk dan raakt.
+	Om dit probleem op te lossen gebruiken we een vergelijking voor de afstand van een punt tot een lijn, en die afstand moet gelijk zijn aan de straal van de cirkel. Als $AB$ en $CD$ niet parallel lopen, krijgen we twee oplossingen voor onze vergelijking. De eerste is de botsing, de tweede oplossing geeft het tijdstip aan waarop de cirkel door $AB$ is gevlogen en het lijnstuk dan raakt.
 	
 	\begin{figure}[h]
 		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Lijn.png}}
@@ -203,9 +219,9 @@
 		\end{aligned}
 	\end{equation}
 	
-	En inderdaad geeft deze formule door het plusminusteken twee oplossingen, tenzij de noemer $0$ is, wat betekend dat de het lijnstuk en de verplaatsingsvector evenwijdig lopen.
+	En inderdaad geeft deze formule door het plusminusteken twee oplossingen, tenzij de noemer $0$ is, wat betekent dat het lijnstuk en de verplaatsingsvector evenwijdig lopen.
 	
-	Er is echter nog \'{e}\'{e}n probleem dat we moeten oplossen. Aangezien de formule twee oplossingen geeft voor elke situatie waarbij de verplaatsingsvector en het lijnstuk niet parallel lopen, geeft de formule ook twee oplossingen voor de momenten waarop de cirkel tegen de lijn in het verlengde van het lijnstuk botst. Er moet dus nog gecontroleerd worden of de cirkel wel daadwerkelijk het lijnstuk raakt, of juist de lijn in het verlengde van het lijnstuk.
+	Er is echter nog \'{e}\'{e}n probleem dat we moeten oplossen. Aangezien de formule twee oplossingen geeft voor elke situatie waarbij de verplaatsingsvector en het lijnstuk niet parallel lopen, geeft de formule blijkbaar ook twee oplossingen voor de momenten waarop de cirkel tegen de lijn in het verlengde van het lijnstuk botst. Er moet dus nog gecontroleerd worden of de cirkel wel daadwerkelijk het lijnstuk raakt, of juist de lijn in het verlengde van het lijnstuk.
 	
 	\subsubsection{Lijnstuk of lijn?}
 	De formule uit de vorige paragraaf blijkt dus ook oplossingen te geven voor botsingen met de lijn in het verlengde van het lijnstuk. Om te controleren of er wel sprake is van een botsing met een lijnstuk, kijken we wat de verhouding is tussen het beginpunt van het lijnstuk en het raakpunt van de cirkel en het lijnstuk zelf.
@@ -244,6 +260,15 @@
 	\end{equation}
 	\\We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen hierbij zijn de positie van de cirkel en de positie van het lijnstuk.
 	
+	\subsubsection{Uiteinden van het lijnstuk}
+	De vergelijking werkt niet om te kijken of een cirkel op \'{e}\'{e}n van de uiteinden van een lijnstuk botst, zoals in figuur \ref{botsing-lijnstuk-uiteinden}. Gelukkig is de oplossing hiervoor heel simpel; de uiteinden van een lijnstuk zijn te zien als een cirkel met straal 0. En omdat we al formules hebben voor botsingen tussen twee cirkels, hebben we geen extra werk.
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Lijnstuk-Uiteinde.png}}
+		\caption{Een cirkel botst tegen het uiteinde van een lijnstuk}
+		\label{botsing-lijnstuk-uiteinden}
+	\end{figure}
+	
 	\newpage
 
 	\section{Theorie van botsingen}
@@ -264,7 +289,9 @@
 
 	De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
 	Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
-
+	
+	\newpage
+	
 	\section{Berekening van de snelheden na de botsing}
 	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. Een eenvoudige botsing is de centrale botsing, ook wel eendimensionale botsing genoemd.
 
@@ -536,8 +563,7 @@
 			v_{1, y}=\frac{v_{1, ||AB}\left(y_1-y_2\right)+v_{1, LAB}\left(x_1-x_2\right)}{\sqrt{\left(x_1-x_2\right)^2+\left(y_1-y_2\right)^2}}\\
 		\end{aligned}
 	\end{equation}
-
-	\newpage
+	
 	Met alle bekende variabelen:
 	De resulterende snelheid na de botsing is: 
 	\begin{equation}
@@ -716,9 +742,11 @@
 	\newpage
 
 	\section{Het eindproduct}
-	Als eindproduct hebben we alle formules die we hebben opgesteld omgezet in een computerprogramma, waarmee we vrij nauwkeurige simulaties kunnen uitvoeren. We hebben gekozen voor een algemeen programma, waarmee derden zelf simulaties kunnen maken. Verder hebben we zelf een aantal voorbeelden gemaakt, om te laten zien wat de mogelijkheden zijn.
+	Als eindproduct hebben we alle formules die we hebben opgesteld omgezet in een computerprogramma, waarmee we vrij nauwkeurige simulaties kunnen uitvoeren. We hebben gekozen voor een algemeen programma, waarmee mensen met kennis van programmeren zelf complexe simulaties kunnen maken en waarmee mensen zonder kennis van programmeren gemakkelijk simpele simulaties kunnen maken. Verder hebben we zelf een aantal voorbeelden gemaakt, om te laten zien wat de mogelijkheden zijn.
 	
-	\subsection{Wat zit erin?}
+	Oftewel: de eindgebruiker maakt de simulatie, wij hebben de software gemaakt die de simulatie kan uitvoeren.
+	
+	\subsection{Wat er gesimuleerd kan worden}
 	\begin{description}
   		\item[Voorwerpen] \hfill \\
   			Elk voorwerp heeft een positie. Verder zijn sommige voorwerpen statisch (onverplaatsbaar) en sommige dynamisch (verplaatsbaar).
@@ -742,7 +770,8 @@
 	\end{description}
 	
 	\subsection{De werking van het programma}
-	Als een simulatie wordt uitgevoerd, leest het programma eerst welke voorwerpen er zijn, welke eigenschappen die hebben en welke krachten er werken.
+	\label{werking-van-het-programma}
+	Als een simulatie wordt uitgevoerd, leest ons programma eerst welke voorwerpen er zijn, welke eigenschappen die hebben en welke krachten er werken.
 	
 	Vervolgens voert de computer de volgende volgende stappen om de 30ms uit: 
 	
@@ -777,4 +806,38 @@
 			\mathbf{x} := \mathbf{x} + \mathbf{v}
 		\end{aligned}
 	\end{equation}
+	
+	\subsection{Het programma}
+	Voor het programma hebben we een aantal voorbeeldsimulaties gemaakt.
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg.jpg}}
+		\caption{Een voorbeeld van een simulatie in het programma}
+		\label{bal-bal}
+	\end{figure}
+	
+	\subsection{Voorbeeldcode voor complexe simulaties}
+	Met ons programma kunnen andere mensen zonder verstand van botsingstheorie\"{e}n toch complexere simulaties uitvoeren door zelf te programmeren. Een voorbeeld daarvan is dit:
+	
+	\begin{lstlisting}[language=C++]
+// maak 4 cirkels
+var cirkel = new Cirkel(20, 20, 300);
+cirkel.snelheid = new Vector(3, 0);
+cirkel.massa = 50;
+cirkel.nieuweKracht( new Vector(2, 0) );
+
+var cirkel2 = new Cirkel(20, 100, 300);
+cirkel2.massa = 50;
+
+var cirkel3 = new Cirkel(20, 200, 300);
+cirkel3.massa = 50;
+
+var cirkel4 = new Cirkel(20, 300, 300);
+cirkel4.massa = 50;
+
+// voeg ze toe aan de wereld
+wereld.nieuwVoorwerp(cirkel);
+wereld.nieuwVoorwerp(cirkel2);
+wereld.nieuwVoorwerp(cirkel3);
+wereld.nieuwVoorwerp(cirkel4);
+	\end{lstlisting}
 \end{document}
