@@ -1,7 +1,7 @@
 function nieuwItem(vw, i){
   return [
           '<li>',
-            '<h2>Voorwerp ', i, '</h2>',
+            '<h2>Cirkel ', i, '</h2>',
             '<p class="clearfix">',
               '<label for="massa-', i, '">Massa: </label>',
               '<input type="text" name="massa-', i, '" id="massa-', i, '" size="4" value="', vw.massa, '" />',
@@ -223,10 +223,12 @@ $(document).ready(function(){
     
     var cirkel1 = new Cirkel(20, 300, 260);
     cirkel1.snelheid = new Vector(2, 1);
+    cirkel1.nieuweKracht( new Vector(0, 0.5) );
     cirkel1.massa = 50;
     
     var cirkel2 = new Cirkel(20, 200, 350);
     cirkel2.snelheid = new Vector(-1, -1);
+    cirkel2.nieuweKracht( new Vector(0, 0.5) );
     cirkel2.massa = 50;
     
     var lijn1 = new Lijnstuk(100, 200, 0, 200);
@@ -262,8 +264,9 @@ $(document).ready(function(){
     } );
     cirkel2.nieuweKracht( new Vector(0, 3) );
     
-    var cirkel3 = new Cirkel(40, 1300, 500);
-    cirkel3.snelheid = new Vector(-5, 0);
+    var cirkel3 = new Cirkel(40, 700, 500);
+    cirkel3.snelheid = new Vector(-5, -5);
+    cirkel3.nieuweKracht( new Vector(0, 9) );
     cirkel3.massa = 150;
     
     wereld.nieuweTekenVoorafganger(function(){
@@ -328,12 +331,40 @@ $(document).ready(function(){
         
         wereld.voorwerpen[i].nieuweKracht((function(i, j){
           return function(){
-            console.log(i, j);
             return aantrekkingskracht(wereld.voorwerpen[i], wereld.voorwerpen[j]);
           };
         })(i, j));
       }
     }
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
+  
+  $('#vb7').click(function(){
+    wereld.apocalyps();
+    
+    var cirkel = new Cirkel(10, 110, 394);
+    cirkel.snelheid = new Vector(2, -0.5);
+    cirkel.massa = 50;
+    
+    var cirkel2 = new Cirkel(10, 100, 371);
+    cirkel2.snelheid = new Vector(2, -0.5);
+    cirkel2.massa = 50;
+    
+    var cirkel3 = new Cirkel(10, 90, 348);
+    cirkel3.snelheid = new Vector(2, -0.5);
+    cirkel3.massa = 50;
+    
+    var lijnstuk = new Lijnstuk(400, 300, 0, 300);
+    
+    wereld.nieuwVoorwerp(cirkel);
+    wereld.nieuwVoorwerp(cirkel2);
+    wereld.nieuwVoorwerp(cirkel3);
+    wereld.nieuwVoorwerp(lijnstuk, true);
+    
     
     $('#vernieuwData').click();
     wereld.teken();

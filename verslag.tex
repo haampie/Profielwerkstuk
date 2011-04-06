@@ -5,6 +5,8 @@
 \usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
 
 \title{Een fysisch systeem voor de computer}
 \date{\today}
@@ -12,7 +14,8 @@
 
 \begin{document}
 	\begin{titlepage}
-	\maketitle
+		\maketitle
+		\thispagestyle{empty}
 	\end{titlepage}
 
 	\tableofcontents
@@ -33,14 +36,22 @@
 
 	\newpage
 	
+	\section{Inleiding}
+	Dit moet nog geschreven worden
+	
+	\newpage
+	
 	\section{Vectoren}
-	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we ook alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
+	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
 	
 	\subsection{Notatie}
 	De namen van vectoren schrijven we dikgedrukt en de componenten boven elkaar met ronde haken eromheen. Een voorbeeld hiervan is $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$. Dit stelt een vector voor die $5$ naar rechts is gericht en $3$ naar onder.
 	
 	\subsection{Norm van een vector}
-	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{\left({v_1}^2+{v_2}^2\right)}$
+	De norm van een vector is de lengte of grootte. Deze wordt aangeduid met een dubbele verticale streep rondom de vector. Oftewel, de norm van vector $\mathbf{v}$ is $\|\mathbf{v}\| = \sqrt{{v_1}^2+{v_2}^2}$.
+	
+	\subsection{Eenheidsvector}
+	Een eenheidsvector is een vector waarvan de norm 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de norm van het getal waarmee vermenigvuldigd is aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van de eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
 	
 	\subsection{Het inwendig product}
 	Het inwendig product van twee vectoren is de som van alle componenten met elkaar vermenigvuldigd. Een voorbeeld hiervan is:
@@ -52,14 +63,24 @@
 		\end{aligned}
 	\end{equation*}
 	
-	Het resultaat van die vermenigvuldiging en optelling is het best te zien als hoeveel de kortste vector van de twee in het domein van de langste zit. Deze eigenschap is handig te gebruiken bij het kijken of twee bewegende cirkels elkaar op een bepaald tijdsinterval raken.
+	Deze rekenkundige bewerking blijkt heel goed toepasbaar te zijn in geometrische berekeningen. We gebruiken het inproduct onder andere om een vector op een andere te projecteren, en ook om te kijken of een voorwerp een lijnstuk of juist de lijn in het verlengde van het lijnstuk raakt.
+
+	Werken met het inproduct zorgt niet alleen voor een kortere notatie, maar blijkt ook in sommige gevallen de voor de computer tijdrovende functie cosinus te vervangen.
 	
-	Het bewijs voor deze eigenschap maakt gebruik van de cosinusregel. Gegeven de vectoren $\mathbf{u}=\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}$ en $\mathbf{v}=\begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van de vectoren, geldt er:
+	Het bewijs voor de laatstgenoemde eigenschap maakt gebruik van de cosinusregel. Gegeven zijn de vectoren $\mathbf{a}=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $\mathbf{b}=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van $\mathbf{a}$ en $\mathbf{b}$. Zie figuur \ref{cosinusregel-inproduct}
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/cosinusregel-inproduct.png}}
+		\caption{Een driehoek met vectoren als zijden}
+		\label{cosinusregel-inproduct}
+	\end{figure}
+	
+	Voor de lengte van vector $\mathbf{c}$ geldt dan:
  	\begin{equation}
 		\begin{aligned}
 			\|\mathbf{c}\|^2 = \left\{ 
 				\begin{array}{l l}
- 	 				\sqrt{(a_1-b_1)^2+(a_2-b_2)^2} \\
+ 	 				(a_1-b_1)^2+(a_2-b_2)^2 \\
   					{\|\mathbf{a}\|}^2 + {\|\mathbf{b}\|}^2 - 2 \cdot \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma 
  	 			\end{array} 
  	 		\right.
@@ -77,43 +98,53 @@
 			\mathbf{a} \cdot \mathbf{b} &= \|\mathbf{a}\| \cdot \|\mathbf{b}\| \cdot \cos\gamma\\
 		\end{aligned}
 	\end{equation}
-
-	Met het resultaat hiervan kunnen we later geometrische berekeningen doen, zonder de voor de computer ``tijdrovende'' functie cosinus of sinus te gebruiken.
 	
-	\subsection{Eenheidsvector}
-	Een eenheidsvector is een vector waarvan de lengte 1 is. Het handige van zo'n vector is dat hij, vermenigvuldigd met een getal, zijn richting behoudt en de lengte van dat getal aanneemt. Stel, je hebt de richting waarin een voorwerp beweegt als eenheidsvector, dan geeft vermenigvuldiging met de snelheid, de snelheid als vector. De notatie van een eenheidsvector wordt gedaan met een dakje erop: $\|\mathbf{\hat{a}}\| = 1$.
+	\subsection{Normaalvector}
+	De normaalvector van een vector is de vector die loodrecht op de andere vector staat. Een normaalvector is makkelijk af te leiden, algemeen geldt: als vector $\mathbf{v}=\begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ is gegeven, dan is de normaalvector $\mathbf{n}=\begin{pmatrix} -v_2 \\ v_1 \end{pmatrix}$.
+	
+	Het inproduct van een vector met zijn normaalvector is altijd 0, bijvoorbeeld:
+	
+	\begin{equation}
+		\begin{aligned}
+			\mathbf{v} &= \begin{pmatrix} 4 \\ 2 \end{pmatrix}\\
+			\mathbf{n} &= \begin{pmatrix} -2 \\ 4 \end{pmatrix} \\
+			\mathbf{v} \cdot \mathbf{n} &= 4 \cdot -2 - 2 \cdot 4 = 0
+		\end{aligned}
+	\end{equation}
+	
+	Dit volgt ook uit de eigenschap van het inproduct \eqref{inproduct-cosinus}, de cosinus van 90 graden is namelijk 0.
 
-	\newpage	
+	\newpage
 
 	\section{Tijdstippen van botsingen}
 	
 	\subsection{Cirkel tegen cirkel}
-	Kijken of twee cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen groter of gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels snel bewegen en elkaar tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen cirkels juist tussen twee frames gebeurt.
+	Kijken of twee stilstaande cirkels elkaar raken is theoretisch erg makkelijk te doen. Het komt er simpelweg op neer dat de cirkels elkaar raken als de som van de stralen gelijk is aan de afstand tussen de middelpunten. Het wordt echter lastiger als de cirkels bewegen en elkaar in een simulatie tussen twee frames raken. Het probleem is dat het gros van de botsingen tussen bewegende cirkels juist tussen twee frames gebeurt.
 	
 	\subsubsection{Formule}
 	\begin{figure}[h]
-		\centerline{\includegraphics[width=\textwidth]{Bal-Bal.png}}
-		\caption{Botsing tussen twee ballen}
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Bal.png}}
+		\caption{Hoe bereken je op welk moment twee bewegende ballen botsen?}
 		\label{bal-bal}
 	\end{figure}
 	
 	Bij het berekenen van de nieuwe posities van de ballen in het volgende frame, moeten we dus als eerste kijken of ze ondertussen botsen, als tweede berekenen wanneer dat is en als derde uitvinden wat voor gevolg die botsing heeft.
 	
-	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit.
+	Om de uiteindelijke vergelijking te versimpelen gaan wij ervan uit dat elk voorwerp tussen twee frames een constante snelheid heeft en over een rechte lijn beweegt. Dit klopt niet met de realiteit, maar omdat de tijd tussen twee frames erg klein is, maakt het niet zo veel uit. Zie ook paragraaf \ref{werking-van-het-programma}.
 	
-	De cirkels kunnen elkaar op het tijdsinterval tussen twee frames hoogstens twee keer raken (als je geen rekening houdt met het effect van de botsing), namelijk wanneer ze voor het eerst tegen elkaar aankomen en wanneer ze door elkaar heen zijn gevlogen. De botsing die wij moeten vinden is de eerste, de tweede vindt natuurlijk nooit plaats.
+	De cirkels kunnen elkaar op het tijdsinterval tussen twee frames hoogstens twee keer raken (geen rekening gehouden met het effect van de botsing), namelijk wanneer ze voor het eerst tegen elkaar aankomen en wanneer ze door elkaar heen zijn gevlogen. De botsing die wij moeten vinden is de eerste, de tweede vindt natuurlijk nooit plaats.
 	
 	Allereerst noemen we de tijd in het eerste frame $t=0$ en in het tweede frame $t=1$. We zoeken een waarde van $t$ waarvoor geldt dat $0 \le t < 1$ en waarbij de afstand tussen de middelpunten gelijk is aan de som van de stralen.
 	
 	De posities van de ballen geven we aan met vectoren. De nieuwe positie bestaat uit de oude positie met daarbij opgeteld de snelheidsvector vermenigvuldigd met de tijd. Wat we krijgen is dus:
 	\begin{equation}
 		\begin{aligned}
-			\mathbf{X} &= \mathbf{X} + \mathbf{v}t\\
+			\mathbf{X} &:= \mathbf{X} + \mathbf{v}t\\
 		\end{aligned}
 	\end{equation}
-	\\Vul je $t=0$ in, dan krijg je de positie in frame 1; vul je $t=1$, dan krijg je de positie in frame 2 (geen rekening gehouden met het effect van een mogelijke botsing).
+	\\Vul je $t=0$ in, dan krijg je de positie in frame 1; vul je $t=1$, dan krijg je de positie in frame 2, als er tussendoor geen botsing plaatsvindt.
 	
-	We moeten nu een vergelijking opzetten en oplossen voor $t$, waarin we de relatieve afstand tussen twee ballen gelijkstellen aan de som van de stralen:
+	We moeten nu een vergelijking opstellen en oplossen voor $t$, waarin we de relatieve afstand tussen twee ballen gelijkstellen aan de som van de stralen:
 	
 	\begin{equation}
 		\begin{aligned}
@@ -130,7 +161,7 @@
 			(\mathbf{v_{rel}} \cdot \mathbf{v_{rel}})t^2 + 2(\mathbf{X_{rel}} \cdot \mathbf{v_{rel}})t + \mathbf{X_{rel}} \cdot \mathbf{X_{rel}} - (r_1 + r_2)^2 &= 0\\
 		\end{aligned}
 	\end{equation}
-	\\Deze vergelijking is een eenvoudige vierkantsvergelijking, die ook in een iets alternatieve vorm kan worden geschreven om rekentijd te beperken:
+	\\Deze vergelijking is een eenvoudige vierkantsvergelijking en kan met de ABC-formule worden opgelost, maar we kiezen ervoor om een iets alternatieve vorm de ABC-formule te gebruiken om de rekentijd te beperken:
 	
 	\begin{equation}
 		\label{a2bc}
@@ -153,23 +184,23 @@
 	\end{equation}
 	
 	\subsubsection{Simulatie}
-	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte; zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
+	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte. Zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
 	
 	\subsection{Cirkel tegen lijnstuk}
-	Om erachter te komen of een cirkel een lijnstuk raakt binnen een tijdinterval, gebruiken we een formule die het punt op het lijnsegment geeft dat het dichtst bij het midden van de cirkel ligt.
+	De vergelijking die we moeten opstellen om te kijken of een cirkel binnen een tijdsinterval een een frame botst met een lijnstuk is lastiger dan dat van twee cirkels. Het is namelijk een stuk lastiger om de kortste afstand tussen een cirkel en een lijnstuk te vinden, maar het we hebben wel een elegante oplossing gevonden.
 	
 	\subsubsection{Tijdstippen van botsingen}
-	Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken dus naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
+	Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
 	
-	Om dit probleem op te lossen gebruiken een vergelijking voor de afstand van een punt tot een lijn, en die afstand moet gelijk zijn aan de straal van de cirkel. Als $AB$ en $CD$ niet parallel lopen, krijgen we twee oplossingen voor onze vergelijking. De eerste is de botsing, de tweede oplossing geeft het tijdstip aan waarop de cirkel door $AB$ is gevlogen en het lijnstuk dan raakt.
+	Om dit probleem op te lossen gebruiken we een vergelijking voor de afstand van een punt tot een lijn, en die afstand moet gelijk zijn aan de straal van de cirkel. Als $AB$ en $CD$ niet parallel lopen, krijgen we twee oplossingen voor onze vergelijking. De eerste is de botsing, de tweede oplossing geeft het tijdstip aan waarop de cirkel door $AB$ is gevlogen en het lijnstuk dan raakt.
 	
 	\begin{figure}[h]
-		\centerline{\includegraphics[width=\textwidth]{Bal-Lijn.png}}
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Lijn.png}}
 		\caption{Botsing tussen een bal en een lijnstuk}
 		\label{bal-lijn}
 	\end{figure}
 	
-	Eerst defini\"{e}ren we $\mathbf{n}$ als de normaalvector van $AB$. Daarna vinden we de afstand van een punt tot een lijnstuk door middel van de eigenschappen van het inproduct van twee vectoren:
+	Eerst defini\"{e}ren we $\mathbf{n}$ als de normaalvector van $AB$ en $r$ als de straal van de cirkel. Daarna vinden we de afstand van een punt tot een lijnstuk door middel van de eigenschappen van het inproduct van twee vectoren:
 	\begin{equation}
 		\label{eigenschappeninproduct}
 		cos \gamma = \frac{|\mathbf{w} \cdot \mathbf{n}|}{\| \mathbf{w} \| \| \mathbf{n} \|}
@@ -209,34 +240,55 @@
 		\end{aligned}
 	\end{equation}
 	
-	\subsubsection{Punt op lijnstuk dichtste bij cirkel}
-	DIT STUKJE IS NU VERGELIJKBAAR MET HET VORIGE. HET MOET OPNIEUW GESCHREVEN WORDEN.
+	En inderdaad geeft deze formule door het plusminusteken twee oplossingen, tenzij de noemer $0$ is, wat betekent dat het lijnstuk en de verplaatsingsvector evenwijdig lopen.
 	
-	Omdat we met vectoren werken is het heel makkelijk om te bepalen welk punt op een lijnstuk het dichtst bij het middelpunt van een cirkel ligt. Voor het gemak noemen we de uiteinden van het lijntuk $A$ en $B$, het middelpunt van de cirkel $C$, en we defini\"{e}ren $P$ als het punt op het lijnstuk het dichtste bij $C$. $P$ is dus een loodrechte projectie van $C$ op $AB$. Verder stellen we het lijnstuk voor als een vector $\mathbf{v}$ vanuit punt $A$ en tekenen we een vector $\mathbf{w}$ vanuit $A$ naar $C$. Eerder bleek al dat geldt \eqref{inproduct-cosinus}:
+	Er is echter nog \'{e}\'{e}n probleem dat we moeten oplossen. Aangezien de formule twee oplossingen geeft voor elke situatie waarbij de verplaatsingsvector en het lijnstuk niet parallel lopen, geeft de formule blijkbaar ook twee oplossingen voor de momenten waarop de cirkel tegen de lijn in het verlengde van het lijnstuk botst. Er moet dus nog gecontroleerd worden of de cirkel wel daadwerkelijk het lijnstuk raakt, of juist de lijn in het verlengde van het lijnstuk.
+	
+	\subsubsection{Lijnstuk of lijn?}
+	De formule uit de vorige paragraaf blijkt dus ook oplossingen te geven voor botsingen met de lijn in het verlengde van het lijnstuk. Om te controleren of er wel sprake is van een botsing met een lijnstuk, kijken we wat de verhouding is tussen het beginpunt van het lijnstuk en het raakpunt van de cirkel en het lijnstuk zelf.
+	
+	We noemen het middelpunt van de cirkel punt $M$, het raakpunt van de cirkel met lijn $AB$ punt $P$, we stellen het lijnstuk voor als vector $\mathbf{u}$ en we spiegelen vector $\mathbf{w}$. Zie figuur \ref{botsing-lijnstuk-closeup}. Het gaat nu om de verhouding $AP:AB$. Is die verhouding kleiner dan 0 of groter dan 1, dan raakt de cirkel aan de lijn voorbij het lijnstuk. Ligt de verhouding tussen 0 en 1 in, dan raakt de cirkel aan het lijnstuk.
+
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Lijn-stuk-closup.png}}
+		\caption{Botsing van een cirkel met een lijnstuk}
+		\label{botsing-lijnstuk-closeup}
+	\end{figure}	
+	
+	Eerder \eqref{inproduct-cosinus} bleek al dat geldt:
 	\begin{equation}
 		\label{inproduct-cosinus-toegepast}
 		\begin{aligned}
-			\mathbf{v} \cdot \mathbf{w} &= \|\mathbf{v}\| \cdot \|\mathbf{w}\| \cdot \cos\gamma \\
-			\cos\gamma &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|}\\
+			\mathbf{u} \cdot \mathbf{w} &= \|\mathbf{u}\| \cdot \|\mathbf{w}\| \cdot \cos\gamma \\
+			\cos\gamma &= \frac{\mathbf{u} \cdot \mathbf{w}}{\|\mathbf{u}\| \cdot \|\mathbf{w}\|}\\
 		\end{aligned}
 	\end{equation}
-	\\Verder geldt in driehoek $\triangle ACP$, waarbij $AC = \mathbf{w}$:
+	\\Verder geldt in driehoek $\triangle AMP$:
 	\begin{equation}
 		\label{cos-gamma}
-		\cos\gamma = \frac{AP}{\|\mathbf{w}\|} = \frac{x}{\|\mathbf{w}\|}
+		\cos\gamma = \frac{AP}{\|\mathbf{w}\|}
 	\end{equation}
 
-	We zijn nu op zoek naar de verhouding tussen $x$ en $\mathbf{w}$. Dat geeft een indicatie van hoever punt $P$ op het lijnstuk ligt. Is die verhouding kleiner dan 0, of groter dan 1, dan ligt het punt dat het dichtste bij $C$ ligt, voorbij het lijnstuk. Ligt het ertussen, dan ligt het punt ergens tussen $A$ en $B$.
 	Combineer je \eqref{inproduct-cosinus-toegepast} en \eqref{cos-gamma}, dan krijg je:
 	\begin{equation}
 		\begin{aligned}
-		\frac{x}{\|\mathbf{w}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|} \\
-		                       x &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\|} \\
-		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{v}\|} \\
-		\frac{x}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}\\
+		\frac{AP}{\|\mathbf{w}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{w}\|} \\
+		                       AP &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\|} \\
+		\frac{AP}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \cdot \|\mathbf{v}\|} \\
+		\frac{AP}{\|\mathbf{v}\|} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}\\
+		\frac{AP}{AB} &= \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}\\
 		\end{aligned}
 	\end{equation}
-	\\We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen zijn hierbij het de positie van het de begin- en eindpunten van het lijnstuk (dat is meteen al vector $\mathbf{v}$ geworden) en de positie van de cirkel.
+	\\We hebben dit ook in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra} gesimuleerd, zie in de bijlage het bestand Bal-Lijn.ggb. Variabelen hierbij zijn de positie van de cirkel en de positie van het lijnstuk.
+	
+	\subsubsection{Uiteinden van het lijnstuk}
+	De vergelijking werkt niet om te kijken of een cirkel op \'{e}\'{e}n van de uiteinden van een lijnstuk botst, zoals in figuur \ref{botsing-lijnstuk-uiteinden}. Gelukkig is de oplossing hiervoor heel simpel; de uiteinden van een lijnstuk zijn te zien als een cirkel met straal 0. En omdat we al formules hebben voor botsingen tussen twee cirkels, hebben we geen extra werk.
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/Bal-Lijnstuk-Uiteinde.png}}
+		\caption{Een cirkel botst tegen het uiteinde van een lijnstuk}
+		\label{botsing-lijnstuk-uiteinden}
+	\end{figure}
 	
 	\newpage
 
@@ -257,8 +309,10 @@
 	\end{equation}
 
 	De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
-Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
-
+	Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
+	
+	\newpage
+	
 	\section{Berekening van de snelheden na de botsing}
 	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. Een eenvoudige botsing is de centrale botsing, ook wel eendimensionale botsing genoemd.
 
@@ -403,7 +457,7 @@ Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elka
 		\end{aligned}
 	\end{equation}
 	\\Bij een volkomen onelastische botsing is de gemeenschappelijke snelheid $v_g$ van beide voorwerpen gelijk aan \eqref{gemeenschappelijke-snelheid}. Bij een volkomen elastische centrale botsing is de snelheidsverandering van elk voorwerp gedurende de tweede periode van de botsing (op grond van de definitie van een elastische botsing) gelijk aan de snelheidsverandering gedurende de eerste periode van de botsing.
-Is $v$ de snelheid na de botsing, dan geldt dus:
+	Is $v$ de snelheid na de botsing, dan geldt dus:
 	\begin{equation}
 		\begin{aligned}
 			v-v_g&=v_g-o\\
@@ -453,11 +507,11 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 		\end{aligned}
 	\end{equation}
 	Bij een centrale botsing bewegen de twee lichamen langs de verbindingslijn van de middelpunten. De botsing vindt ook plaats langs deze lijn, het wordt daarom ook wel een eendimensionale botsing genoemd. Bij een niet-centrale botsing kunnen de snelheden ook ontbonden worden in snelheden langs de verbindingslijn en snelheden loodrecht op de verbindings lijn. Als er alleen gekeken wordt naar de snelheid langs de verbindingslijn, dan kan daar formule \eqref{snelheden-na-botsing} op worden toegepast omdat het een eendimensionale botsing betreft. De snelheid die loodrecht op deze verbindingslijn staat is onafhankelijk van de botsing, en zal dus constant blijven.
-\\
-\\Voor het gemak even een voorbeeld:
+	\\
+	\\Voor het gemak even een voorbeeld:
 
 	\begin{figure}[h]
-		\centerline{\includegraphics[width=\textwidth]{niet-centrale botsing.png}}
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/niet-centrale-botsing.png}}
 		\caption{Botsing tussen twee ballen}
 		\label{niet-centrale botsing}
 	\end{figure}
@@ -484,7 +538,7 @@ Is $v$ de snelheid na de botsing, dan geldt dus:
 			f&={y_1+o_{1,y}}={y_2+o_{2,y}}\\
 		\end{aligned}
 	\end{equation}
-We bekijken de tweedimentionale botsing in het $Oxy$-vlak, en lossen het dan analytisch op. Het middelpunt is $M(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2})$. De vergelijking voor AM en A'M zijn dan als volgt:
+	We bekijken de tweedimentionale botsing in het $Oxy$-vlak, en lossen het dan analytisch op. Het middelpunt is $M(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2})$. De vergelijking voor AM en A'M zijn dan als volgt:
 
 	\begin{equation}
 		\begin{aligned}
@@ -493,7 +547,7 @@ We bekijken de tweedimentionale botsing in het $Oxy$-vlak, en lossen het dan ana
 		\end{aligned}
 	\end{equation}
 
-We kunnen het snijpunt van deze twee vergelijkingen berekenen. De $x$-co"{o}rdinaat stelt de snelheid in de $x$-richting naar B voor. De $y$-co\"{o}rdinaat stelt de snelheid in de $y$-richting naar B voor.
+	We kunnen het snijpunt van deze twee vergelijkingen berekenen. De $x$-co"{o}rdinaat stelt de snelheid in de $x$-richting naar B voor. De $y$-co\"{o}rdinaat stelt de snelheid in de $y$-richting naar B voor.
 	\begin{equation}
 		\begin{aligned}
 			\frac{b-d}{a-c}\left(x-a\right)+b=&\frac{c-a}{b-d}\left(x-e\right)+f\\
@@ -504,18 +558,24 @@ We kunnen het snijpunt van deze twee vergelijkingen berekenen. De $x$-co"{o}rdin
 		\end{aligned}
 	\end{equation}
 
-Invullen in AB geeft 
+	Invullen in AB geeft 
 	\begin{equation}
 		\begin{aligned}
 			y=\frac{b-d}{a-c}\left(\frac{a(b-d)^2+e(a-c)^2+(f-b)(a-c)(b-d)}{(b-d)^2+(a-c)^2}-a\right)+b\\
 		\end{aligned}
 	\end{equation}
 
+<<<<<<< HEAD
 De snelheid richting B is dus: $o_{1, \parallel AB}=\sqrt{x^2+y^2}$. Hiervoor geldt dus wel de wet van behoud van impuls. Voor de snelheid loodrecht op de verplaatsingsrichting geldt: $o_{1, \perp AB}=v_{1, \perp AB}=\sqrt{{o_{1, res}}^2-{o_{1, \parallel AB}}^2}$.
 
 De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, \parallel AB}}^2+{v_{1, \perp AB}}^2}$.
+=======
+	De snelheid richting B is dus: $o_{1, ||AB}=\sqrt{x^2+y^2}$. Hiervoor geldt dus wel de wet van behoud van impuls. Voor de snelheid loodrecht op de verplaatsingsrichting geldt: $o_{1, LAB}=v_{1, LAB}=\sqrt{{o_{1, res}}^2-{o_{1, ||AB}}^2}$.
 
-De snelheden in de $x$- en $y$-richting kunnen als volgt berekend worden:
+	De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, ||AB}}^2+{v_{1, LAB}}^2}$.
+>>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
+
+	De snelheden in de $x$- en $y$-richting kunnen als volgt berekend worden:
 	\begin{equation}
 		\begin{aligned}
 			v_{1, x}=\frac{v_{1, \parallel AB}\left(a-c\right)+v_{1, \perp AB}\left(b-d\right)}{\sqrt{\left(a-c\right)^2+\left(b-d\right)^2}}\\
@@ -523,17 +583,16 @@ De snelheden in de $x$- en $y$-richting kunnen als volgt berekend worden:
 		\end{aligned}
 	\end{equation}
 
-Nu $a$, $b$, $c$ en $d$ vervangen door de co\"{o}dinaten:
+	Nu $a$, $b$, $c$ en $d$ vervangen door de co\"{o}dinaten:
 	\begin{equation}
 		\begin{aligned}
 			v_{1, x}=\frac{v_{1,  \parallel AB}\left(x_1-x_2\right)+v_{1, \perp AB}\left(y_1-y_2\right)}{\sqrt{\left(x_1-x_2\right)^2+\left(y_1-y_2\right)^2}}\\
 			v_{1, y}=\frac{v_{1,  \parallel AB}\left(y_1-y_2\right)+v_{1, \perp AB}\left(x_1-x_2\right)}{\sqrt{\left(x_1-x_2\right)^2+\left(y_1-y_2\right)^2}}\\
 		\end{aligned}
 	\end{equation}
-
-	\newpage
-Met alle bekende variabelen:
-De resulterende snelheid na de botsing is: 
+	
+	Met alle bekende variabelen:
+	De resulterende snelheid na de botsing is: 
 	\begin{equation}
 		\begin{aligned}
 			v_{1, res}&=\sqrt{{v_{1,  \parallel AB}}^2+{v_{1, \perp AB}}^2}\\
@@ -551,16 +610,29 @@ De resulterende snelheid na de botsing is:
 
 	\subsubsection{Botsing tussen twee ballen}
 	Er zijn twee soorten botsingen te onderscheiden: een centrale botsing en een niet-centrale botsing.
+<<<<<<< HEAD
 De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
 De verwachting bij een niet-centrale botsing waarvan \'{e}\'{e}n bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing, als de massa's gelijk zijn. 
 
 \begin{figure}[h]
-	\centerline{\includegraphics{BotsingSchuin.png}}
+	\centerline{\includegraphics{Plaatjes/BotsingSchuin.png}}
 	\caption{Een niet-centrale botsing}
 	\label{botsingschuin}
 \end{figure}
 
 Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
+=======
+	De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
+	De verwachting bij een niet-centrale botsing waarvan een bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing. 
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics{Plaatjes/BotsingSchuin.png}}
+		\caption{Een niet-centrale botsing}
+		\label{botsingschuin}
+	\end{figure}
+	
+	Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
+>>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
 
 	Dit is ook als volgt te bewijzen:
 	De twee ballen zijn te beschouwen als puntmassa's. We kiezen een assenstelsel zo dat er voor de botsing geen beweging in de $y$-richting is. Bal 1 gaat daarna omhoog onder een hoek $\alpha$ en bal 2 onder een hoek $\beta$. Nu hebben we de volgende gegevens:
@@ -621,8 +693,13 @@ Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing 
 	Dit levert op $tan(\alpha)tan(\beta)=1$ waardoor de hoek $\alpha+\beta=90°$.
 
 	\subsubsection{Botsing tussen meer dan twee ballen}
+<<<<<<< HEAD
 	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaatsvindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
 Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+=======
+	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaats vindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
+	Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+>>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
 
 	\subsection{Resultaten van het experiment met botsende ballen}
 	Om te controleren of de formules - die afgeleidt zijn van de wet van behoud van impuls - ook in overeenstemming zijn met de werkelijkheid, hebben wij een aantal proeven uitgevoerd. We hebben de proeven uitgevoerd op 15 december 2010 in het practicumlokaal, meer een camera van school. Deze proeven hebben we uitgevoerd met verschillende ballen, omdat we van tevoren niet wisten bij welke ballen de meeste kinetische energie werd overgedragen. We hebben een golfbal, knikkers en jeu de boules ballen gebruikt. Eerst wilden we een aantal gegevens noteren van de ballen die wij gebruikten, zoals de diameter of omtrek en de massa. Maar we omdat alleen de massa's en de snelheden van de ballen in de formules \eqref{energie} en \eqref{impuls} hebben zitten, hebben we alleen de massa's van de ballen genoteerd:
@@ -642,41 +719,41 @@ Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken 
 	\\
 	\\We hebben een aantal verschillende combinaties van ballen met elkaar laten botsen. Eerst een blauwe jeu de boules bal met een rode jeu de boules bal.
 
-In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat de botsing duidelijk te zien is.
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{botsing3.jpg}}
-	\caption{Alle beeldjes samengevoegd}
-	\label{botsing3}
-\end{figure}
+	In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat de botsing duidelijk te zien is.
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/botsing3.jpg}}
+		\caption{Alle beeldjes samengevoegd}
+		\label{botsing3}
+	\end{figure}
 
 	Als we de resultaten met Coach uitlezen en in tabellen zetten, kunnen we er met Exel hieraan rekenen. Als we de positie uitzetten tegen de tijd krijgen we figuur \eqref{00771} en \eqref{00772}.
 
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00771.png}}
-	\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal}
-	\label{00771}
-\end{figure}
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00772.png}}
-	\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal}
-	\label{00772}
-\end{figure}
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00771.png}}
+		\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal}
+		\label{00771}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00772.png}}
+		\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal}
+		\label{00772}
+	\end{figure}
 
 	De blauwe bal licht in eerste instantie stil. Pas vanaf $t=2,94\ s$ begint de blauwe bal te rollen, nadat de rode bal er tegen aan is gebotst. Op ongeveer $t=4,30\ s$ tot $t=4,54\ s$ rolt de blauwe bal onder de paal door, hierdoor is het automatisch traceren op dit interval niet goed gelukt. Na $t=5,71\ s$ verdwijnt de bal uit het beeld, en is dus ook niet goed getraceerd. Als we dus alleen de goede meetresultaten mee rekenen krijgen we reeks \eqref{00773} en \eqref{00774}.
 
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00773.png}}
-	\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
-	\label{00773}
-\end{figure}
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00774.png}}
-	\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
-	\label{00774}
-\end{figure}
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00773.png}}
+		\caption{x-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
+		\label{00773}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00774.png}}
+		\caption{y-co\"{o}rdinaten van de blauwe jeu de boules bal (aangepast)}
+		\label{00774}
+	\end{figure}
 
 	Nu hebben we de plaats in de $x$-richting en in de $y$-richting uitgezet tegen de tijd. Hieruit kunnen we de snelheid van de bal herleiden. Na $1,00\ s$ is de bal $0,1883\ m$ verplaats in de $x$-richting en $0,1786\ m$ in de $y$-richting. De snelheid van de bal kun je dus berekenen met de $Stelling\ van\ Pythagoras$:
 
@@ -692,14 +769,15 @@ In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat
 
 	Nu hebben we de blauwe bal gehad, nu de rode bal. De rode bal heeft, in tegenstelling tot de blauwe, wel een begin snelheid. Omdat de rode bal heel weinig wordt afgebogen is het niet heel duidelijk te zien op werk tijdstip dit gebeurd. De bal wordt het meeste afgebogen in de $x$-richting, en als we in figuur \eqref{00775} kijken kunnen we op $t=2,97\ s$ een verandering in de baan ontdekken.
 
+<<<<<<< HEAD
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00775.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00775.png}}
 	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal}
 	\label{00775}
 \end{figure}
 
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00776.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00776.png}}
 	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal}
 	\label{00776}
 \end{figure}
@@ -707,13 +785,13 @@ In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat
 De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x$-richting verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
 
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00777.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00777.png}}
 	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
 	\label{00777}
 \end{figure}
 
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00778.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00778.png}}
 	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
 	\label{00778}
 \end{figure}
@@ -723,16 +801,59 @@ Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid 
 We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67\ s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79\ s$ tot $t=3,67\ s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
 
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{00779.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00779.png}}
 	\caption{$x$-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
 	\label{00779}
 \end{figure}
 
 \begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{007710.png}}
+	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/007710.png}}
 	\caption{$y$-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
 	\label{007710}
 \end{figure}
+=======
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00775.png}}
+		\caption{x-co\"{o}rdinaten van de rode jeu de boules bal}
+		\label{00775}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00776.png}}
+		\caption{y-co\"{o}rdinaten van de rode jeu de boules bal}
+		\label{00776}
+	\end{figure}
+	
+	De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x-richting$ verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00777.png}}
+		\caption{x-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
+		\label{00777}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00778.png}}
+		\caption{y-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
+		\label{00778}
+	\end{figure}
+
+	Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid berekenen we dus met formule \eqref{snelheid}: $v=0,6649m/s$
+
+	We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79s$ tot $t=3,67s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
+
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00779.png}}
+		\caption{x-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
+		\label{00779}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/007710.png}}
+		\caption{y-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
+		\label{007710}
+	\end{figure}
+>>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
 
 	De snelheid hieruit berekenen geeft: $v=0,4664m/s$
 
@@ -763,54 +884,88 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 		\end{aligned}
 	\end{equation}
 
-Maar in dit geval hebben we te maken met een niet-centrale botsing.
+	Maar in dit geval hebben we te maken met een niet-centrale botsing.
 
 	\newpage
 
-	\section{Programmeren}
-	\subsection{Andere eenheden}
-	Een computermodel gebruikt andere eenheden dan in de realiteit worden gebruikt, dus we defini\"{e}ren hier nieuwe eenheden. Als eerste werkt een animatie met een hoeveelheid beeldjes per seconde, of in het Engels: \emph{frames per seconde} (fps). We proberen een snelheid van ongeveer $80$fps te bereiken; hoe hoger het aantal frames per seconde, hoe betrouwbaarder de simulatie. De snelheid van de voorwerpen geven we vervolgens in pixels per frame, of het aantal beeldpuntjes per frame. Dus komen we tot de volgende definities:
-	\\
-	\begin{tabular}{| l l l l |}
-		\hline 
-		\emph{grootheid}       & \emph{symbool} & \emph{eenheid}                    & \emph{symbool} \\
-		Interval tussen frames & $T$            & seconden                          & $s$            \\
-		Frames per seconde     & $f$            & hertz                             & Hz = $s^{-1}$  \\
-		Snelheid               & $v$            & pixels per interval               & px T$^{-1}$    \\
-		Versnelling            & $a$            & pixels per intervalkwadraat       & px T$^{-2}$    \\
-		Kracht                 & $F$            & newton.... .hoehierverder.        & $?$            \\
-		\hline 
-	\end{tabular}
+	\section{Het eindproduct}
+	Als eindproduct hebben we alle formules die we hebben opgesteld omgezet in een computerprogramma, waarmee we vrij nauwkeurige simulaties kunnen uitvoeren. We hebben gekozen voor een algemeen programma, waarmee mensen met kennis van programmeren zelf complexe simulaties kunnen maken en waarmee mensen zonder kennis van programmeren gemakkelijk simpele simulaties kunnen maken. Verder hebben we zelf een aantal voorbeelden gemaakt, om te laten zien wat de mogelijkheden zijn.
 	
-	\subsection{Hoe de posities berekend worden}
-	In onze simulatie nemen we steeds een stapje $T$ verder in de tijd. Elke keer als we een stapje verder gaan doen we de volgende stappen:
-	\\
-	\begin{enumerate}[1]
-		\item Ga alle voorwerpen bij langs
-		\begin{enumerate}[1]
-			\item Bereken de nieuwe positie: Tel de snelheidsvector bij de huidige positie op
-			\item Bereken welke de richting en grootte van alle krachten op het voorwerp
-			\item Bereken met behulp van de som van alle krachten de nieuwe versnelling
-			\item Tel de versnelling bij de snelheid op
-		\end{enumerate}
+	Oftewel: de eindgebruiker maakt de simulatie, wij hebben de software gemaakt die de simulatie kan uitvoeren.
+	
+	\subsection{Wat er gesimuleerd kan worden}
+	\begin{description}
+  		\item[Voorwerpen] \hfill \\
+  			Elk voorwerp heeft een positie. Verder zijn sommige voorwerpen statisch (onverplaatsbaar) en sommige dynamisch (verplaatsbaar).
+			\begin{description}
+				\item[Cirkel] \hfill \\
+					De cirkel is een dynamisch voorwerp en heeft als extra eigenschappen een straal, een gewicht, een snelheidsvector en een lijst met krachten die erop werken.
+				
+				\item[Lijnstuk] \hfill \\
+					Het lijnstuk is een statisch voorwerp en wordt voorgesteld als een vector.
+			\end{description}
+		\item[Krachten] \hfill \\
+			Op elk dynamisch voorwerp kunnen oneindig veel krachten werken. Sommige krachten zijn constant, andere afhankelijk van de omstandigheden. Krachten worden weergegeven als vectoren.
+			\begin{description}
+				\item[Constante krachten] \hfill \\
+					Constante krachten veranderen niet van grootte of richting, en blijven zoals ze in het begin van de simulatie zijn gedefinieerd. Een voorbeeld van een constante kracht is de zwaartekracht.
+				\item[Afhankelijke krachten] \hfill \\
+					Afhankelijke krachten kunnen veranderen van richting en grootte. Voorbeelden hiervan zijn spankracht en aantrekkingskracht tussen twee voorwerpen.
+			\end{description}
+		\item[Botsingen] \hfill \\
+			Botsingen be\"{i}nvloeden de snelheidsvector van dynamische voorwerpen.
+	\end{description}
+	
+	\subsection{Het programma}
+	Voor het programma hebben we een aantal voorbeeldsimulaties gemaakt, die met de knoppen bovenaan te bekijken zijn.
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg.jpg}}
+		\caption{Een voorbeeld van een simulatie in het programma}
+	\end{figure}
+	Bij elke voorbeeldsimulatie zijn de basisgegevens te wijzigen, zoals positie, snelheid en massa.
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg-instellen.jpg}}
+		\caption{Instellingen veranderen en nieuwe voorwerpen toevoegen}
+	\end{figure}
+	
+	\subsection{De werking van het programma}
+	\label{werking-van-het-programma}
+	Als een simulatie wordt uitgevoerd, leest ons programma eerst welke voorwerpen er zijn, welke eigenschappen die hebben en welke krachten er werken.
+	
+	Vervolgens voert de computer de volgende volgende stappen om de 30ms uit: 
+	
+	\begin{enumerate}
+		\item Teken alle voorwerpen op het scherm;
+		\item Bereken per voorwerp de resulterende kracht met behulp van $a = \tfrac{F_{res}}{m}$;
+		\item Bereken per voorwerp de nieuwe snelheid;
+		\item Kijk per voorwerp of het met een volgend voorwerp botst;
+		\item Als er een botsing plaatsvindt:
+			\begin{enumerate}
+				\item Verplaats de twee voorwerpen naar botsingstand;
+				\item Bereken de nieuwe snelheden;
+				\item Onthoud hoeveel procent van de tijd tussen twee frames de botsende voorwerpen al hebben gebruikt
+			\end{enumerate}
+		\item Verplaats elk voorwerp met behulp van de snelheid
 	\end{enumerate}
-	We doen dus alsof elk voorwerp met een constante snelheid in het interval $T$ beweegt. Dit klopt niet met de realiteit, maar als we het tijdsinterval tussen twee frames steeds kleiner maken, benadert het wel de werkelijkheid. Stel dat $T$ naar 0 nadert, dus $T = \Delta t$, dan geldt allereerst voor de positie van een voowerp:
-	\\	
+	
+	We proberen de tijd tussen twee frames zo klein mogelijk te maken. Hoe kleiner de tijd tussen twee frames, des te betrouwbaarder de simulatie. Dit komt doordat we voor het berekenen van de snelheden en posities de definities voor versnelling en snelheid vrij letterlijk nemen:
+	
 	\begin{equation}
-		\label{verplaatsing}
 		\begin{aligned}
-			\mathbf{x} =: \mathbf{x} + \mathbf{v} \cdot \Delta t
-		\end{aligned}	
-	\end{equation}
-	En voor de snelheid geldt dan:
-	\\	
-	\begin{equation}
-		\label{snelheidsdefinitie}
-		\begin{aligned}
-			\mathbf{v} &= \lim_{\Delta t\to0} \frac{\Delta \mathbf{x}}{\Delta t} \\
-			\mathbf{v} \cdot \Delta t &= \Delta \mathbf{x}
+			\Delta \mathbf{v} = \Delta t \cdot \mathbf{a} \\
+			\Delta \mathbf{x} = \Delta t \cdot \mathbf{v}
 		\end{aligned}
 	\end{equation}
+	
+	We stellen de tijd tussen twee frames als $\Delta t$, waardoor we voor het berekenen van de nieuwe snelheid domweg de versnelling kunnen optellen bij de snelheid, en op dezelfde manier de snelheid bij de positie kunnen optellen voor de nieuwe positie:
+	
+	\begin{equation}
+		\begin{aligned}
+			\mathbf{v} := \mathbf{v} + \mathbf{a} \\
+			\mathbf{x} := \mathbf{x} + \mathbf{v}
+		\end{aligned}
+	\end{equation}
+<<<<<<< HEAD
 	Invullen van \eqref{snelheidsdefinitie} in \eqref{verplaatsing} geeft dan:
 	\begin{equation}
 		\mathbf{x} =: \mathbf{x} +  \Delta \mathbf{x}
@@ -824,3 +979,48 @@ Maar in dit geval hebben we te maken met een niet-centrale botsing.
 
 
 
+=======
+	
+	\subsection{De grenzen van het programma}
+	Natuurlijk verloopt een simulatie niet precies zoals het er in de werkelijkheid aan toe zou gaan. Er is nog een aantal natuurkundige zaken waar ons programma geen rekening mee houdt, en er is ook nog een technisch probleem. Bijvoorbeeld:
+	\begin{description}
+  		\item[Verlies van energie] \hfill \\
+  			In ons programma zijn alle botsingen volkomen elastische botsingen, terwijl deze alleen theoretisch bestaan. Bij biljartballen is de hoeveelheid verloren energie aan wrijving verwaarloosbaar, maar er is toch zeker sprake van. Ons programma houdt dus geen rekening met het type stof, en gaat uit van onbuigbare volkomen harde stoffen.
+		\item[Rotatie] \hfill \\
+			Biljartballen die op elkaar botsen rollen, en hun botsing zal daarom een ander effect hebben dan dat van sjoelschijven of airhockeypucks. Ook treedt er rotatie op als een bal over een schuin lijnstuk rolt, wat niet verwerkt is in ons programma. Het gevolg in simulaties hiervan is, dat cirkels op een lijnstuk vast komen te zitten, in plaats van naar beneden te rollen.
+		\item[E\'{e}n botsing per frame] \hfill \\
+			Dit is misschien het meest vervelende probleem voor simulaties met veel snel bewegende voowerpen. Per frame kan hooguit het effect van \'{e}\'{e}n botsing worden berekend en gesimuleerd, waardoor er soms voorwerpen door elkaar heen vliegen.
+	\end{description}
+	
+	\subsection{Voorbeeldcode voor complexe simulaties}
+	Met ons programma kunnen andere mensen zonder verstand van botsingstheorie\"{e}n toch complexere simulaties uitvoeren door zelf te programmeren. Een voorbeeld daarvan is dit:
+	
+	\begin{lstlisting}[language=C++]
+// maak 4 cirkels
+var cirkel = new Cirkel(20, 20, 300);
+cirkel.snelheid = new Vector(3, 0);
+cirkel.massa = 50;
+cirkel.nieuweKracht( new Vector(2, 0) );
+
+var cirkel2 = new Cirkel(20, 100, 300);
+cirkel2.massa = 50;
+
+var cirkel3 = new Cirkel(20, 200, 300);
+cirkel3.massa = 50;
+
+var cirkel4 = new Cirkel(20, 300, 300);
+cirkel4.massa = 50;
+
+// voeg ze toe aan de wereld
+wereld.nieuwVoorwerp(cirkel);
+wereld.nieuwVoorwerp(cirkel2);
+wereld.nieuwVoorwerp(cirkel3);
+wereld.nieuwVoorwerp(cirkel4);
+	\end{lstlisting}
+	
+	\newpage
+	
+	\section{Conclusie}
+	Dit moet nog geschreven worden
+\end{document}
+>>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
