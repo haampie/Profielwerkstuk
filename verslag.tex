@@ -14,10 +14,16 @@
 
 \begin{document}
 	\begin{titlepage}
-	\maketitle
+		\maketitle
+		\thispagestyle{empty}
 	\end{titlepage}
 
 	\tableofcontents
+	\newpage
+	
+	\section{Inleiding}
+	Dit moet nog geschreven worden
+	
 	\newpage
 	
 	\section{Vectoren}
@@ -769,6 +775,18 @@
 			Botsingen be\"{i}nvloeden de snelheidsvector van dynamische voorwerpen.
 	\end{description}
 	
+	\subsection{Het programma}
+	Voor het programma hebben we een aantal voorbeeldsimulaties gemaakt, die met de knoppen bovenaan te bekijken zijn.
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg.jpg}}
+		\caption{Een voorbeeld van een simulatie in het programma}
+	\end{figure}
+	Bij elke voorbeeldsimulatie zijn de basisgegevens te wijzigen, zoals positie, snelheid en massa.
+	\begin{figure}[H]
+		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg-instellen.jpg}}
+		\caption{Instellingen veranderen en nieuwe voorwerpen toevoegen}
+	\end{figure}
+	
 	\subsection{De werking van het programma}
 	\label{werking-van-het-programma}
 	Als een simulatie wordt uitgevoerd, leest ons programma eerst welke voorwerpen er zijn, welke eigenschappen die hebben en welke krachten er werken.
@@ -807,18 +825,16 @@
 		\end{aligned}
 	\end{equation}
 	
-	\subsection{Het programma}
-	Voor het programma hebben we een aantal voorbeeldsimulaties gemaakt, die met de knoppen bovenaan te bekijken zijn.
-	\begin{figure}[h!]
-		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg.jpg}}
-		\caption{Een voorbeeld van een simulatie in het programma}
-	\end{figure}
-	Bij elke voorbeeldsimulatie zijn de basisgegevens te wijzigen, zoals positie, snelheid en massa.
-	\begin{figure}[h!]
-		\centerline{\includegraphics[width=\textwidth]{Plaatjes/programma-uitleg-instellen.jpg}}
-		\caption{Instellingen veranderen en nieuwe voorwerpen toevoegen}
-	\end{figure}
-	
+	\subsection{De grenzen van het programma}
+	Natuurlijk verloopt een simulatie niet precies zoals het er in de werkelijkheid aan toe zou gaan. Er is nog een aantal natuurkundige zaken waar ons programma geen rekening mee houdt, en er is ook nog een technisch probleem. Bijvoorbeeld:
+	\begin{description}
+  		\item[Verlies van energie] \hfill \\
+  			In ons programma zijn alle botsingen volkomen elastische botsingen, terwijl deze alleen theoretisch bestaan. Bij biljartballen is de hoeveelheid verloren energie aan wrijving verwaarloosbaar, maar er is toch zeker sprake van. Ons programma houdt dus geen rekening met het type stof, en gaat uit van onbuigbare volkomen harde stoffen.
+		\item[Rotatie] \hfill \\
+			Biljartballen die op elkaar botsen rollen, en hun botsing zal daarom een ander effect hebben dan dat van sjoelschijven of airhockeypucks. Ook treedt er rotatie op als een bal over een schuin lijnstuk rolt, wat niet verwerkt is in ons programma. Het gevolg in simulaties hiervan is, dat cirkels op een lijnstuk vast komen te zitten, in plaats van naar beneden te rollen.
+		\item[E\'{e}n botsing per frame] \hfill \\
+			Dit is misschien het meest vervelende probleem voor simulaties met veel snel bewegende voowerpen. Per frame kan hooguit het effect van \'{e}\'{e}n botsing worden berekend en gesimuleerd, waardoor er soms voorwerpen door elkaar heen vliegen.
+	\end{description}
 	
 	\subsection{Voorbeeldcode voor complexe simulaties}
 	Met ons programma kunnen andere mensen zonder verstand van botsingstheorie\"{e}n toch complexere simulaties uitvoeren door zelf te programmeren. Een voorbeeld daarvan is dit:
@@ -845,4 +861,9 @@ wereld.nieuwVoorwerp(cirkel2);
 wereld.nieuwVoorwerp(cirkel3);
 wereld.nieuwVoorwerp(cirkel4);
 	\end{lstlisting}
+	
+	\newpage
+	
+	\section{Conclusie}
+	Dit moet nog geschreven worden
 \end{document}
