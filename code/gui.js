@@ -371,4 +371,29 @@ $(document).ready(function(){
     
     return false;
   });
+  
+  $('#vb8').click(function(){
+    wereld.apocalyps();
+    
+    wereld.nieuweTekenVoorafganger(function(){
+      Wereld.MAAKLEEGPERFRAME = false;
+    });
+    
+    var cirkel1 = new Cirkel(27, 306, 182);
+    cirkel1.snelheid = new Vector();
+    cirkel1.massa = 223.06;
+    
+    var cirkel2 = new Cirkel(27, 283, 12);
+    cirkel2.snelheid = new Vector(-3, 28.3);
+    cirkel2.massa = 223.30;
+    
+    wereld.nieuwVoorwerp(cirkel1);
+    wereld.nieuwVoorwerp(cirkel2);
+    
+    
+    $('#vernieuwData').click();
+    wereld.teken();
+    
+    return false;
+  });
 });

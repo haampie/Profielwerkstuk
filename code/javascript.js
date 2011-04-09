@@ -16,6 +16,7 @@ function Wereld(breedte, hoogte, ctx){
 
 Wereld.TEKENSNELHEID = true;
 Wereld.TEKENKRACHTEN = true;
+Wereld.MAAKLEEGPERFRAME = true;
 
 /**
  * Kijk of er een botsing gebeurt tussen twee voorwerpen
@@ -239,6 +240,7 @@ Wereld.prototype.apocalyps = function(){
   this.voorwerpen = [];
   this.statischeVoorwerpen = [];
   this.drawCallback = function(){};
+  Wereld.MAAKLEEGPERFRAME = true;
 };
 
 /**
@@ -247,7 +249,9 @@ Wereld.prototype.apocalyps = function(){
 Wereld.prototype.teken = function(){
   
   // Maak het scherm leeg
-  this.ctx.clearRect(0, 0, this.breedte, this.hoogte);
+  if(Wereld.MAAKLEEGPERFRAME){
+    this.ctx.clearRect(0, 0, this.breedte, this.hoogte);
+  }
   
   this.drawCallback.call(this);
   
