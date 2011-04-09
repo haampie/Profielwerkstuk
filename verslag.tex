@@ -23,22 +23,20 @@
 
 	\section{Inleiding}
 	Wij hebben er voor gekozen om een fysisch systeem te maken voor de computer. Met dit fysisch systeem kunnen tweedimensionale botsingen gesimuleerd worden. Onze hoofdvraag hierbij is:
-
-	Hoe maken we een fysisch systeem dat tweedimensionale botsingen kan simuleren?
+	\\
+	\\Hoe maken we een fysisch systeem dat tweedimensionale botsingen kan simuleren?
+	\\
 	\\Daarbij hebben we de volgende deelvragen bedacht:
 
-	\begin{tabular}{l l}
-	\\1.&Hoe werken botsingen bij poolballen?
-	\\2.&Met welke natuurkundige en wiskundige formules is de beweging te beschrijven?
-	\\3.&Hoe programmeer je deze formules?
-	\\4.&Hoe optimaliseer je de snelheid van het programma?
-	\end{tabular}
+	\begin{enumerate}
+		\item Hoe werken botsingen bij poolballen?
+		\item Met welke natuurkundige en wiskundige formules is de beweging te beschrijven?
+		\item Hoe programmeer je deze formules?
+		\item Hoe optimaliseer je de snelheid van het programma?
+	\end{enumerate}
 
-	\newpage
-	
-	\section{Inleiding}
-	Dit moet nog geschreven worden
-	
+	Omdat de berekening grotendeels gebeuren met behulp van vectoren, geven we eerst een uitleg over vectoren. Op het moment van botsen veranderen de snelheid en de richting van de ballen. Maar eerst moet je weten op welk tijdstip dat gebeurt en wat dan de snelheden en de posities zijn. Het bepalen van dat moment leggen we ook uit, hierbij moet onderscheid gemaakt worden tussen botsingen tussen ballen en botsingen met een bal en een lijnstuk. Er zit ook veel natuurkundige theorie achter botsingen. Dit leggen we eerst uit voordat we aan de botsingen gaan rekenen. Het resultaat kan op meerdere manieren verkregen worden, hier behandelen we twee manieren. De eerste manier gaat met behulp van de wet van behoud van energie en de wet van behoud van impuls. De tweede manier werkt ook met de wet van behoud van impuls een maakt gebruik van de gemeenschappelijke snelheid. Deze tweede manier is aanzienlijk korter. Met al deze informatie en formules is het programma gemaakt. We zullen niet het hele programma stap voor stap verklaren, maar samenvatten en in grote lijnen vertellen wat er gebeurt.
+
 	\newpage
 	
 	\section{Vectoren}
@@ -317,7 +315,7 @@
 	In de meeste gevallen zijn de snelheden van de ballen na de botsing, anders dan de snelheden van de ballen voor de botsing. Deze snelheden kunnen berekend worden met behulp van de snelheden v\'{o}\'{o}r de botsing en de massa's van beide ballen. Een eenvoudige botsing is de centrale botsing, ook wel eendimensionale botsing genoemd.
 
 	\subsection{Berekening voor een centrale botsing}
-	De snelheden na een botsing bij een centrale botsing kunnen op meerdere manieren berekend worden. Hier volgen twee methodes waarop deze berekend kunnen worden. Bij  de eerste methode gebruiken wordt gebruikt gemaakt van de wet van behoud van energie en de wet van behoud van impuls. Bij de tweede methode wordt alleen de wet van behoud van impuls en de gemeenschappelijke snelheid gebruikt.
+	De snelheden na een botsing bij een centrale botsing kunnen op meerdere manieren berekend worden. Hier volgen twee methodes waarop deze berekend kunnen worden. Bij  de eerste methode wordt gebruikt gemaakt van de wet van behoud van energie en de wet van behoud van impuls. Bij de tweede methode wordt alleen de wet van behoud van impuls en de gemeenschappelijke snelheid gebruikt.
 
 	\subsubsection{Met behulp van de wet van behoud van energie en impuls}
 	Omdat we te maken hebben met volkomen elastische botsingen geldt de wet van behoud van energie \eqref{energie} en de wet van behoud van impuls \eqref{impuls}. Met deze twee wetten kunnen we de snelheden van de ballen na de botsing berekenen.
@@ -425,7 +423,7 @@
 			&=\frac{\left(m_1o_1+m_2o_2\right)+m_2\left(o_2-o_1\right)}{\left(m_1+m_2\right)}\\
 		\end{aligned}
 	\end{equation}
-	\\Je kunt $v_2$ op een zelfde soort manier berekenen. Dus $v_1$ en $v_2$ zijn:
+	\\Je kunt $v_2$ op dezelfde manier berekenen. Dus $v_1$ en $v_2$ zijn:
 	\begin{equation}
 		\begin{aligned}
 		\label{uitwerking-energie-impuls}
@@ -507,14 +505,13 @@
 		\end{aligned}
 	\end{equation}
 	Bij een centrale botsing bewegen de twee lichamen langs de verbindingslijn van de middelpunten. De botsing vindt ook plaats langs deze lijn, het wordt daarom ook wel een eendimensionale botsing genoemd. Bij een niet-centrale botsing kunnen de snelheden ook ontbonden worden in snelheden langs de verbindingslijn en snelheden loodrecht op de verbindings lijn. Als er alleen gekeken wordt naar de snelheid langs de verbindingslijn, dan kan daar formule \eqref{snelheden-na-botsing} op worden toegepast omdat het een eendimensionale botsing betreft. De snelheid die loodrecht op deze verbindingslijn staat is onafhankelijk van de botsing, en zal dus constant blijven.
-	\\
-	\\Voor het gemak even een voorbeeld:
 
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centerline{\includegraphics[width=\textwidth]{Plaatjes/niet-centrale-botsing.png}}
 		\caption{Botsing tussen twee ballen}
 		\label{niet-centrale botsing}
 	\end{figure}
+
 	De snelheden van lichaam 1 en 2  in de richting van de voortplantingsbeweging zijn:
 	\begin{equation}
 		\begin{aligned}
@@ -561,19 +558,13 @@
 	Invullen in AB geeft 
 	\begin{equation}
 		\begin{aligned}
+		\label{y}
 			y=\frac{b-d}{a-c}\left(\frac{a(b-d)^2+e(a-c)^2+(f-b)(a-c)(b-d)}{(b-d)^2+(a-c)^2}-a\right)+b\\
 		\end{aligned}
 	\end{equation}
+	De snelheid richting B is dus: $o_{1, \parallel AB}=\sqrt{x^2+y^2}$. Hiervoor geldt dus wel de wet van behoud van impuls. Voor de snelheid loodrecht op de verplaatsingsrichting geldt: $o_{1, \perp AB}=v_{1, \perp AB}=\sqrt{{o_{1, res}}^2-{o_{1, \parallel AB}}^2}$.
 
-<<<<<<< HEAD
-De snelheid richting B is dus: $o_{1, \parallel AB}=\sqrt{x^2+y^2}$. Hiervoor geldt dus wel de wet van behoud van impuls. Voor de snelheid loodrecht op de verplaatsingsrichting geldt: $o_{1, \perp AB}=v_{1, \perp AB}=\sqrt{{o_{1, res}}^2-{o_{1, \parallel AB}}^2}$.
-
-De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, \parallel AB}}^2+{v_{1, \perp AB}}^2}$.
-=======
-	De snelheid richting B is dus: $o_{1, ||AB}=\sqrt{x^2+y^2}$. Hiervoor geldt dus wel de wet van behoud van impuls. Voor de snelheid loodrecht op de verplaatsingsrichting geldt: $o_{1, LAB}=v_{1, LAB}=\sqrt{{o_{1, res}}^2-{o_{1, ||AB}}^2}$.
-
-	De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, ||AB}}^2+{v_{1, LAB}}^2}$.
->>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
+	De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, \parallel AB}}^2+{v_{1, \perp AB}}^2}$.
 
 	De snelheden in de $x$- en $y$-richting kunnen als volgt berekend worden:
 	\begin{equation}
@@ -604,36 +595,20 @@ De resulterende snelheid na de botsing is: $v_{1, res}=\sqrt{{v_{1, \parallel AB
 	\newpage
 
 	\section{Experiment van botsende ballen}
+	Wij werken alleen met botsingen in het platte vlak. Omdat we werken met jeu de boules ballen zullen we geen volkomen elastische botsingen hebben, dit is overigens in de praktijk nauwelijks haalbaar.
 
 	\subsection{Verwachtingen bij het experiment van botsende ballen}
-	Wij werken alleen met botsingen in het platte vlak. Omdat we werken met harde houten ballen, die vergelijkbaar zijn met biljartballen, hebben we enkel en alleen te maken met volkomen elastische botsingen.
 
 	\subsubsection{Botsing tussen twee ballen}
-	Er zijn twee soorten botsingen te onderscheiden: een centrale botsing en een niet-centrale botsing.
-<<<<<<< HEAD
-De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
-De verwachting bij een niet-centrale botsing waarvan \'{e}\'{e}n bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing, als de massa's gelijk zijn. 
+	Er zijn twee soorten botsingen te onderscheiden: een centrale botsing en een niet-centrale botsing. De verwachting bij een centrale botsing tussen twee ballen met dezelfde massa is dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
+Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e}\'{e}n bal geen snelheid heeft, zullen de ballen onder een hoek van 90° uit elkaar gaan na de botsing. 
 
-\begin{figure}[h]
-	\centerline{\includegraphics{Plaatjes/BotsingSchuin.png}}
-	\caption{Een niet-centrale botsing}
-	\label{botsingschuin}
-\end{figure}
-
-Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
-=======
-	De verwachting bij een centrale botsing is, dat de richting van de snelheid van de ballen na de botsing precies tegenovergesteld is aan de richting van de snelheid van de ballen voor de botsing, en dat de snelheden van de ballen verwisseld zijn.
-	De verwachting bij een niet-centrale botsing waarvan een bal geen snelheid heeft is, dat de ballen onder een hoek van 90° uitelkaar gaan na de botsing. 
-	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centerline{\includegraphics{Plaatjes/BotsingSchuin.png}}
 		\caption{Een niet-centrale botsing}
 		\label{botsingschuin}
 	\end{figure}
 	
-	Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing zal een deel van de snelheid van bal 1\ ``overgedragen" zijn aan bal 2, en gaan de ballen onder een hoek van 90° uit elkaar.
->>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
-
 	Dit is ook als volgt te bewijzen:
 	De twee ballen zijn te beschouwen als puntmassa's. We kiezen een assenstelsel zo dat er voor de botsing geen beweging in de $y$-richting is. Bal 1 gaat daarna omhoog onder een hoek $\alpha$ en bal 2 onder een hoek $\beta$. Nu hebben we de volgende gegevens:
 	\begin{equation}
@@ -693,13 +668,8 @@ Op deze twee afbeeldingen heeft bal 2 aanvankelijk geen snelheid. Na de botsing 
 	Dit levert op $tan(\alpha)tan(\beta)=1$ waardoor de hoek $\alpha+\beta=90°$.
 
 	\subsubsection{Botsing tussen meer dan twee ballen}
-<<<<<<< HEAD
 	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaatsvindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
 Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
-=======
-	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaats vindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
-	Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
->>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
 
 	\subsection{Resultaten van het experiment met botsende ballen}
 	Om te controleren of de formules - die afgeleidt zijn van de wet van behoud van impuls - ook in overeenstemming zijn met de werkelijkheid, hebben wij een aantal proeven uitgevoerd. We hebben de proeven uitgevoerd op 15 december 2010 in het practicumlokaal, meer een camera van school. Deze proeven hebben we uitgevoerd met verschillende ballen, omdat we van tevoren niet wisten bij welke ballen de meeste kinetische energie werd overgedragen. We hebben een golfbal, knikkers en jeu de boules ballen gebruikt. Eerst wilden we een aantal gegevens noteren van de ballen die wij gebruikten, zoals de diameter of omtrek en de massa. Maar we omdat alleen de massa's en de snelheden van de ballen in de formules \eqref{energie} en \eqref{impuls} hebben zitten, hebben we alleen de massa's van de ballen genoteerd:
@@ -717,7 +687,7 @@ Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken 
 		\hline 
 	\end{tabular}
 	\\
-	\\We hebben een aantal verschillende combinaties van ballen met elkaar laten botsen. Eerst een blauwe jeu de boules bal met een rode jeu de boules bal.
+	\\We hebben een aantal verschillende combinaties van ballen met elkaar laten botsen. Eerst een blauwe jeu de boules bal met een rode jeu de boules bal. Deze botsing is redelijk goed gelukt, en daarom zullen we deze als voorbeeld nemen:
 
 	In figuur \eqref{botsing3} zijn alle beeldjes van de botsing samengevoegd, zodat de botsing duidelijk te zien is.
 	
@@ -769,49 +739,6 @@ Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken 
 
 	Nu hebben we de blauwe bal gehad, nu de rode bal. De rode bal heeft, in tegenstelling tot de blauwe, wel een begin snelheid. Omdat de rode bal heel weinig wordt afgebogen is het niet heel duidelijk te zien op werk tijdstip dit gebeurd. De bal wordt het meeste afgebogen in de $x$-richting, en als we in figuur \eqref{00775} kijken kunnen we op $t=2,97\ s$ een verandering in de baan ontdekken.
 
-<<<<<<< HEAD
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00775.png}}
-	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal}
-	\label{00775}
-\end{figure}
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00776.png}}
-	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal}
-	\label{00776}
-\end{figure}
-
-De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x$-richting verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00777.png}}
-	\caption{x-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
-	\label{00777}
-\end{figure}
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00778.png}}
-	\caption{y-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
-	\label{00778}
-\end{figure}
-
-Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid berekenen we dus met formule \eqref{snelheid}: $v=0,6649m/s$
-
-We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67\ s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79\ s$ tot $t=3,67\ s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00779.png}}
-	\caption{$x$-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
-	\label{00779}
-\end{figure}
-
-\begin{figure}[h]
-	\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/007710.png}}
-	\caption{$y$-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
-	\label{007710}
-\end{figure}
-=======
 	\begin{figure}[H]
 		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00775.png}}
 		\caption{x-co\"{o}rdinaten van de rode jeu de boules bal}
@@ -823,9 +750,9 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 		\caption{y-co\"{o}rdinaten van de rode jeu de boules bal}
 		\label{00776}
 	\end{figure}
-	
-	De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x-richting$ verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
-	
+
+	De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x$-richting verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
+
 	\begin{figure}[H]
 		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00777.png}}
 		\caption{x-co\"{o}rdinaten van de rode jeu de boules bal voor de botsing}
@@ -840,7 +767,7 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 
 	Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid berekenen we dus met formule \eqref{snelheid}: $v=0,6649m/s$
 
-	We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79s$ tot $t=3,67s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
+	We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67\ s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79\ s$ tot $t=3,67\ s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
 
 	\begin{figure}[H]
 		\centerline{\includegraphics[width=0.5\textwidth]{Plaatjes/00779.png}}
@@ -853,8 +780,12 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 		\caption{y-co\"{o}rdinaten van de rode jeu de boules bal na de botsing}
 		\label{007710}
 	\end{figure}
->>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
+	
+	De punten van figuur \eqref{00777} lijken een beetje vreemd, maar dat komt omdat we maar een klein aantal beeldjes hebben van de rode bal voor de botsing, de bal nauwelijk zich in de $x-richting$ verplaatst en omdat het traceren niet nauwkeuriger gebeurt dan met twee decimalen.
 
+	Hier doen we dus hetzelfde mee als met de blauwe jeu de boules bal. De snelheid berekenen we dus met formule \eqref{snelheid}: $v=0,6649m/s$
+
+	We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op figuur \eqref{00775} is te zien dat de bal op $t=3,67s$ onder de paal door gaat en het traceren niet meer wil. Als we dus de meetresultaten van $t=2,79s$ tot $t=3,67s$ nemen krijgen we figuur \eqref{00779} en \eqref{007710}.
 	De snelheid hieruit berekenen geeft: $v=0,4664m/s$
 
 	We stellen dat de blauwe bal, bal 1 is, en de rode bal, bal 2.
@@ -884,7 +815,7 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 		\end{aligned}
 	\end{equation}
 
-	Maar in dit geval hebben we te maken met een niet-centrale botsing.
+	Maar in dit geval hebben we te maken met een niet-centrale botsing. Dus hebben we de posities nodig van de ballen op het moment van de botsing. De fotocamera maakte om de driehonderdste seconde een foto. Dit is niet genoeg om het exacte moment van de botsing te bepalen. Een kleine fout met Coach in het traceren kan grote afwijkingen hebben. De uitkomst zal waarschijnlijk ook niet helemaal overeenkomen met de werkelijkheid. In het programma zal dit beter lukken, omdat we daar met veel exactere waarden werken en er dus geen meetfouten, zoals met het traceren, kunnen ontstaan.
 
 	\newpage
 
@@ -965,22 +896,17 @@ We hebben nu alleen nog maar de snelheid van de rode bal na de botsing nodig. Op
 			\mathbf{x} := \mathbf{x} + \mathbf{v}
 		\end{aligned}
 	\end{equation}
-<<<<<<< HEAD
+
 	Invullen van \eqref{snelheidsdefinitie} in \eqref{verplaatsing} geeft dan:
 	\begin{equation}
 		\mathbf{x} =: \mathbf{x} +  \Delta \mathbf{x}
 	\end{equation}
 	Waarmee bewezen is dat je de snelheid van een voorwerp als constant mag zien in een minuscuul tijdsinterval.
-\end{document}
 
 	\newpage
 
 	\section{Conclusie}
 
-
-
-=======
-	
 	\subsection{De grenzen van het programma}
 	Natuurlijk verloopt een simulatie niet precies zoals het er in de werkelijkheid aan toe zou gaan. Er is nog een aantal natuurkundige zaken waar ons programma geen rekening mee houdt, en er is ook nog een technisch probleem. Bijvoorbeeld:
 	\begin{description}
@@ -1018,9 +944,17 @@ wereld.nieuwVoorwerp(cirkel3);
 wereld.nieuwVoorwerp(cirkel4);
 	\end{lstlisting}
 	
-	\newpage
-	
-	\section{Conclusie}
-	Dit moet nog geschreven worden
+	\subsection{Antwoorden op de deelvragen}
+
+	\begin{description}
+		\item[Hoe werken botsingen bij poolballen?]\hfill \\
+			
+		\item[Met welke natuurkundige en wiskundige formules is de beweging te beschrijven?]\hfill \\
+			
+		\item[Hoe programmeer je deze formules?]\hfill \\
+			
+		\item[Hoe optimaliseer je de snelheid van het programma?]\hfill \\
+			
+	\end{description}
+
 \end{document}
->>>>>>> 7c5c2fdabc01b1cc0515b4ab7b0f1eabbc2098ca
