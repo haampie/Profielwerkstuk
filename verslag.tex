@@ -8,6 +8,42 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{subfig}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\renewcommand\lstlistingname{Programma}
+\renewcommand\lstlistlistingname{Programma}
+
+\lstdefinelanguage{Javascript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
 
 \title{Een fysisch systeem voor de computer}
 \date{\today}
@@ -21,11 +57,20 @@
 
 	\tableofcontents
 	\newpage
-
+	
+	\section{Voorwoord}
+	Dit profielwerkstuk is gemaakt in het kader van het profiel Natuur en Techniek, en is vooral een verbreding in de vakken natuurkunde, wiskunde en informatica. Dit is het schriftelijk eindproduct, waarin we verslag doen van ons onderzoek naar tweedimensionale botsingen en het schrijven van een simulatieprogramma. Naast het schriftelijk eindproduct is een USB-stick bijgeleverd met het offici\"{e}le eindproduct.
+	
+	Derk Rouwhorst heeft zich vooral gericht op de praktische kant, zoals het onderzoeken van een praktijkvoorbeeld en daarna het uitzoeken wat het gevolg van botsingen is, met behulp van formules. Harmen Stoppels heeft zich vooral gericht op de theoretische kant, zoals het opstellen van vergelijkingen voor tijdstippen van botsingen en het programmeren van het eindproduct.
+	
+	We bedanken meneer Prins voor het begeleiden van het project, meneer Leemhuis voor hulp bij het prakticum en het uitlenen van apparatuur, en als laatste meneer Stoppels voor uitleg en hulp bij het opstellen van vergelijkingen.
+	
+	\newpage
+		
 	\section{Inleiding}
-	Wij hebben er voor gekozen om een fysisch systeem te maken voor de computer. Met dit fysisch systeem kunnen tweedimensionale botsingen gesimuleerd worden. Onze hoofdvraag hierbij is:
+	Wij hebben ervoor gekozen om een fysisch systeem te maken voor de computer, waarmee onder andere tweedimensionale botsingen gesimuleerd kunnen worden. Onze hoofdvraag hierbij is:
 	\\
-	\\Hoe maken we een fysisch systeem dat tweedimensionale botsingen kan simuleren?
+	\\\textbf{Hoe maken we een fysisch systeem dat tweedimensionale botsingen kan simuleren?}
 	\\
 	\\Daarbij hebben we de volgende deelvragen bedacht:
 
@@ -41,7 +86,7 @@
 	\newpage
 	
 	\section{Vectoren}
-	We drukken in ons hele profielwerkstuk snelheden, posities en krachten uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
+	We drukken in ons hele profielwerkstuk snelheden, posities en krachten zoveel mogelijk uit in vectoren. Hiermee maken we het rekenwerk een stuk makkelijker en kunnen we formules veel korter opschrijven. We maken gebruik van tweedimensionale vectoren, die uit een $x$- en een $y$-component in het cartesisch co\"{o}rdinatenstelsel bestaan. In de voorbeelden en definities in dit onderdeel gebruiken we alleen tweedimensionale vectoren, ook al gelden veel ervan ook voor $n$-dimensionale vectoren.
 	
 	\subsection{Notatie}
 	De namen van vectoren schrijven we dikgedrukt en de componenten boven elkaar met ronde haken eromheen. Een voorbeeld hiervan is $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$. Dit stelt een vector voor die $5$ naar rechts is gericht en $3$ naar onder.
@@ -66,7 +111,7 @@
 
 	Werken met het inproduct zorgt niet alleen voor een kortere notatie, maar blijkt ook in sommige gevallen de voor de computer tijdrovende functie cosinus te vervangen.
 	
-	Het bewijs voor de laatstgenoemde eigenschap maakt gebruik van de cosinusregel. Gegeven zijn de vectoren $\mathbf{a}=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $\mathbf{b}=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van $\mathbf{a}$ en $\mathbf{b}$. Zie figuur \ref{cosinusregel-inproduct}
+	Het bewijs voor de laatstgenoemde eigenschap maakt gebruik van de cosinusregel. Gegeven zijn de vectoren $\mathbf{a}=\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ en $\mathbf{b}=\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$ met hetzelfde beginpunt en een onderlinge hoek $\gamma$ en vector $\mathbf{c}$ tussen beide uiteinden van $\mathbf{a}$ en $\mathbf{b}$. Zie figuur \ref{cosinusregel-inproduct}.
 	
 	\begin{figure}[h]
 		\centerline{\includegraphics[width=\textwidth]{Plaatjes/cosinusregel-inproduct.png}}
@@ -107,7 +152,7 @@
 		\begin{aligned}
 			\mathbf{v} &= \begin{pmatrix} 4 \\ 2 \end{pmatrix}\\
 			\mathbf{n} &= \begin{pmatrix} -2 \\ 4 \end{pmatrix} \\
-			\mathbf{v} \cdot \mathbf{n} &= 4 \cdot -2 - 2 \cdot 4 = 0
+			\mathbf{v} \cdot \mathbf{n} &= 4 \cdot -2 + 2 \cdot 4 = 0
 		\end{aligned}
 	\end{equation}
 	
@@ -186,7 +231,7 @@
 	We hebben deze formule omgezet naar een simulatie in \href{http://www.geogebra.org/webstart/geogebra.html}{Geogebra}, om te kijken of de formule klopte. Zie de bijlage met de bestandsnaam Bal-Bal.ggb. Zowel de verplaatsingsvectoren, beginposities en de stralen van beide cirkels zijn aan te passen, en als er binnen het begin- en eindpunt een botsing is, worden de cirkels opnieuw gestippeld getekend op de plaats van de botsing.
 	
 	\subsection{Cirkel tegen lijnstuk}
-	De vergelijking die we moeten opstellen om te kijken of een cirkel binnen een tijdsinterval een een frame botst met een lijnstuk is lastiger dan dat van twee cirkels. Het is namelijk een stuk lastiger om de kortste afstand tussen een cirkel en een lijnstuk te vinden, maar het we hebben wel een elegante oplossing gevonden.
+	De vergelijking die we moeten opstellen om te kijken of een cirkel binnen een tijdsinterval van \'{e}\'{e}n frame botst met een lijnstuk is lastiger dan dat van twee cirkels. Het is namelijk een stuk lastiger om de kortste afstand tussen een cirkel en een lijnstuk te vinden, maar het we hebben wel een elegante oplossing gevonden.
 	
 	\subsubsection{Tijdstippen van botsingen}
 	Gegeven is een lijnstuk $AB$ en een cirkel die met constante snelheid over lijnstuk $CD$ beweegt. De cirkel heeft straal $r$ en botst tijdens zijn beweging misschien tegen lijnstuk $AB$. Op tijdstip $t=0$ bevindt het middelpunt van de cirkel zich op $C$, op tijdstip $t=1$ bevindt het zich op $D$. We zoeken naar de eerste waarde voor $t$ tussen $0$ en $1$ waarop de cirkel lijnstuk $AB$ raakt.
@@ -199,7 +244,7 @@
 		\label{bal-lijn}
 	\end{figure}
 	
-	Eerst defini\"{e}ren we $\mathbf{n}$ als de normaalvector van $AB$ en $r$ als de straal van de cirkel. Daarna vinden we de afstand van een punt tot een lijnstuk door middel van de eigenschappen van het inproduct van twee vectoren:
+	Eerst defini\"{e}ren we $\mathbf{n}$ als de normaalvector van $AB$. Daarna vinden we de afstand van een punt tot een lijnstuk door middel van de eigenschappen van het inproduct van twee vectoren, zoals in vergelijking \eqref{inproduct-cosinus}:
 	\begin{equation}
 		\label{eigenschappeninproduct}
 		cos \gamma = \frac{|\mathbf{w} \cdot \mathbf{n}|}{\| \mathbf{w} \| \| \mathbf{n} \|}
@@ -304,10 +349,10 @@
 	\subsection{De wet van behoud van impuls}
 	Omdat voor elke botsing geldt dat de krachten die de lichamen op elkaar uitoefenen, even groot zijn, tegengesteld gericht zijn en even lang werken, is de stoot van de botsingskrachten nul:
 	\begin{equation}
-		  \int_0^t \sum F_1\,dt = 0\\
+		  \int_0^t \sum F_i\,dt = 0\\
 	\end{equation}
 
-	De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden voor elk type botsing geldt de wet van behoud van impuls.
+	De verandering van de impuls van de beide lichamen samen is dus nul, met andere woorden: voor elk type botsing geldt de wet van behoud van impuls.
 	Voor de gevolgen van een botsing is het ook belangrijk hoe de twee lichamen elkaar treffen. Als je aanneemt dat de beide lichamen in \'{e}\'{e}n plat vlak bewegen, dan kunnen de beide snelheidsvectoren samenvallen met de verbindingslijn tussen de beide zwaartepunten. Dit heet een centrale botsing (analoog met een frontale botsing tussen auto's). Maken deze vectoren hoeken met deze verbindingslijn, dan spreekt men van een niet-centrale botsing (bijvoorbeeld een botsing tussen twee auto's op een straathoek).
 	
 	\newpage
@@ -678,8 +723,8 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 	Dit levert op $tan(\alpha)tan(\beta)=1$ waardoor de hoek $\alpha+\beta=90°$.
 
 	\subsubsection{Botsing tussen meer dan twee ballen}
-	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaatsvindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
-	Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak kunnen raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kunnen raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal 60°. Er kunnen dus 360°/60° = 6 ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
+	In de werkelijkheid zal het nauwelijks voorkomen dat een botsing tussen meer dan twee ballen plaatsvindt. Als dit wel zo lijkt zijn het meestal meerdere botsingen vlak na elkaar. Maar in theorie is het best mogelijk dat drie of meer ballen elkaar exact op hetzelfde ogenblik raken. Wij verwachten dat deze botsing te schrijven is als de som van twee botsingen tussen twee ballen.
+	Het maximale aantal ballen, dat elkaar tegelijk in het platte vlak bij een poolspel kan raken is drie. Het maximale aantal ballen, dat een andere bal tegelijkertijd kan raken is zes. Als drie ballen elkaar kunnen raken, is de hoek bal bal bal $60^{circ}$. Er kunnen dus $360^{circ}/60^{circ} = 6$ ballen om een andere bal heen liggen. Waarschijnlijk zijn deze botsingen te schrijven is als de som van meerdere botsingen tussen twee ballen.
 
 	\subsection{Resultaten van het experiment met botsende ballen}
 	Om te controleren of de formules - die afgeleidt zijn van de wet van behoud van impuls - ook in overeenstemming zijn met de werkelijkheid, hebben wij een aantal proeven uitgevoerd. We hebben de proeven uitgevoerd op 15 december 2010 in het practicumlokaal, meer een camera van school. Deze proeven hebben we uitgevoerd met verschillende ballen, omdat we van tevoren niet wisten bij welke ballen de meeste kinetische energie werd overgedragen. We hebben een golfbal, knikkers en jeu de boules-ballen gebruikt. Eerst wilden we een aantal gegevens noteren van de ballen die wij gebruikten, zoals de diameter of omtrek en de massa. Maar we omdat alleen de massa's en de snelheden van de ballen in de formules \eqref{energie} en \eqref{impuls} hebben zitten, hebben we alleen de massa's van de ballen genoteerd:
@@ -705,7 +750,7 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 		\centering
 		\subfloat[Alle beeldjes samengevoegd]{\label{botsing3}\includegraphics[width=0.45\textwidth]{Plaatjes/botsing3.jpg}}
 		\,
-		\subfloat[Simulate met ons programma]{\label{botsing3-simulatie}\includegraphics[width=0.45\textwidth]{Plaatjes/botsing3-simulatie.jpg}}
+		\subfloat[Simulatie met ons programma]{\label{botsing3-simulatie}\includegraphics[width=0.45\textwidth]{Plaatjes/botsing3-simulatie.jpg}}
 		\caption{Botsing tussen jeu de boules-ballen}
 	\end{figure}
 
@@ -729,7 +774,7 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 		\caption{Co\"{o}rdinaten van de blauwe jeu de boules-bal}
 	\end{figure}
 
-	Nu hebben we de plaats in de $x$-richting en in de $y$-richting uitgezet tegen de tijd. Hieruit kunnen we de snelheid van de bal herleiden. Na $1,00\ s$ is de bal $0,1883\ m$ verplaats in de $x$-richting en $0,1786\ m$ in de $y$-richting. De snelheid van de bal kun je dus berekenen met de $Stelling\ van\ Pythagoras$:
+	Nu hebben we de plaats in de $x$-richting en in de $y$-richting uitgezet tegen de tijd. Hieruit kunnen we de snelheid van de bal herleiden. Na $1,00\ s$ is de bal $0,1883\ m$ verplaatst in de $x$-richting en $0,1786\ m$ in de $y$-richting. De snelheid van de bal kun je dus berekenen met de $Stelling\ van\ Pythagoras$:
 
 	\begin{equation}
 		\label{snelheid}
@@ -812,7 +857,7 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 		\end{aligned}
 	\end{equation}
 
-	Maar in dit geval hebben we te maken met een niet-centrale botsing. Dus hebben we de posities nodig van de ballen op het moment van de botsing. De fotocamera maakte om de driehonderdste seconde een foto. Dit is niet genoeg om het exacte moment van de botsing te bepalen. Een kleine fout met Coach in het traceren kan grote afwijkingen hebben. De uitkomst zal waarschijnlijk ook niet helemaal overeenkomen met de werkelijkheid. In het programma zal dit beter lukken, omdat we daar met veel exactere waarden werken en er dus geen meetfouten, zoals met het traceren, kunnen ontstaan.
+	Maar in dit geval hebben we te maken met een niet-centrale botsing. Dus hebben we de posities nodig van de ballen op het moment van de botsing. De fotocamera maakte om de driehonderdste seconde een foto. Dit is niet genoeg om het exacte moment van de botsing te bepalen. Een kleine fout met Coach in het traceren kan grote afwijkingen hebben. De uitkomst zal waarschijnlijk ook niet helemaal overeenkomen met de werkelijkheid. In het programma zal dit beter lukken, omdat we daar met veel exactere waarden werken en er dus geen meetfouten, zoals met het traceren, kunnen ontstaan. En zoals blijkt uit figuur \ref{botsing3-simulatie}, klopt de simulatie met ons programma precies met de werkelijkheid, totdat de botsing plaatsvindt. De snelheden zijn ongeveer gelijk, maar de richting van de ballen is anders. Dit komt doordat ons programma werkt met compleet elastische botsingen, terwijl in realiteit dat soort botsingen amper bestaat.
 
 	\newpage
 
@@ -893,16 +938,31 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 			\mathbf{x} := \mathbf{x} + \mathbf{v}
 		\end{aligned}
 	\end{equation}
+	
+	\subsection{Voorbeeldcode voor complexe simulaties}
+	Met ons programma kunnen andere mensen zonder verstand van botsingstheorie\"{e}n toch complexere simulaties uitvoeren door zelf te programmeren. Een voorbeeld daarvan is dit:
+	
+	\begin{lstlisting}[language=Javascript, caption={Vier cirkels, met een kracht op cirkel 1}]
+// maak 2 cirkels
 
-	Invullen van \eqref{snelheidsdefinitie} in \eqref{verplaatsing} geeft dan:
-	\begin{equation}
-		\mathbf{x} =: \mathbf{x} +  \Delta \mathbf{x}
-	\end{equation}
-	Waarmee bewezen is dat je de snelheid van een voorwerp als constant mag zien in een minuscuul tijdsinterval.
+// Eerste cirkel: new Cirkel(straal, x, y)
+var cirkel1 = new Cirkel(20, 20, 300);
 
-	\newpage
+// Beginsnelheid: 3px/frame naar rechts
+cirkel1.snelheid = new Vector(3, 0);
 
-	\section{Conclusie}
+// Constante kracht: 2px/frame naar rechts   
+cirkel1.nieuweKracht( new Vector(2, 0) ); 
+cirkel1.massa = 50;
+
+// Tweede cirkel
+var cirkel2 = new Cirkel(20, 100, 300);
+cirkel2.massa = 50;
+
+// Voeg ze toe aan de simulatie
+wereld.nieuwVoorwerp(cirkel1);
+wereld.nieuwVoorwerp(cirkel2);
+	\end{lstlisting}
 
 	\subsection{De grenzen van het programma}
 	Natuurlijk verloopt een simulatie niet precies zoals het er in de werkelijkheid aan toe zou gaan. Er is nog een aantal natuurkundige zaken waar ons programma geen rekening mee houdt, en er is ook nog een technisch probleem. Bijvoorbeeld:
@@ -915,43 +975,35 @@ Bij een niet-centrale botsing tussen twee ballen met dezelfde massa waarvan \'{e
 			Dit is misschien het meest vervelende probleem voor simulaties met veel snel bewegende voowerpen. Per frame kan hooguit het effect van \'{e}\'{e}n botsing worden berekend en gesimuleerd, waardoor er soms voorwerpen door elkaar heen vliegen.
 	\end{description}
 	
-	\subsection{Voorbeeldcode voor complexe simulaties}
-	Met ons programma kunnen andere mensen zonder verstand van botsingstheorie\"{e}n toch complexere simulaties uitvoeren door zelf te programmeren. Een voorbeeld daarvan is dit:
-	
-	\begin{lstlisting}[language=C++]
-// maak 4 cirkels
-var cirkel = new Cirkel(20, 20, 300);
-cirkel.snelheid = new Vector(3, 0);
-cirkel.massa = 50;
-cirkel.nieuweKracht( new Vector(2, 0) );
+	\newpage
 
-var cirkel2 = new Cirkel(20, 100, 300);
-cirkel2.massa = 50;
-
-var cirkel3 = new Cirkel(20, 200, 300);
-cirkel3.massa = 50;
-
-var cirkel4 = new Cirkel(20, 300, 300);
-cirkel4.massa = 50;
-
-// voeg ze toe aan de wereld
-wereld.nieuwVoorwerp(cirkel);
-wereld.nieuwVoorwerp(cirkel2);
-wereld.nieuwVoorwerp(cirkel3);
-wereld.nieuwVoorwerp(cirkel4);
-	\end{lstlisting}
+	\section{Conclusie}
+	In dit profielwerkstuk zijn we erachter gekomen wat er bij botsingen gebeurt, hoe je dat in formules kunt uitdrukken en hoe je daar vervolgens simulaties van kan maken. Verder hebben we geleerd hoe je rekenwerk versimpelt, door gebruik te maken van vectoren.
 	
 	\subsection{Antwoorden op de deelvragen}
+	Van tevoren hadden we ons een aantal vragen gesteld, die we nu kunnen beantwoorden.
 
-	\begin{description}
-		\item[Hoe werken botsingen bij poolballen?]\hfill \\
-			
-		\item[Met welke natuurkundige en wiskundige formules is de beweging te beschrijven?]\hfill \\
-			
-		\item[Hoe programmeer je deze formules?]\hfill \\
-			
-		\item[Hoe optimaliseer je de snelheid van het programma?]\hfill \\
-			
-	\end{description}
+	\subsubsection{Hoe werken botsingen bij poolballen?}
+	Deze vraag hebben we algemener beantwoord; het antwoord is niet toegespitst op poolballen. Er is onderscheid tussen elastische en onelastische botsingen, en centrale en niet-centrale. Een botsing tussen een kogel en een zandzak is een voorbeeld van een onelastische botsing, en een poolbal met een andere poolbal is een voorbeeld van een bijna elastische botsing. Verder blijkt dat bij niet-centrale botsingen de snelheid in de richting van het botsingsvlak verandert, terwijl de snelheid evenwijdig aan het botsingsvlak gelijk blijft.
+
+	\subsubsection{Met welke natuurkundige en wiskundige formules is de beweging te beschrijven?}
+	Uiteindelijk bleken er vooral wiskundige formules gebruikt te worden voor het beschrijven van bewegingen. Dat komt vooral omdat natuurkundige formules moesten omschrijven, en we op zoek moesten naar tijdstippen van botsingen. Er zijn twee natuurkundige formules die we hebben samengevoegd om de snelheid na een botsing te bepalen, namelijk de formules over kinetische energie en impuls.
+
+	\subsubsection{Hoe programmeer je deze formules?}
+	Voor het programmeren heb je formules nodig met allerlei verschillende variabelen, die niet van tevoren ingevuld kunnen worden. Massa, positie, snelheid en krachten zijn per voorwerp anders, en dus hadden we algemene formules nodig. Als je die formules eenmaal hebt, is er geen kunst aan om ze te programmeren, omdat je de eigenschappen per voorwerp in \'{e}\'{e}n object kunt verwerken, en de formules bijna letterlijk kunt overtypen. We moesten wel van tevoren alle basisbewerkingen van vectoren programmeren, maar dat was ook niet al te lastig.
+
+	\subsubsection{Hoe optimaliseer je de snelheid van het programma?}
+	Met gebruik van vectoren hebben we alle formules korter kunnen schrijven, zodat de hoeveelheid code klein blijft. Daarmee kun je sneller programmeren, maar dat zegt niets over de snelheid van het programma. Een bijkomstigheid van het werken met vectoren was, dat we door de eigenschappen van het inproduct \eqref{inproduct-cosinus} op geen enkele plek een sinus, cosinus of tangens hebben gebruikt. Zoals gezegd zijn die functies relatief tijdrovend voor de computer. Nog een voorbeeld van kleine snelheidsoptimalisatie is de aangepaste ABC-formule \eqref{a2bc}, voor vergelijkingen met de vorm $ax^2+2bx+c=0$.
+	
+	Al met al schokt het programma niet, zelfs niet als je meer dan tien voorwerpen simuleert.
+	
+	\newpage
+	
+	\section{Nawoord}
+	Tijdens het maken van het profielwerkstuk hebben we opvallend veel nieuwe zaken geleerd, zowel in de natuurkunde als in de wiskunde. Dit profielwerkstuk was duidelijk een verbreding, waarin we een duik namen in de botsingstheori\"{e} en het nodige leerden over werken met vectoren.
+	
+	Daarnaast hebben we ook opvallend veel technische zaken geleerd, zoals het werken met \LaTeX. Ons hele verslag is hierin geschreven, zodat we makkelijker de opmaak van formules konden instellen. Voor de plaatjes leerden we gebruikmaken van GeoGebra, wat toch wel mooie resultaten opleverde. Om het simulatieprogramma te schrijven hebben we gebruikgemaakt van een zeer nieuwe techniek, namelijk een combinatie van HTML5 en Javascript. Alle simulaties zouden daarom zo op internet kunnen komen te staan, maar het is nog wachten op de volledige implementatie van deze techniek in de huidige webbrowsers. Het meest ingewikkelde was toch wel het werken met Git. Met Git kun je met meerdere personen werken aan \'{e}\'{e}n tekstbestand, waarbij alle veranderingen terug te draaien zijn, zonder dat er ook maar iets van wat geschreven is verloren kan gaan.
+	
+	Kortom, we hebben ontzettend veel geleerd, de samenwerking ging redelijk goed, en we hebben al met al een aardig mooi eindproduct gemaakt.
 
 \end{document}
